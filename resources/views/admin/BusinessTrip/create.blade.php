@@ -73,14 +73,15 @@
         </div>
 
         <div class="form-group">
-            <label for="quarter">Type</label><br>
-            {{-- <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}" required> --}}
-            <select name="quarter" id="quarter">
-                <option value="chorak_one">1-chorak</option>
-                <option value="chorak_two">2-chorak</option>
-                <option value="chorak_three">3-chorak</option>
-                <option value="chorak_four">4-chorak</option>
-              </select>
+        <label for="quarters_id" class="form-label">Select Quarter</label>
+                <select name="quarters_id" id="quarters_id" class="form-control" required>
+                    <option value="">-- Select a Quarter --</option>
+                    @foreach($quarters as $quarter)
+                        <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
+                            {{ $quarter->name }}
+                        </option>
+                    @endforeach
+                </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Create Business Trip</button>

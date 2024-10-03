@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessTrip extends Model
+class BusinesTrip extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -19,6 +19,11 @@ class BusinessTrip extends Model
         'data_name',
         'invite_count',
         'ball',
-        'quarter'
+        'quarters_id'
     ];
+
+    public function quarter()
+    {
+        return $this->belongsTo(Quarter::class, 'quarters_id');
+    }
 }

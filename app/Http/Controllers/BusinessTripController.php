@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quarter;
+use App\Models\BusinesTrip;
 use App\Models\BusinessTrip;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class BusinessTripController extends Controller
      */
     public function index()
     {
-        $businessTrips = BusinessTrip::all();
+        $businessTrips = BusinesTrip::all();
         return view('admin.BusinessTrip.index', compact('businessTrips'));
     }
 
@@ -21,7 +23,8 @@ class BusinessTripController extends Controller
      */
     public function create()
     {
-        return view('admin.BusinessTrip.create');
+        $quarters = Quarter::all();
+        return view('admin.BusinessTrip.create',compact('quarters'));
     }
 
     /**
@@ -40,10 +43,10 @@ class BusinessTripController extends Controller
             'data_name' => 'required|string',
             'invite_count' => 'required|integer',
             'ball' => 'required|integer',
-            'quarter' => 'required|string',
+            'quarters_id' => 'required|exists:quarters,id',
         ]);
 
-        BusinessTrip::create($validatedData);
+        BusinesTrip::create($validatedData);
 
         return redirect()->route('business_trips.index')->with('success', 'Business trip created successfully!');
     }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('business_trips', function (Blueprint $table) {
+        Schema::create('busines_trips', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('type');
@@ -23,7 +23,8 @@ return new class extends Migration
             $table->text('data_name');
             $table->integer('invite_count');
             $table->integer('ball');
-            $table->string('quarter');
+            $table->unsignedBigInteger('quarters_id');  // Foreign key to `quarters` table
+            $table->foreign('quarters_id')->references('id')->on('quarters')->onDelete('cascade');  // Set foreign key with cascade
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('business_trips');
+        Schema::dropIfExists('busines_trips');
     }
 };
