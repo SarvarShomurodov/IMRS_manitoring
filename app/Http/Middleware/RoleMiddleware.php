@@ -23,6 +23,6 @@ class RoleMiddleware
             return $next($request);
         }
 
-        return redirect('/home'); // Or a forbidden page
+        return redirect('/'); // Or a forbidden page
     }
 }

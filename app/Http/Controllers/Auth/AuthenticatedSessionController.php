@@ -28,8 +28,18 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = Auth::user();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Redirect one specific user to the index route, others to the home route
+        if ($user->email == 'abdixojayev@example.com') {  // Replace with specific user condition
+            return redirect('/index');
+        }elseif($user->email == 'qarabayeva@example.com'){
+            return redirect('/business_trips');
+        }
+        elseif($user->email == 'qutliyev@example.com'){
+            return redirect('/training_courses');
+        }
+        return redirect(RouteServiceProvider::HOME);
     }
 
     /**

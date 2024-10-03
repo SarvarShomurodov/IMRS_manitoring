@@ -1,47 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
-<h2>HTML Table</h2>
-
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Ko`rsatkich nomi</th>
-    <th>1-chorak</th>
-    <th>2-chorak</th>
-    <th>3-chorak</th>
-    <th>4-chorak</th>
-  </tr>
-  <tr>
-    <td><a href="{{ url('business_trips') }}">Safarlar</a></td>
-    <td>Hududlarga kim ekanimni ko`rsatish</td>
-    <td>{{ $trips }}</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+  
+<div class="container-fluid mt-3">
+    <?
+      foreach ($businessTripCounts as $trip) {
+        echo $trip->number_of_business_trips . "\n"; // Output each number
+    }
+      ?>
+</div>
 
 </body>
 </html>
-

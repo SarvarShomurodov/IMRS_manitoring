@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TrainingCourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,18 +32,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
-    Route::get('/index', [Controller::class, 'index_home'])->name('index.index_home');
+    Route::get('/index', [Controller::class, 'getBusinessTripCounts'])->name('index.getBusinessTripCounts');
     Route::get('/business_trips', [BusinessTripController::class,'index'])->name('business_trips.index');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/page1', function () {
-        return 'Page1';
-    });
+    Route::resource('training_courses', TrainingCourseController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {
-    // Route::get('/page2', function () {
+    // Route::get('/index', function () {
     //     return 'Page2';
     // });
     Route::resource('business_trips', BusinessTripController::class);
