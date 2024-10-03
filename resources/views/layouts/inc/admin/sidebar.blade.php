@@ -39,12 +39,15 @@
               <p>Dashboard</p>
             </a>
           </li>
-          {{-- <li class="nav-section">
-            <span class="sidebar-mini-icon">
-              <i class="fa fa-ellipsis-h"></i>
-            </span>
-            <h4 class="text-section">Components</h4>
+          @if( Auth::user()->name == 'Abdixojayev')
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#base">
+              <i class="fas fa-layer-group"></i>
+              <p>Base</p>
+            </a>
           </li>
+          @endif
+           {{--
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#base">
               <i class="fas fa-layer-group"></i>
