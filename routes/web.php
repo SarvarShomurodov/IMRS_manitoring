@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TrainingCourseController;
+use App\Http\Controllers\YoungEconomistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,9 +61,7 @@ Route::middleware(['auth', 'role:author'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:subscriber'])->group(function () {
-    Route::get('/page5', function () {
-        return 'Page5';
-    });
+    Route::resource('young_economists', YoungEconomistController::class);
 });
 
 

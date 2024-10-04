@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title>IMRS</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -15,6 +15,7 @@
 
     <!-- Fonts and icons -->
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
+    {{-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> --}}
     <script>
       WebFont.load({
         google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -34,6 +35,8 @@
     </script>
 
     <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css')}}" />
@@ -57,6 +60,40 @@
             
         </div>
     </div>
+    <script>
+      $('#description').summernote({
+          placeholder: 'description...',
+          toolbar: [
+              ['style', ['style']],
+              ['fontsize', ['fontsize']],
+              ['font', ['bold', 'italic', 'underline', 'clear']],
+              ['fontname', ['fontname']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['height', ['height']],
+              ['insert', ['picture', 'hr']],
+              ['table', ['table']],
+              ['custom', ['emoji']]
+          ],
+          tabsize:2,
+          height:400,
+          buttons:{
+                  emoji: function(context) {
+                      var ui = $.summernote.ui;
+                      // create button
+                      var button = ui.button({
+                          contents: '<i class="fa fa-smile-o"/> Emoji',
+                          tooltip: 'Insert emoji',
+                          click: function() {
+                              // invoke insertText method with 'hello' on editor module.
+                              context.invoke('editor.insertText', '🕛');
+                          }
+                      });
+                  return button.render();   // return button as jquery object
+              }
+          }
+      });
+  </script>
     <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>

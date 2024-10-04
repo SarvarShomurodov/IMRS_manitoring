@@ -16,4 +16,9 @@ class Quarter extends Model
     {
         return $this->hasMany(BusinesTrip::class, 'quarters_id');
     }
+    
+    public function youngEconomist()
+    {
+        return $this->hasMany(YoungEconomist::class, 'quarters_id');
+    }
 }

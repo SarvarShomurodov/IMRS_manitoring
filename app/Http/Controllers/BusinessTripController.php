@@ -15,7 +15,7 @@ class BusinessTripController extends Controller
     public function index()
     {
         $businessTrips = BusinesTrip::all();
-        return view('admin.BusinessTrip.index', compact('businessTrips'));
+        return view('admin.BusinessTrip.index', compact('businessTrips'))->with('i');
     }
 
     /**
@@ -64,7 +64,9 @@ class BusinessTripController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $quarters = Quarter::all();
+        $businessTrips = BusinesTrip::findOrFail($id);
+        return view('admin.BusinessTrip.edit',compact(['quarters','businessTrips']));
     }
 
     /**
@@ -72,7 +74,24 @@ class BusinessTripController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'type' => 'required|string',
+            'goal' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'adress' => 'required|string',
+            'list_person' => 'required|string',
+            'data_name' => 'required|string',
+            'invite_count' => 'required|integer',
+            'ball' => 'required|integer',
+            'quarters_id' => 'required|exists:quarters,id',
+        ]);
+        $businessTrips = BusinesTrip::findOrFail($id);
+
+        $businessTrips->update($validatedData);
+
+        return redirect()->route('business_trips.index')->with('success', 'Business trip Update successfully!');
     }
 
     /**
@@ -80,6 +99,8 @@ class BusinessTripController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $businessTrips = BusinesTrip::findOrFail($id);
+        $businessTrips->delete();
+        return redirect()->route('business_trips.index')->with('success', 'BusinesTrip deleted successfully.');
     }
 }

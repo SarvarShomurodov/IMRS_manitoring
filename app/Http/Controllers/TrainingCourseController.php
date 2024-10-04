@@ -14,7 +14,7 @@ class TrainingCourseController extends Controller
     public function index()
     {
         $trainingCourses = TrainingCourse::all();
-        return view('admin.TrainingCourse.index', compact('trainingCourses'));
+        return view('admin.TrainingCourse.index', compact('trainingCourses'))->with('i');
     }
 
     /**
@@ -60,7 +60,9 @@ class TrainingCourseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $quarters = Quarter::all();
+        $trainingCourses = TrainingCourse::findOrFail($id);
+        return view('admin.TrainingCourse.edit',compact(['quarters','trainingCourses']));
     }
 
     /**
@@ -68,7 +70,20 @@ class TrainingCourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'type' => 'required|string',
+            'organizer' => 'required|string',
+            'date' => 'required|date',
+            'adress' => 'required|string',
+            'invite_count' => 'required|integer',
+            'list_person' => 'required|string',
+            'quarters_id' => 'required|exists:quarters,id',
+        ]);
+        $trainingCourses = TrainingCourse::findOrFail($id);
+        $trainingCourses->update($validatedData);
+
+        return redirect()->route('training_courses.index')->with('success', 'Training Course update successfully!');
     }
 
     /**
@@ -76,6 +91,8 @@ class TrainingCourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $trainingCourses = TrainingCourse::findOrFail($id);
+        $trainingCourses->delete();
+        return redirect()->route('training_courses.index')->with('success', 'Training Course deleted successfully.');
     }
 }

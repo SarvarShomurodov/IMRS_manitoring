@@ -11,30 +11,26 @@
     @endif
     <div class="card">
         <div class="card-header">
-          <div class="card-title">Training Courses</div>
+          <div class="card-title">Ёш Иқтисодчилар</div>
         </div>
         <div class="card-body">
           @if (Auth::user()->name == 'Abdixojayev')
             
           @else
-          <div class="card-sub">
-            <a href="{{ route('training_courses.create') }}" class="btn btn-primary">Add New Training Courses</a>
-          </div>
+            <div class="card-sub">
+              <a href="{{ route('young_economists.create') }}" class="btn btn-primary">Mажлисларини қо`шиш</a> 
+            </div>
           @endif
           <div class="table-responsive">
             <table class="table table-bordered">
-              <thead>
-                <tr>
+              <thead class="text-center">
                     <tr>
-                      <th>№</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Organizer</th>
-                        <th>Date</th>
-                        <th>Address</th>
-                        <th>Invite Count</th>
-                        <th>List Person</th>
-                        <th>Chorak</th>
+                        <th>№</th>
+                        <th>Маърузачининг ф.и.ш.</th>
+                        <th>Маърузачи лавозими (докторант, таянч докторант, мустақил изланувчи, илмий ходим)</th>
+                        <th>Мажлис санаси</th>
+                        <th>Иштирокчилар руйҳати (маҳаллий)</th>
+                        <th>Иштирокчилар рўйхати (чет эл вакиллари)</th>
                         @if(Auth::user()->name == 'Abdixojayev')
                         @else
                             <th>Action</th>  
@@ -42,28 +38,25 @@
                     </tr>
               </thead>
               <tbody>
-                @foreach ($trainingCourses as $trip)
+                @foreach ($youngEconomists as $trip)
                     <tr>
-                      <td>{{ ++$i }}</td>
+                        <td>{{ ++$i }}</td>
                         <td>{{ $trip->name }}</td>
-                        <td>{{ $trip->type }}</td>
-                        <td>{{ $trip->organizer }}</td>
+                        <td>{{ $trip->position }}</td>
                         <td>{{ $trip->date }}</td>
-                        <td>{{ $trip->adress }}</td>
-                        <td>{{ $trip->invite_count }}</td>
-                        <td>{{ $trip->list_person }}</td>
-                        <td>{{ $trip->quarter->name }}</td>
+                        <td>{{ $trip->list_person_local }}</td>
+                        <td>{{ $trip->list_person_no_local }}</td>
                         @if (Auth::user()->name == 'Abdixojayev')
                         @else
                         <td>
-                            <form action="{{ route('training_courses.destroy',$trip->id) }}" method="POST">        
-                                <a class="btn btn-info" href="{{ route('training_courses.edit',$trip->id) }}">Ўзгартириш</a>
+                            <form action="" method="POST">        
+                                <a class="btn btn-primary mb-2" href="">Ўзгартириш</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Ўчириш</button>
                             </form>
-                        </td> 
-                        @endif
+                        </td>
+                        @endif 
                     </tr>
                 @endforeach
               </tbody>

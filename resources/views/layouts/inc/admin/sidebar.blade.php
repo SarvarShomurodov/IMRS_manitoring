@@ -3,14 +3,11 @@
     <div class="sidebar-logo">
       <!-- Logo Header -->
       <div class="logo-header" data-background-color="dark">
-        <a href="index.html" class="logo">
           <img
-            src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}"
+            src="{{ asset('assets/img/kaiadmin/screen.png') }}"
             alt="navbar brand"
-            class="navbar-brand"
-            height="20"
+            class="navbar-brand h-75 w-50 mx-4"
           />
-        </a>
         <div class="nav-toggle">
           <button class="btn btn-toggle toggle-sidebar">
             <i class="gg-menu-right"></i>
@@ -28,22 +25,29 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
+          @if( Auth::user()->name == 'Abdixojayev')
           <li class="nav-item active">
             <a
-              data-bs-toggle="collapse"
-              href="#dashboard"
+              {{-- data-bs-toggle="collapse" --}}
+              href="{{ url('index') }}"
               class="collapsed"
               aria-expanded="false"
             >
               <i class="fas fa-home"></i>
-              <p>Dashboard</p>
+              <p>Aсосий Саҳифа</p>
             </a>
           </li>
-          @if( Auth::user()->name == 'Abdixojayev')
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#base">
-              <i class="fas fa-layer-group"></i>
-              <p>Base</p>
+          @endif
+          @if( Auth::user()->name == 'Qarabayeva')
+          <li class="nav-item active">
+            <a
+              {{-- data-bs-toggle="collapse" --}}
+              href="{{ url('business_trips') }}"
+              class="collapsed"
+              aria-expanded="false"
+            >
+              <i class="fa fa-home"></i>
+              <p>Asosiy Sahifa</p>
             </a>
           </li>
           @endif
