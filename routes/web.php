@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
 use App\Http\Controllers\HigherOrganController;
+use App\Http\Controllers\PublishController;
 use App\Http\Controllers\TrainingCourseController;
 use App\Http\Controllers\YoungEconomistController;
 use App\Models\HigherOrgan;
@@ -42,6 +43,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('training_courses', TrainingCourseController::class);
     Route::resource('higher_organs', HigherOrganController::class);
+    Route::resource('publishes', PublishController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {

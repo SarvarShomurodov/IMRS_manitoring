@@ -58,6 +58,17 @@
           <li class="nav-item active">
             <a
               {{-- data-bs-toggle="collapse" --}}
+              href="{{ url('training_courses') }}"
+              class="collapsed"
+              aria-expanded="false"
+            >
+              <!-- <i class="fa fa-home"></i> -->
+              <p>Тренинг ўқув курси</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a
+              {{-- data-bs-toggle="collapse" --}}
               href="{{ url('higher_organs') }}"
               class="collapsed"
               aria-expanded="false"
@@ -69,12 +80,12 @@
           <li class="nav-item active">
             <a
               {{-- data-bs-toggle="collapse" --}}
-              href="{{ url('training_courses') }}"
+              href="{{ url('publishes') }}"
               class="collapsed"
               aria-expanded="false"
             >
               <!-- <i class="fa fa-home"></i> -->
-              <p>Тренинг ўқув курси</p>
+              <p>Илмий нашриёт ишлари</p>
             </a>
           </li>
           @endif

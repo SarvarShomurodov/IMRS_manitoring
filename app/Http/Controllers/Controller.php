@@ -78,9 +78,38 @@ class Controller extends BaseController
             ORDER BY 
                 wg.id;
         ");
+        $publish = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quater,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quater,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quater,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quater
+            FROM 
+                publishes bt
+            INNER JOIN 
+                quarters q ON bt.quarters_id = q.id;
 
-
+        ");
+        $publishCounts = DB::select("
+         SELECT 
+                pt.name AS issuer_name,
+                pt.id as id,
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                publishes ho 
+            INNER JOIN 
+                publish_types pt ON ho.type_id = pt.id 
+            INNER JOIN 
+                quarters q ON ho.quarters_id = q.id 
+            GROUP BY 
+                pt.name,pt.id 
+            ORDER BY 
+                pt.id;
+        ");
         // var_dump($trainingCourses);
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts']));
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts']));
     }
 }
