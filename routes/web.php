@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\HigherOrganController;
 use App\Http\Controllers\TrainingCourseController;
 use App\Http\Controllers\YoungEconomistController;
+use App\Models\HigherOrgan;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use App\Http\Controllers\YoungEconomistController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -39,6 +41,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('training_courses', TrainingCourseController::class);
+    Route::resource('higher_organs', HigherOrganController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {

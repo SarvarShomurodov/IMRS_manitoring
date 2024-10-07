@@ -14,102 +14,73 @@ class Controller extends BaseController
     public function getBusinessTripCounts()
     {
         $businessTripCounts = DB::select("
-            select
-                sum(s.first_quater) as first_quater,
-                sum(s.second_quater) as second_quater,
-                sum(s.third_quater) as third_quater,
-                sum(s.fourth_quater) as fourth_quater
-            from (select count(q.id) first_quater, 0 second_quater, 0 third_quater, 0 fourth_quater
-               from busines_trips bt
-                        inner join quarters q on bt.quarters_id = q.id
-               where q.id = 1
-               group by bt.name
-               union all
-               select 0 first_quater, count(q.id) second_quater, 0 third_quater, 0 fourth_quater
-               from busines_trips bt
-                        inner join quarters q on bt.quarters_id = q.id
-               where q.id = 2
-               group by bt.name
-               union all
-               select  0 first_quater, 0 second_quater, count(q.id) third_quater, 0 fourth_quater
-               from busines_trips bt
-                        inner join quarters q on bt.quarters_id = q.id
-               where q.id = 3
-               group by bt.name
-               union all
-               select  0 first_quater, 0 second_quater, 0 third_quater, count(q.id) fourth_quater
-               from busines_trips bt
-                        inner join quarters q on bt.quarters_id = q.id
-               where q.id = 4
-               group by bt.name
-            ) s;
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quater,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quater,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quater,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quater
+            FROM 
+                busines_trips bt
+            INNER JOIN 
+                quarters q ON bt.quarters_id = q.id;
+
         ");
         $youngEconomistCounts = DB::select("
-            select
-                sum(s.first_quater) as first_quater,
-                sum(s.second_quater) as second_quater,
-                sum(s.third_quater) as third_quater,
-                sum(s.fourth_quater) as fourth_quater
-            from (
-                select count(q.id) first_quater, 0 second_quater, 0 third_quater, 0 fourth_quater
-                from young_economists ye
-                inner join quarters q on ye.quarters_id = q.id
-                where q.id = 1
-                group by ye.name
-                union all
-                select 0 first_quater, count(q.id) second_quater, 0 third_quater, 0 fourth_quater
-                from young_economists ye
-                inner join quarters q on ye.quarters_id = q.id
-                where q.id = 2
-                group by ye.name
-                union all
-                select 0 first_quater, 0 second_quater, count(q.id) third_quater, 0 fourth_quater
-                from young_economists ye
-                inner join quarters q on ye.quarters_id = q.id
-                where q.id = 3
-                group by ye.name
-                union all
-                select 0 first_quater, 0 second_quater, 0 third_quater, count(q.id) fourth_quater
-                from young_economists ye
-                inner join quarters q on ye.quarters_id = q.id
-                where q.id = 4
-                group by ye.name
-            ) s;
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quater,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quater,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quater,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quater
+            FROM 
+                young_economists ye
+            INNER JOIN 
+                quarters q ON ye.quarters_id = q.id;
+
         ");
-        $trainingCourseCounts  = DB::select("
-            select
-                sum(s.first_quater) as first_quater,
-                sum(s.second_quater) as second_quater,
-                sum(s.third_quater) as third_quater,
-                sum(s.fourth_quater) as fourth_quater
-            from (
-                select count(q.id) first_quater, 0 second_quater, 0 third_quater, 0 fourth_quater
-                from training_courses tc
-                inner join quarters q on tc.quarters_id = q.id
-                where q.id = 1
-                group by tc.name
-                union all
-                select 0 first_quater, count(q.id) second_quater, 0 third_quater, 0 fourth_quater
-                from training_courses tc
-                inner join quarters q on tc.quarters_id = q.id
-                where q.id = 2
-                group by tc.name
-                union all
-                select 0 first_quater, 0 second_quater, count(q.id) third_quater, 0 fourth_quater
-                from training_courses tc
-                inner join quarters q on tc.quarters_id = q.id
-                where q.id = 3
-                group by tc.name
-                union all
-                select 0 first_quater, 0 second_quater, 0 third_quater, count(q.id) fourth_quater
-                from training_courses tc
-                inner join quarters q on tc.quarters_id = q.id
-                where q.id = 4
-                group by tc.name
-            ) s;
+        $trainingCourseCounts = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quater,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quater,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quater,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quater
+            FROM 
+                training_courses tc
+            INNER JOIN 
+                quarters q ON tc.quarters_id = q.id;
+        ");
+        $higherOrgans = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quater,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quater,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quater,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quater
+            FROM 
+                higher_organs tc
+            INNER JOIN 
+                quarters q ON tc.quarters_id = q.id;
+        ");
+        $higherOrganCounts = DB::select("
+            SELECT 
+                wg.name AS issuer_name,
+                wg.id as id,
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                higher_organs ho 
+            INNER JOIN 
+                who_givens wg ON ho.who_given_id = wg.id 
+            INNER JOIN 
+                quarters q ON ho.quarters_id = q.id 
+            GROUP BY 
+                wg.name,wg.id 
+            ORDER BY 
+                wg.id;
         ");
 
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts']));
-        // 
+
+        // var_dump($trainingCourses);
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts']));
     }
 }

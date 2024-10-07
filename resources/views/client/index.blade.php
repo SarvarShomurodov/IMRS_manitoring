@@ -90,8 +90,25 @@
           <div>{{$trainingCourseCounts[0]->second_quater}}</div>
           <div>{{$trainingCourseCounts[0]->third_quater}}</div>
           <div>{{$trainingCourseCounts[0]->fourth_quater}}</div>
-          <div>187</div>
-          
+          <div>154</div>
+
+          <div>4</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}">Таҳлилий материаллар</a></div>
+          <div>{{$higherOrgans[0]->first_quater}}</div>
+          <div>{{$higherOrgans[0]->second_quater}}</div>
+          <div>{{$higherOrgans[0]->third_quater}}</div>
+          <div>{{$higherOrgans[0]->fourth_quater}}</div>
+          <div>160</div>
+
+          @foreach($higherOrganCounts as $higherOrganCount)
+          <div>4.{{$higherOrganCount->id}}</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}">{{$higherOrganCount->issuer_name}}</a></div>
+          <div>{{$higherOrganCount->first_quarter}}</div>
+          <div>{{$higherOrganCount->second_quarter}}</div>
+          <div>{{$higherOrganCount->third_quarter}}</div>
+          <div>{{$higherOrganCount->fourth_quarter}}</div>
+          <div></div>
+          @endforeach
 
           
       </div>

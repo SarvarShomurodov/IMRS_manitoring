@@ -25,6 +25,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
+
           @if( Auth::user()->name == 'Abdixojayev')
           <li class="nav-item active">
             <a
@@ -38,6 +39,7 @@
             </a>
           </li>
           @endif
+
           @if( Auth::user()->name == 'Qarabayeva')
           <li class="nav-item active">
             <a
@@ -48,6 +50,31 @@
             >
               <i class="fa fa-home"></i>
               <p>Asosiy Sahifa</p>
+            </a>
+          </li>
+          @endif
+
+          @if( Auth::user()->name == 'Qutliyev')
+          <li class="nav-item active">
+            <a
+              {{-- data-bs-toggle="collapse" --}}
+              href="{{ url('higher_organs') }}"
+              class="collapsed"
+              aria-expanded="false"
+            >
+              <!-- <i class="fa fa-home"></i> -->
+              <p>Таҳлилий материаллар</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a
+              {{-- data-bs-toggle="collapse" --}}
+              href="{{ url('training_courses') }}"
+              class="collapsed"
+              aria-expanded="false"
+            >
+              <!-- <i class="fa fa-home"></i> -->
+              <p>Тренинг ўқув курси</p>
             </a>
           </li>
           @endif

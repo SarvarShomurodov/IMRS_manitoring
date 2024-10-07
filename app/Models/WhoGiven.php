@@ -12,8 +12,8 @@ class WhoGiven extends Model
         'name'
     ];
 
-    // public function businesTrips()
-    // {
-    //     return $this->hasMany(BusinesTrip::class, 'quarters_id');
-    // }
+    public function higherOrgans()
+    {
+        return $this->hasMany(HigherOrgan::class, 'who_given_id');
+    }
 }

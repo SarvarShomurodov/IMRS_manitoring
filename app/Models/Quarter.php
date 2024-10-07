@@ -21,4 +21,8 @@ class Quarter extends Model
     {
         return $this->hasMany(YoungEconomist::class, 'quarters_id');
     }
+    public function higherOrgans()
+    {
+        return $this->hasMany(HigherOrgan::class, 'quarters_id');
+    }
 }
