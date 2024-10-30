@@ -3,24 +3,27 @@
 @section('title', 'Business Trips')
 
 @section('content')
-  
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+@if (Auth::user()->name == 'Abdixojayev')
+
+@else
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+      <div class="pull-left">
+          <h2>Хизмат Сафарлари</h2>
+      </div>
+      <div class="pull-right">
+          <a class="btn btn-primary mb-2" href="{{ url('business_trips/create') }}">Янги хизмат сафарини қўшиш</a>
+      </div>
+  </div>
+</div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="card">
-        <div class="card-header">
-          <div class="card-title">Хизмат Сафарлари</div>
-        </div>
         <div class="card-body">
-          @if (Auth::user()->name == 'Abdixojayev')
-            
-          @else
-            <div class="card-sub">
-              <a href="{{ route('business_trips.create') }}" class="btn btn-primary">Yang xizmat safarini qo`shish</a> 
-            </div>
-          @endif
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead class="text-center">
@@ -62,7 +65,7 @@
                         @else
                         <td>
                             <form action="{{ route('business_trips.destroy',$trip->id) }}" method="POST">        
-                                <a class="btn btn-primary mb-2" href="{{ route('business_trips.edit',$trip->id) }}">Ўзгартириш</a>
+                                <a class="btn btn-info" href="{{ route('business_trips.edit',$trip->id) }}">Ўзгартириш</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Ўчириш</button>

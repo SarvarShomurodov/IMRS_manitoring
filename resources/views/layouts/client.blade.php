@@ -1,124 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>IMRS</title>
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="assets/img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    />
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>IMRS </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{asset('admin/vendors/feather/feather.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/ti-icons/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/typicons/typicons.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/simple-line-icons/css/simple-line-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/css/vendor.bundle.base.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
+    <!-- endinject -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-    <!-- Fonts and icons -->
-    <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
-    <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["assets/css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
-    </script>
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/js/select.dataTables.min.css')}}">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css')}}" />
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="{{ asset('assets/css/demo.css')}}" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
+    <!-- endinject -->
 </head>
 <body>
-    <div class="wrapper">
-        @include('layouts.inc.admin.sidebar')
-        <div class="main-panel">
-            <div class="main-header">
-                @include('layouts.inc.admin.navbar') 
-            </div>
-                 
-                <div class="container">
-                    <div class="page-inner">
-                        @yield('content')
+    <div class="container-scroller">
+        @include('layouts.inc.admin.navbar')
+        <div class="container-fluid page-body-wrapper">
+            @include('layouts.inc.admin.sidebar')
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12 bg-white p-5">
+                            @yield('content')
+                        </div>
                     </div>
                 </div>
-            
+            </div>
         </div>
     </div>
-    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-
-    <!-- jQuery Scrollbar -->
-    <script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-
-    <!-- Chart JS -->
-    <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
-
-    <!-- jQuery Sparkline -->
-    <script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
-
-    <!-- Chart Circle -->
-    <script src="{{ asset('') }}assets/js/plugin/chart-circle/circles.min.js"></script>
-
-    <!-- Datatables -->
-    <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
-
-    <!-- Bootstrap Notify -->
-    <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
-
-    <!-- jQuery Vector Maps -->
-    <script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
-
-    <!-- Sweet Alert -->
-    <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
-
-    <!-- Kaiadmin JS -->
-    <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
-
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
-    <script src="{{ asset('assets/js/demo.js') }}"></script>
+    <!-- JS File-->
     <script>
-      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#177dff",
-        fillColor: "rgba(23, 125, 255, 0.14)",
-      });
-
-      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#f3545d",
-        fillColor: "rgba(243, 84, 93, .14)",
-      });
-
-      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#ffa534",
-        fillColor: "rgba(255, 165, 52, .14)",
+      $('#summernote').summernote({
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
       });
     </script>
+    <script src="{{asset('admin/vendors/js/vendor.bundle.base.js')}}"></script>
+    <script src="{{asset('admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{{asset('admin/vendors/chart.js/chart.umd.js')}}"></script>
+    <script src="{{asset('admin/vendors/progressbar.js/progressbar.min.js')}}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{{asset('admin/js/off-canvas.js')}}"></script>
+    <script src="{{asset('admin/js/template.js')}}"></script>
+    <script src="{{asset('admin/js/settings.js')}}"></script>
+    <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
+    <script src="{{asset('admin/js/todolist.js')}}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="{{asset('admin/js/jquery.cookie.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/dashboard.js')}}"></script>
+    <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
 </body>
 </html>

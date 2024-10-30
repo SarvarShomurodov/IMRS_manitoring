@@ -79,12 +79,12 @@ class HigherOrganController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string',
-            'who_given_id' => 'required|exists:quarters,id',
+            'who_given_id' => 'required|exists:who_givens,id',
             'date' => 'required|date',
-            'number' => 'required|integer',
+            'ass_number' => 'required|integer',
             'who_send' => 'required|string',
             'letter_date' => 'required|date',
-            'letter_number' => 'required|date',
+            'letter_number' => 'required|integer',
             'direction' => 'required|string',
             'sorov' => 'required|string',
             'country' => 'required|string',

@@ -3,37 +3,40 @@
 @section('title', 'Business Trips')
 
 @section('content')
-  
+    @if (Auth::user()->name == 'Abdixojayev')
+                
+    @else
+    <div class="row">
+      <div class="col-lg-12 margin-tb">
+          <div class="pull-left">
+              <h2>Тренинг ўқув курси</h2>
+          </div>
+          <div class="pull-right">
+              <a class="btn btn-primary" href="{{ url('training_courses/create') }}">Тренинг ўқув курсларини яратиш</a>
+          </div>
+      </div>
+    </div>
+    @endif
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
     <div class="card">
-        <div class="card-header">
-          <div class="card-title">Training Courses</div>
-        </div>
         <div class="card-body">
-          @if (Auth::user()->name == 'Abdixojayev')
-            
-          @else
-          <div class="card-sub">
-            <a href="{{ route('training_courses.create') }}" class="btn btn-primary">Add New Training Courses</a>
-          </div>
-          @endif
           <div class="table-responsive">
             <table class="table table-bordered">
-              <thead>
+              <thead class="text-center">
                 <tr>
                     <tr>
                       <th>№</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Organizer</th>
-                        <th>Date</th>
-                        <th>Address</th>
-                        <th>Invite Count</th>
-                        <th>List Person</th>
+                        <th>Тренинг/ўқув курси номи</th>
+                        <th>Тури(онлайн ёки оффлайн)</th>
+                        <th>Ташкилотчи</th>
+                        <th>Саналар</th>
+                        <th>Манзил(давлат ёки ҳудуд)</th>
+                        <th>Иштирок этган ходимлар сони</th>
+                        <th>Иштирокличар рўйхати</th>
                         <th>Chorak</th>
                         @if(Auth::user()->name == 'Abdixojayev')
                         @else
@@ -45,13 +48,13 @@
                 @foreach ($trainingCourses as $trip)
                     <tr>
                       <td>{{ ++$i }}</td>
-                        <td>{{ $trip->name }}</td>
+                        <td>{!! $trip->name !!}</td>
                         <td>{{ $trip->type }}</td>
-                        <td>{{ $trip->organizer }}</td>
+                        <td>{!! $trip->organizer !!}</td>
                         <td>{{ $trip->date }}</td>
                         <td>{{ $trip->adress }}</td>
                         <td>{{ $trip->invite_count }}</td>
-                        <td>{{ $trip->list_person }}</td>
+                        <td>{!! $trip->list_person !!}</td>
                         <td>{{ $trip->quarter->name }}</td>
                         @if (Auth::user()->name == 'Abdixojayev')
                         @else

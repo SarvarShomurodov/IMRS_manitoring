@@ -58,7 +58,9 @@ class YoungEconomistController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $quarters = Quarter::all();
+        $youngEconomists = YoungEconomist::findOrFail($id);
+        return view('admin.YoungEconomist.edit',compact('quarters','youngEconomists'));
     }
 
     /**
@@ -66,7 +68,19 @@ class YoungEconomistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'position' => 'required|string',
+            'date' => 'required|date',
+            'list_person_local' => 'required|string',
+            'list_person_no_local' => 'required|string',
+            'quarters_id' => 'required|exists:quarters,id',
+        ]);
+
+        $youngEconomists = YoungEconomist::findOrFail($id);
+        $youngEconomists->update($validatedData);
+
+        return redirect()->route('young_economists.index')->with('success', 'Young Economist update successfully!');
     }
 
     /**
@@ -74,6 +88,8 @@ class YoungEconomistController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $youngEconomists = YoungEconomist::findOrFail($id);
+        $youngEconomists->delete();
+        return redirect()->route('young_economists.index')->with('success', 'Young Economist deleted successfully.');
     }
 }

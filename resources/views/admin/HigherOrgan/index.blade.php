@@ -3,24 +3,27 @@
 @section('title', 'Higher Organ')
 
 @section('content')
-  
+    @if (Auth::user()->name == 'Abdixojayev')
+
+    @else
+    <div class="row">
+      <div class="col-lg-12 margin-tb">
+          <div class="pull-left">
+              <h2>Таҳлилий материаллар</h2>
+          </div>
+          <div class="pull-right">
+              <a class="btn btn-primary mb-2" href="{{ url('higher_organs/create') }}">Таҳлилий материаллар қўшиш</a>
+          </div>
+      </div>
+    </div>
+    @endif
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
     <div class="card">
-        <div class="card-header">
-          <div class="card-title">Таҳлилий материаллар</div>
-        </div>
         <div class="card-body">
-          @if (Auth::user()->name == 'Abdixojayev')
-            
-          @else
-            <div class="card-sub">
-              <a href="{{ route('higher_organs.create') }}" class="btn btn-primary">Таҳлилий материаллар қўшиш</a> 
-            </div>
-          @endif
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead class="text-center">
@@ -48,7 +51,7 @@
                 @foreach ($higherOrgans as $trip)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $trip->name }}</td>
+                        <td>{!! $trip->name !!}</td>
                         <td>{{ $trip->whogiven->name }}</td>
                         <td>{{ $trip->date }}</td>
                         <td>{{ $trip->ass_number }}</td>
@@ -64,7 +67,7 @@
                         @else
                         <td>
                             <form action="{{ route('higher_organs.destroy',$trip->id) }}" method="POST">        
-                                <a class="btn btn-primary mb-2" href="{{ route('higher_organs.edit',$trip->id) }}">Ўзгартириш</a>
+                                <a class="btn btn-info" href="{{ route('higher_organs.edit',$trip->id) }}">Ўзгартириш</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Ўчириш</button>

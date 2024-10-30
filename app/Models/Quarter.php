@@ -16,7 +16,6 @@ class Quarter extends Model
     {
         return $this->hasMany(BusinesTrip::class, 'quarters_id');
     }
-    
     public function youngEconomist()
     {
         return $this->hasMany(YoungEconomist::class, 'quarters_id');
@@ -24,5 +23,13 @@ class Quarter extends Model
     public function higherOrgans()
     {
         return $this->hasMany(HigherOrgan::class, 'quarters_id');
+    }
+    public function oPublishes()
+    {
+        return $this->hasMany(Opublish::class, 'quarters_id');
+    }
+    public function convention()
+    {
+        return $this->hasMany(Convention::class, 'quarters_id');
     }
 }

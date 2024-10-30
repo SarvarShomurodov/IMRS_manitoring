@@ -30,13 +30,13 @@
           font-weight: bold;
         }
 </style>
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+      <h4 class="text-center">Ўзбекистон Республикаси Вазирлар Маҳкамаси ҳузуридаги Макроиқтисодий ва ҳудудий тадқиқотлар институтида 2024 йил давомида амалга оширилган ишлар тўғрисида 
+        МАЪЛУМОТ</h4>
+  </div>
+</div>
 <div class="card">
-    <div class="card-header">
-      <div class="card-title text-center">
-        Ўзбекистон Республикаси Вазирлар Маҳкамаси ҳузуридаги Макроиқтисодий ва ҳудудий тадқиқотлар институтида 2024 йил давомида амалга оширилган ишлар тўғрисида 
-        МАЪЛУМОТ
-      </div>
-    </div>
     <div class="card-body">
       <div class="table-responsive">
         {{-- <table class="table table-bordered">
@@ -110,11 +110,11 @@
             <div>{{$higherOrganCount->second_quarter}}</div>
             <div>{{$higherOrganCount->third_quarter}}</div>
             <div>{{$higherOrganCount->fourth_quarter}}</div>
-            <div style="border: 1px"></div>
+            <div>{{$higherOrganCount->year_number}}</div>
           @endforeach
 
           <div class="id">5</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}">Илмий нашриёт ишлари сони:</a></div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}">Илмий нашриёт ишлари сони:</a></div>
           <div>{{$publish[0]->first_quater}}</div>
           <div>{{$publish[0]->second_quater}}</div>
           <div>{{$publish[0]->third_quater}}</div>
@@ -123,12 +123,30 @@
 
           @foreach($publishCounts as $publishCount)
             <div>5.{{$publishCount->id}}</div>
-            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}">{{$publishCount->issuer_name}}</a></div>
+            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}">{{$publishCount->issuer_name}}</a></div>
             <div>{{$publishCount->first_quarter}}</div>
             <div>{{$publishCount->second_quarter}}</div>
             <div>{{$publishCount->third_quarter}}</div>
             <div>{{$publishCount->fourth_quarter}}</div>
-            <div style="border: 1px"></div>
+            <div>{{$publishCount->year_number}}</div>
+          @endforeach
+
+          <div class="id">6</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}">Илмий нашриёт ишлари сони:</a></div>
+          <div>{{$opublishes[0]->first_quarter}}</div>
+          <div>{{$opublishes[0]->second_quarter}}</div>
+          <div>{{$opublishes[0]->third_quarter}}</div>
+          <div>{{$opublishes[0]->fourth_quarter}}</div>
+          <div>198</div>
+
+          @foreach($opublishCounts as $publishCount)
+            <div>6.{{$publishCount->id}}</div>
+            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}">{{$publishCount->issuer_name}}</a></div>
+            <div>{{$publishCount->first_quarter}}</div>
+            <div>{{$publishCount->second_quarter}}</div>
+            <div>{{$publishCount->third_quarter}}</div>
+            <div>{{$publishCount->fourth_quarter}}</div>
+            <div>{{$publishCount->year_number}}</div>
           @endforeach
           
       </div>

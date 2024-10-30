@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('higher_organs', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->unsignedBigInteger('who_given_id');  // Foreign key to `quarters` table
+            $table->unsignedBigInteger('who_given_id'); 
             $table->foreign('who_given_id')->references('id')->on('who_givens')->onDelete('cascade');
             $table->date('date');
             $table->integer('ass_number');

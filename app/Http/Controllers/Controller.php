@@ -63,6 +63,7 @@ class Controller extends BaseController
             SELECT 
                 wg.name AS issuer_name,
                 wg.id as id,
+                wg.year_num as year_number,
                 SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
                 SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
                 SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
@@ -74,7 +75,7 @@ class Controller extends BaseController
             INNER JOIN 
                 quarters q ON ho.quarters_id = q.id 
             GROUP BY 
-                wg.name,wg.id 
+                wg.name,wg.id,wg.year_num 
             ORDER BY 
                 wg.id;
         ");
@@ -94,6 +95,7 @@ class Controller extends BaseController
          SELECT 
                 pt.name AS issuer_name,
                 pt.id as id,
+                pt.year_num as year_number,
                 SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
                 SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
                 SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
@@ -105,11 +107,42 @@ class Controller extends BaseController
             INNER JOIN 
                 quarters q ON ho.quarters_id = q.id 
             GROUP BY 
-                pt.name,pt.id 
+                pt.name,pt.id,year_number
             ORDER BY 
                 pt.id;
         ");
-        // var_dump($trainingCourses);
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts']));
+        $opublishes = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                opublishes AS o
+            INNER JOIN 
+                quarters AS q ON o.quarters_id = q.id
+        ");
+        $opublishCounts = DB::select("
+            SELECT 
+                wp.name AS issuer_name,
+                wp.id AS id,
+                wp.year_num AS year_number,
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                opublishes AS ho
+            INNER JOIN 
+                who_publishes AS wp ON ho.oav_id = wp.id
+            INNER JOIN 
+                quarters AS q ON ho.quarters_id = q.id
+            GROUP BY 
+                wp.name, wp.id, wp.year_num
+            ORDER BY 
+                wp.id;
+        ");
+        // var_dump($opublishCounts);
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts']));
     }
 }

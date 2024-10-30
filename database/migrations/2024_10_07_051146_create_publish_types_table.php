@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('publish_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('year_num');
             $table->timestamps();
         });
     }

@@ -9,7 +9,8 @@ class Publish_type extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'name',
+        'year_num'
     ];
     
     public function publishes()

@@ -9,11 +9,16 @@ class WhoGiven extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'name',
+        'year_num'
     ];
 
     public function higherOrgans()
     {
         return $this->hasMany(HigherOrgan::class, 'who_given_id');
+    }
+    public function convention()
+    {
+        return $this->hasMany(Convention::class, 'who_given_id');
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('who_givens', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('year_num');
             $table->timestamps();
         });
     }

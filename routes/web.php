@@ -4,10 +4,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
+use App\Http\Controllers\ConventionController;
 use App\Http\Controllers\HigherOrganController;
+use App\Http\Controllers\OAVPublishController;
 use App\Http\Controllers\PublishController;
 use App\Http\Controllers\TrainingCourseController;
 use App\Http\Controllers\YoungEconomistController;
+use App\Models\Convention;
 use App\Models\HigherOrgan;
 
 /*
@@ -44,6 +47,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('training_courses', TrainingCourseController::class);
     Route::resource('higher_organs', HigherOrganController::class);
     Route::resource('publishes', PublishController::class);
+    Route::resource('conventions',ConventionController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {
@@ -67,6 +71,10 @@ Route::middleware(['auth', 'role:author'])->group(function () {
 
 Route::middleware(['auth', 'role:subscriber'])->group(function () {
     Route::resource('young_economists', YoungEconomistController::class);
+});
+
+Route::middleware(['auth', 'role:noner'])->group(function () {
+    Route::resource('oavpublish',OAVPublishController::class);
 });
 
 
