@@ -36,13 +36,12 @@
                 </div>
 
                 <div class="form-group col-lg-4">
-                  <label for="type"><b>Tури(хорижий ёки ҳудудларга)</b></label><br>
-                  {{-- <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}" required> --}}
+                  <label for="type"><b>Тури (хорижий ёки ҳудудларга)</b></label><br>
                   <select class="form-control" name="type" id="type">
-                      <option value="hududiy">Hududlarga</option>
-                      <option value="xorijiy">Xorijiy</option>
-                    </select>
-                </div>
+                      <option value="hududiy" {{ $businessTrips->type == 'hududiy' ? 'selected' : '' }}>Hududlarga</option>
+                      <option value="xorijiy" {{ $businessTrips->type == 'xorijiy' ? 'selected' : '' }}>Xorijiy</option>
+                  </select>
+              </div>
 
                 <div class="form-group col-lg-6">
                     <label for="goal"><b>Мақсади</b></label>
@@ -87,11 +86,11 @@
                 <div class="form-group col-lg-2">
                   <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>
                   <select name="quarters_id" class="form-control" id="quarters_id" class="form-control" required>
-                      <option value="">-- Чораклар --</option>
                       @foreach($quarters as $quarter)
-                          <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
-                              {{ $quarter->name }}
-                          </option>
+                        <option value="{{ $quarter->id }}" 
+                          {{ (old('quarters_id', $businessTrips->quarters_id ?? '') == $quarter->id) ? 'selected' : '' }}>
+                          {{ $quarter->name }}
+                        </option>
                       @endforeach
                   </select>
                 </div>

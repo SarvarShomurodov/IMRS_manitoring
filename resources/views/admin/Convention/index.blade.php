@@ -12,7 +12,7 @@
               <h2>Иштирок этган (публикациясиз) анжуманлар</h2>
           </div>
           <div class="pull-right">
-              <a class="btn btn-primary mb-2" href="{{ url('publishes/create') }}">Иштирок этган анжуманлар қўшиш</a>
+              <a class="btn btn-primary mb-2" href="{{ route('conventions.create') }}">Иштирок этган анжуманлар қўшиш</a>
           </div>
       </div>
     </div>
@@ -34,7 +34,6 @@
                         <th>Тури</th>
                         <th>Ташкилотчи</th>
                         <th>Саналар</th>
-                        <th>Журнал сони рақами</th>
                         <th>Манзил(давлат ёки ҳудуд)</th>
                         <th>Иштирок этган ходимлар сони</th>
                         <th>Иштирокчилар рўйхати</th>
@@ -61,8 +60,8 @@
                         @if (Auth::user()->name == 'Abdixojayev')
                         @else
                         <td>
-                            <form action="{{ route('publishes.destroy',$trip->id) }}" method="POST">        
-                                <a class="btn btn-info" href="{{ route('publishes.edit',$trip->id) }}">Ўзгартириш</a>
+                            <form action="{{ route('conventions.destroy',$trip->id) }}" method="POST">        
+                                <a class="btn btn-info" href="{{ route('conventions.edit',$trip->id) }}">Ўзгартириш</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Ўчириш</button>

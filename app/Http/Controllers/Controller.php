@@ -55,9 +55,13 @@ class Controller extends BaseController
                 SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quater,
                 SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quater
             FROM 
-                higher_organs tc
+                higher_organs ho
             INNER JOIN 
-                quarters q ON tc.quarters_id = q.id;
+                quarters q ON ho.quarters_id = q.id 
+            INNER JOIN 
+                who_givens wg ON ho.who_given_id = wg.id 
+            WHERE 
+                wg.id IN (1, 2, 3, 4, 5);
         ");
         $higherOrganCounts = DB::select("
             SELECT 
@@ -142,7 +146,19 @@ class Controller extends BaseController
             ORDER BY 
                 wp.id;
         ");
-        // var_dump($opublishCounts);
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts']));
+        $conventions = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                conventions AS o
+            INNER JOIN 
+                quarters AS q ON o.quarters_id = q.id
+        ");
+
+        // dd($higherOrganIdCounts);
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions']));
     }
 }

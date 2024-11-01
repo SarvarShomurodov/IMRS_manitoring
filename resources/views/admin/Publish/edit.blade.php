@@ -50,9 +50,12 @@
                             <div class="form-group col-lg-4">
                                 <label for="type_id"><b>Илмий иш тури</b></label>
                                 <select name="type_id" id="type_id" class="form-control" required>
-                                    <option value="{{ $publishTypes->type_id }}">-- Илмий иш турлари --</option>
                                     @foreach($publishTypesIds as $type)
-                                    <option value="{{ $type->id }}" {{ old('type_id', $type->type_id) == $type->id ? 'selected' : '' }}>
+                                    {{-- <option value="{{ $type->id }}" {{ old('type_id', $type->type_id) == $type->id ? 'selected' : '' }}>
+                                        {{ $type->name }}
+                                    </option> --}}
+                                    <option value="{{ $type->id }}" 
+                                        {{ (old('type_id', $publishTypes->type_id ?? '') == $type->id) ? 'selected' : '' }}>
                                         {{ $type->name }}
                                     </option>
                                     @endforeach
@@ -82,9 +85,9 @@
                             <div class="form-group col-lg-2">
                                 <label for="quarters_id" class="form-label"><b>Чораклар</b></label>
                                 <select name="quarters_id" id="quarters_id" class="form-control" required>
-                                    <option value="">-- Чораклар --</option>
                                     @foreach($quarters as $quarter)
-                                    <option value="{{ $quarter->id }}" {{ old('quarters_id', $quarter->quarters_id) == $quarter->id ? 'selected' : '' }}>
+                                    <option value="{{ $quarter->id }}" 
+                                        {{ (old('quarters_id', $publishTypes->quarters_id ?? '') == $quarter->id) ? 'selected' : '' }}>
                                         {{ $quarter->name }}
                                     </option>
                                     @endforeach

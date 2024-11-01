@@ -34,9 +34,11 @@
       <div class="form-group col-lg-2">
           <label for="type">Тури(онлайн ёки оффлайн)</label>
           <select class="form-control" name="type" id="type">
-            <option value="">-- Тури --</option>
+            {{-- <option value="">-- Тури --</option>
             <option value="obline">Oнлайн</option>
-            <option value="offline">Oффлайн</option>
+            <option value="offline">Oффлайн</option> --}}
+            <option value="Oнлайн" {{ $trainingCourses->type == 'Oнлайн' ? 'selected' : '' }}>Oнлайн</option>
+            <option value="Oффлайн" {{ $trainingCourses->type == 'Oффлайн' ? 'selected' : '' }}>Oффлайн</option>
           </select>
       </div>
       <div class="form-group col-lg-6">
@@ -63,11 +65,11 @@
       <div class="form-group col-lg-2">
         <label for="quarters_id" class="form-label">Қайси чоракда</label>
         <select name="quarters_id" class="form-control" id="quarters_id" class="form-control" required>
-            <option value="">-- Чораклар --</option>
             @foreach($quarters as $quarter)
-                <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
-                    {{ $quarter->name }}
-                </option>
+              <option value="{{ $quarter->id }}" 
+                {{ (old('quarters_id', $trainingCourses->quarters_id ?? '') == $quarter->id) ? 'selected' : '' }}>
+                {{ $quarter->name }}
+              </option>
             @endforeach
         </select>
       </div>

@@ -12,7 +12,7 @@
               <h2>Тренинг ўқув курси</h2>
           </div>
           <div class="pull-right">
-              <a class="btn btn-primary" href="{{ url('training_courses/create') }}">Тренинг ўқув курсларини яратиш</a>
+              <a class="btn btn-primary mb-2" href="{{ url('training_courses/create') }}">Тренинг ўқув курсларини яратиш</a>
           </div>
       </div>
     </div>

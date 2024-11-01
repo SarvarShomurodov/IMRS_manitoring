@@ -34,6 +34,7 @@
                         <th>Мажлис санаси</th>
                         <th>Иштирокчилар руйҳати (маҳаллий)</th>
                         <th>Иштирокчилар рўйхати (чет эл вакиллари)</th>
+                        <th>Chorak</th>
                         @if(Auth::user()->name == 'Abdixojayev')
                         @else
                             <th>Action</th>  
@@ -47,8 +48,9 @@
                         <td>{{ $trip->name }}</td>
                         <td>{{ $trip->position }}</td>
                         <td>{{ $trip->date }}</td>
-                        <td>{{ $trip->list_person_local }}</td>
-                        <td>{{ $trip->list_person_no_local }}</td>
+                        <td>{!! $trip->list_person_local !!}</td>
+                        <td>{!! $trip->list_person_no_local !!}</td>
+                        <td>{{ $trip->quarter->name }}</td>
                         @if (Auth::user()->name == 'Abdixojayev')
                         @else
                         <td>

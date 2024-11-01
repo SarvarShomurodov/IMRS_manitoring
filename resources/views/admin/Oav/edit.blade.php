@@ -39,9 +39,13 @@
                             <div class="form-group col-lg-4">
                                 <label for="oav_id"><b>Ишлар тури</b></label>
                                 <select name="oav_id" id="oav_id" class="form-control" required>
-                                    <option value="">-- Ишлар турлари --</option>
+                                    {{-- <option value="">-- Ишлар турлари --</option> --}}
                                     @foreach($whogivens as $type)
-                                    <option value="{{ $type->id }}" {{ old('oav_id', $type->oav_id) == $type->id ? 'selected' : '' }}>
+                                    {{-- <option value="{{ $type->id }}" {{ old('oav_id', $type->oav_id) == $type->id ? 'selected' : '' }}>
+                                        {{ $type->name }}
+                                    </option> --}}
+                                    <option value="{{ $type->id }}" 
+                                        {{ (old('who_given_id', $oavpublishes->oav_id ?? '') == $type->id) ? 'selected' : '' }}>
                                         {{ $type->name }}
                                     </option>
                                     @endforeach
@@ -71,9 +75,10 @@
                             <div class="form-group col-lg-2">
                                 <label for="quarters_id" class="form-label"><b>Чораклар</b></label>
                                 <select name="quarters_id" id="quarters_id" class="form-control" required>
-                                    <option value="">-- Чораклар --</option>
+                                    {{-- <option value="">-- Чораклар --</option> --}}
                                     @foreach($quarters as $quarter)
-                                    <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
+                                    <option value="{{ $quarter->id }}" 
+                                        {{ (old('quarters_id', $oavpublishes->quarters_id ?? '') == $quarter->id) ? 'selected' : '' }}>
                                         {{ $quarter->name }}
                                     </option>
                                     @endforeach

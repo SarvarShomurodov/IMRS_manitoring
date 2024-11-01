@@ -54,11 +54,11 @@
         <div class="form-group col-lg-2">
          <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>
          <select name="quarters_id" class="form-control" id="quarters_id" class="form-control" required>
-             <option value="">-- Чораклар --</option>
              @foreach($quarters as $quarter)
-                 <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
-                     {{ $quarter->name }}
-                 </option>
+                <option value="{{ $quarter->id }}" 
+                 {{ (old('quarters_id', $youngEconomists->quarters_id ?? '') == $quarter->id) ? 'selected' : '' }}>
+                 {{ $quarter->name }}
+                </option>
              @endforeach
          </select>
        </div>

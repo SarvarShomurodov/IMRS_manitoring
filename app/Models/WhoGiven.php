@@ -21,4 +21,5 @@ class WhoGiven extends Model
     {
         return $this->hasMany(Convention::class, 'who_given_id');
     }
+    
 }

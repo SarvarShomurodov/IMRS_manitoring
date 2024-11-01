@@ -28,6 +28,12 @@
           <span class="menu-title">Илмий нашриёт ишлари</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"  href="{{ url('conventions') }}" aria-expanded="false" aria-controls="form-elements">
+          <i class="menu-icon mdi mdi-calendar-check"></i>
+          <span class="menu-title">Иштирок этган анжуманлар</span>
+        </a>
+      </li>
     @endif
     @if( Auth::user()->name == 'Qarabayeva')
     <li class="nav-item nav-category">Barcha malumotlar</li>

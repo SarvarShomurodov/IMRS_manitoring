@@ -71,32 +71,32 @@
           <div class="header">4-ЧОРАК</div>
           <div class="header">Йил бўйича Режа</div>
           
-          <div class="id">1</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('business_trips') }}">Хизмат сафарлар</a></div>
-          <div>{{$businessTripCounts[0]->first_quater}}</div>
-          <div>{{$businessTripCounts[0]->second_quater}}</div>
-          <div>{{$businessTripCounts[0]->third_quater}}</div>
-          <div>{{$businessTripCounts[0]->fourth_quater}}</div>
-          <div>154</div>
+          @foreach($higherOrganCounts as $higherOrganCount)
+            @if ($higherOrganCount->id == 6)
+              <div class="id">1</div>
+              <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 6]) }}"><b>{{$higherOrganCount->issuer_name}}</b></a></div>
+              <div>{{$higherOrganCount->first_quarter}}</div>
+              <div>{{$higherOrganCount->second_quarter}}</div>
+              <div>{{$higherOrganCount->third_quarter}}</div>
+              <div>{{$higherOrganCount->fourth_quarter}}</div>
+              <div>{{$higherOrganCount->year_number}}</div>
+             @endif              
+          @endforeach
 
-          <div class="id">2</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('young_economists') }}">Институт Ёш иқтисодчилар мажлислари сони</a></div>
-          <div>{{$youngEconomistCounts[0]->first_quater}}</div>
-          <div>{{$youngEconomistCounts[0]->second_quater}}</div>
-          <div>{{$youngEconomistCounts[0]->third_quater}}</div>
-          <div>{{$youngEconomistCounts[0]->fourth_quater}}</div>
-          <div>173</div>
+          @foreach($higherOrganCounts as $higherOrganCount)
+            @if ($higherOrganCount->id == 8)
+              <div class="id">2</div>
+              <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 8]) }}"><b>{{$higherOrganCount->issuer_name}}</b></a></div>
+              <div>{{$higherOrganCount->first_quarter}}</div>
+              <div>{{$higherOrganCount->second_quarter}}</div>
+              <div>{{$higherOrganCount->third_quarter}}</div>
+              <div>{{$higherOrganCount->fourth_quarter}}</div>
+              <div>{{$higherOrganCount->year_number}}</div>
+             @endif              
+          @endforeach
 
           <div class="id">3</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('training_courses') }}">Тренинг ўқув курси</a></div>
-          <div>{{$trainingCourseCounts[0]->first_quater}}</div>
-          <div>{{$trainingCourseCounts[0]->second_quater}}</div>
-          <div>{{$trainingCourseCounts[0]->third_quater}}</div>
-          <div>{{$trainingCourseCounts[0]->fourth_quater}}</div>
-          <div>154</div>
-
-          <div class="id">4</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}">Таҳлилий материаллар</a></div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}"><b>Юқори ташкилотларнинг топшириқларга  мувофиқ бажарилган ишлар сони, шундан</b></a></div>
           <div>{{$higherOrgans[0]->first_quater}}</div>
           <div>{{$higherOrgans[0]->second_quater}}</div>
           <div>{{$higherOrgans[0]->third_quater}}</div>
@@ -104,17 +104,38 @@
           <div>160</div>
 
           @foreach($higherOrganCounts as $higherOrganCount)
-            <div>4.{{$higherOrganCount->id}}</div>
-            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}">{{$higherOrganCount->issuer_name}}</a></div>
+            @if($higherOrganCount->id != 6 && $higherOrganCount->id != 8)
+            <div>3. {{$higherOrganCount->id}}</div>
+            <div class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => $higherOrganCount->id]) }}">
+                    {{$higherOrganCount->issuer_name}}
+                </a>
+            </div>
             <div>{{$higherOrganCount->first_quarter}}</div>
             <div>{{$higherOrganCount->second_quarter}}</div>
             <div>{{$higherOrganCount->third_quarter}}</div>
             <div>{{$higherOrganCount->fourth_quarter}}</div>
             <div>{{$higherOrganCount->year_number}}</div>
+            @endif
           @endforeach
 
           <div class="id">5</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}">Илмий нашриёт ишлари сони:</a></div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('business_trips') }}"><b>Хизмат сафарлар</b></a></div>
+          <div>{{$businessTripCounts[0]->first_quater}}</div>
+          <div>{{$businessTripCounts[0]->second_quater}}</div>
+          <div>{{$businessTripCounts[0]->third_quater}}</div>
+          <div>{{$businessTripCounts[0]->fourth_quater}}</div>
+          <div>154</div>
+
+          <div class="id">7</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('training_courses') }}"><b>Тренинглар, ўқув курслари (сертификат билан)</b></a></div>
+          <div>{{$trainingCourseCounts[0]->first_quater}}</div>
+          <div>{{$trainingCourseCounts[0]->second_quater}}</div>
+          <div>{{$trainingCourseCounts[0]->third_quater}}</div>
+          <div>{{$trainingCourseCounts[0]->fourth_quater}}</div>
+          <div>154</div>
+          <div class="id">8</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}"><b>Илмий нашриёт ишлари сони</b></a></div>
           <div>{{$publish[0]->first_quater}}</div>
           <div>{{$publish[0]->second_quater}}</div>
           <div>{{$publish[0]->third_quater}}</div>
@@ -122,7 +143,7 @@
           <div>198</div>
 
           @foreach($publishCounts as $publishCount)
-            <div>5.{{$publishCount->id}}</div>
+            <div>8.{{$publishCount->id}}</div>
             <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}">{{$publishCount->issuer_name}}</a></div>
             <div>{{$publishCount->first_quarter}}</div>
             <div>{{$publishCount->second_quarter}}</div>
@@ -131,8 +152,8 @@
             <div>{{$publishCount->year_number}}</div>
           @endforeach
 
-          <div class="id">6</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}">Илмий нашриёт ишлари сони:</a></div>
+          <div class="id">9</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}"><b>ОАВ нашриёт ишлари сони</b></a></div>
           <div>{{$opublishes[0]->first_quarter}}</div>
           <div>{{$opublishes[0]->second_quarter}}</div>
           <div>{{$opublishes[0]->third_quarter}}</div>
@@ -140,7 +161,7 @@
           <div>198</div>
 
           @foreach($opublishCounts as $publishCount)
-            <div>6.{{$publishCount->id}}</div>
+            <div>9.{{$publishCount->id}}</div>
             <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}">{{$publishCount->issuer_name}}</a></div>
             <div>{{$publishCount->first_quarter}}</div>
             <div>{{$publishCount->second_quarter}}</div>
@@ -149,6 +170,22 @@
             <div>{{$publishCount->year_number}}</div>
           @endforeach
           
+          <div class="id">10</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('conventions') }}"><b>Юқори ташкилотларнинг топшириқларга  мувофиқ семинарлар, вебинарлар, давра сухбатлар, конференциялар, форумлар ва бошқа тадбирларда иштирок этиш (публикациясиз)</b></a></div>
+          <div>{{$conventions[0]->first_quarter}}</div>
+          <div>{{$conventions[0]->second_quarter}}</div>
+          <div>{{$conventions[0]->third_quarter}}</div>
+          <div>{{$conventions[0]->fourth_quarter}}</div>
+          <div>148</div>
+
+          <div class="id">14</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('young_economists') }}"><b>Институт Ёш иқтисодчилар мажлислари сони</b></a></div>
+          <div>{{$youngEconomistCounts[0]->first_quater}}</div>
+          <div>{{$youngEconomistCounts[0]->second_quater}}</div>
+          <div>{{$youngEconomistCounts[0]->third_quater}}</div>
+          <div>{{$youngEconomistCounts[0]->fourth_quater}}</div>
+          <div>173</div>
+
       </div>
       </div>
     </div>

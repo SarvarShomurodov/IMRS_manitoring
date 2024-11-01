@@ -35,11 +35,12 @@
         <div class="form-group col-lg-4">
           <label for="who_given_id" class="form-label"><b>Асос</b></label>
           <select name="who_given_id" class="form-control" id="who_given_id" class="form-control" required>
-              <option value="">-- Ким томонидан берилди --</option>
+              {{-- <option value="">-- Ким томонидан берилди --</option> --}}
               @foreach($whogivens as $whogiven)
-                  <option value="{{ $whogiven->id }}" {{ old('whogiven') == $whogiven->id ? 'selected' : '' }}>
-                      {{ $whogiven->name }}
-                  </option>
+                <option value="{{ $whogiven->id }}" 
+                  {{ (old('who_given_id', $higherOrgans->who_given_id ?? '') == $whogiven->id) ? 'selected' : '' }}>
+                  {{ $whogiven->name }}
+                </option>
               @endforeach
           </select>
         </div>
@@ -78,9 +79,11 @@
           <label for="type"><b>Сўровнома мавжудлиги (ҳа, йўқ)</b></label><br>
           {{-- <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}" required> --}}
           <select class="form-control" name="sorov" id="sorov">
-              <option value="Ha">ҳа</option>
-              <option value="Yo`q">йўқ</option>
-            </select>
+              {{-- <option value="Ha">ҳа</option>
+              <option value="Yo`q">йўқ</option> --}}
+              <option value="Ha" {{ $higherOrgans->sorov == 'Ha' ? 'selected' : '' }}>ҳа</option>
+              <option value="Yo`q" {{ $higherOrgans->sorov == 'Yo`q' ? 'selected' : '' }}>йўқ</option>
+          </select>
         </div>
 
         <div class="form-group col-lg-4">
@@ -96,10 +99,13 @@
         <div class="form-group col-lg-2">
           <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>
           <select name="quarters_id" class="form-control" id="quarters_id" class="form-control" required>
-              <option value="">-- Чораклар --</option>
               @foreach($quarters as $quarter)
-                  <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
+                  {{-- <option value="{{ $quarter->id }}" {{ old('quarters_id') == $quarter->id ? 'selected' : '' }}>
                       {{ $quarter->name }}
+                  </option> --}}
+                  <option value="{{ $quarter->id }}" 
+                    {{ (old('quarters_id', $higherOrgans->quarters_id ?? '') == $quarter->id) ? 'selected' : '' }}>
+                    {{ $quarter->name }}
                   </option>
               @endforeach
           </select>

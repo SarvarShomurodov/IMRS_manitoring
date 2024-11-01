@@ -52,7 +52,7 @@
                         <td>{{ ++$i }}</td>
                         <td>{{ $trip->name }}</td>
                         <td>{{ $trip->type }}</td>
-                        <td>{{ $trip->goal }}</td>
+                        <td>{!! $trip->goal !!}</td>
                         <td>{{ $trip->start_date }}</td>
                         <td>{{ $trip->end_date }}</td>
                         <td>{{ $trip->adress }}</td>

@@ -25,7 +25,7 @@
     @csrf
     <div class="row">
       <div class="form-group col-lg-6">
-          <label for="name"><b>Таҳлилий материал номи</b></label>
+          <label for="name"><b>Анжуман номи</b></label>
           <textarea name="name" id="summernote" class="form-control" required>{{ old('name') }}</textarea>
       </div>
       <div class="form-group col-lg-4">
@@ -39,10 +39,10 @@
             @endforeach
         </select>
       </div>
-      <div class="form-group col-lg-4">
-        <label for="who_given_id" class="form-label"><b>Асос</b></label>
-        <select name="who_given_id" class="form-control" id="who_given_id" class="form-control" required>
-            <option value="">-- Ким томонидан берилди --</option>
+      <div class="form-group col-lg-2">
+        <label for="type_id" class="form-label"><b>Тури</b></label>
+        <select name="type_id" class="form-control" id="type_id" class="form-control" required>
+            <option value="">-- Тури --</option>
             @foreach($conventionstypes as $conventionstype)
                 <option value="{{ $conventionstype->id }}" {{ old('whogiven') == $conventionstype->id ? 'selected' : '' }}>
                     {{ $conventionstype->name }}
@@ -50,47 +50,26 @@
             @endforeach
         </select>
       </div>
+      <div class="form-group col-lg-4">
+        <label for="date"><b>Ташкилотчи</b></label>
+        <input type="text" name="organizer" id="organizer" class="form-control" value="{{ old('organizer') }}" required>
+      </div>
       <div class="form-group col-lg-2">
-        <label for="date"><b>Топшириқ санаси(ёки хатсиз)</b></label>
+        <label for="date"><b>Саналар</b></label>
         <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}" required>
       </div>
-      <div class="form-group col-lg-2">
-        <label for="ass_number"><b>Топшириқ рақами(ёки хатсиз)</b></label>
-        <input type="number" name="ass_number" id="ass_number" class="form-control" value="{{ old('ass_number') }}" min="0" required>
-      </div>
-
-      <div class="form-group col-lg-6">
-        <label for="who_send"><b>Кимга юборилди</b></label>
-        <input type="text" name="who_send" id="who_send" class="form-control" value="{{ old('who_send') }}" required>
-      </div>
-      <div class="form-group col-lg-2">
-        <label for="date"><b>Хат санаси</b></label>
-        <input type="date" name="letter_date" id="letter_date" class="form-control" value="{{ old('letter_date') }}" required>
-      </div>
-      <div class="form-group col-lg-2">
-        <label for="letter_number"><b>Хат рақами</b></label>
-        <input type="number" name="letter_number" id="letter_number" class="form-control" value="{{ old('ass_number') }}" min="0" required>
-      </div>
-      <div class="form-group col-lg-6">
-        <label for="direction"><b>Йўналиш</b></label>
-        <input type="text" name="direction" id="direction" class="form-control" value="{{ old('direction') }}" required>
-      </div>
-      <div class="form-group col-lg-2">
-        <label for="type"><b>Сўровнома мавжудлиги (ҳа, йўқ)</b></label><br>
-        {{-- <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}" required> --}}
-        <select class="form-control" name="sorov" id="sorov">
-            <option value="Ha">ҳа</option>
-            <option value="Yo`q">йўқ</option>
-          </select>
-      </div>
-      <div class="form-group col-lg-6">
-        <label for="country"><b>Давлат ёки ҳудуд</b></label>
-        <input type="text" name="country" id="country" class="form-control" value="{{ old('country') }}" required>
-      </div>
       <div class="form-group col-lg-4">
-        <label for="ball"><b>Иштирок этган ходимлар ва уларнинг қўшган ҳиссаси (балл)</b></label>
-        <input type="number" name="ball" id="ball" class="form-control" value="{{ old('ball') }}" min="0" required>
+        <label for="who_send"><b>Манзил(давлат ёки ҳудуд)</b></label>
+        <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}" required>
       </div>
+      <div class="form-group col-lg-2">
+        <label for="letter_number"><b>Иштирок этган ходимлар сони</b></label>
+        <input type="number" name="employees_count" id="employees_count" class="form-control" value="{{ old('employees_count') }}" min="0" required>
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="name"><b>Иштирокчилар рўйхати</b></label>
+        <textarea name="list" id="summernote2" class="form-control" required>{{ old('list') }}</textarea>
+    </div>
       <div class="form-group col-lg-2">
         <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>
         <select name="quarters_id" class="form-control" id="quarters_id" class="form-control" required>
