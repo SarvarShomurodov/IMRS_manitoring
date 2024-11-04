@@ -4,7 +4,9 @@
 
 @section('content')
     @if (Auth::user()->name == 'Abdixojayev')
-
+        <div class="col-lg-12 mb-4">
+            <h2>Юқори ташкилотларнинг топшириқларга мувофиқ бажарилган ишлар сони, шундан</h2>
+        </div>
     @else
     <div class="row">
       <div class="col-lg-12 margin-tb">

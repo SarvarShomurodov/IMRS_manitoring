@@ -4,7 +4,9 @@
 
 @section('content')
 @if (Auth::user()->name == 'Abdixojayev')
-
+    <div class="col-lg-12 mb-4">
+        <h2>Институт Ёш иқтисодчилар мажлислари сони</h2>
+    </div>
 @else
 <div class="row">
   <div class="col-lg-12 margin-tb">
@@ -34,7 +36,7 @@
                         <th>Мажлис санаси</th>
                         <th>Иштирокчилар руйҳати (маҳаллий)</th>
                         <th>Иштирокчилар рўйхати (чет эл вакиллари)</th>
-                        <th>Chorak</th>
+                        <th>Чораклар</th>
                         @if(Auth::user()->name == 'Abdixojayev')
                         @else
                             <th>Action</th>  

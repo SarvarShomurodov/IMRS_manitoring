@@ -8,6 +8,8 @@ use App\Http\Controllers\ConventionController;
 use App\Http\Controllers\HigherOrganController;
 use App\Http\Controllers\OAVPublishController;
 use App\Http\Controllers\PublishController;
+use App\Http\Controllers\ScientificCouncilController;
+use App\Http\Controllers\ScientificSeminarController;
 use App\Http\Controllers\TrainingCourseController;
 use App\Http\Controllers\YoungEconomistController;
 use App\Models\Convention;
@@ -48,6 +50,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('higher_organs', HigherOrganController::class);
     Route::resource('publishes', PublishController::class);
     Route::resource('conventions',ConventionController::class);
+    Route::resource('scientific',ScientificCouncilController::class);
+    Route::resource('seminar',ScientificSeminarController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {

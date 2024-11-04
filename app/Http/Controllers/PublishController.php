@@ -12,9 +12,16 @@ class PublishController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $publishes = Publish::all();
+        // $publishes = Publish::all();
+        // Get the 'who_given_id' parameter from the URL
+        $typeId = $request->query('type_id');
+        // Apply the filter only if 'who_given_id' is 6 or 8; otherwise, retrieve all records
+        $publishes = Publish::when(in_array($typeId, [1,2,3,4,5,6,7,8,9]), function ($query) use ($typeId) {
+            return $query->where('type_id', $typeId);
+        })->get();
+
         return view('admin.Publish.index', compact('publishes'))->with('i');
     }
 

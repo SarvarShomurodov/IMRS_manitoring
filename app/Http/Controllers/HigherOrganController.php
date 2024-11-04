@@ -15,12 +15,12 @@ class HigherOrganController extends Controller
     public function index(Request $request)
     {
        // Get the 'who_given_id' parameter from the URL
-    $whoGivenId = $request->query('who_given_id');
+        $whoGivenId = $request->query('who_given_id');
+        // Apply the filter only if 'who_given_id' is 6 or 8; otherwise, retrieve all records
+        $higherOrgans = HigherOrgan::when(in_array($whoGivenId, [1,2,3,4,5,6,8,10]), function ($query) use ($whoGivenId) {
+            return $query->where('who_given_id', $whoGivenId);
+        })->get();
 
-    // Apply the filter only if 'who_given_id' is 6 or 8; otherwise, retrieve all records
-    $higherOrgans = HigherOrgan::when(in_array($whoGivenId, [1,2,3,4,5,6,8]), function ($query) use ($whoGivenId) {
-        return $query->where('who_given_id', $whoGivenId);
-    })->get();
         return view('admin.HigherOrgan.index', compact('higherOrgans'))->with('i');
     }
 

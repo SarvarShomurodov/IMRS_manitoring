@@ -32,4 +32,12 @@ class Quarter extends Model
     {
         return $this->hasMany(Convention::class, 'quarters_id');
     }
+    public function ranks()
+    {
+        return $this->hasMany(ScientificCouncil::class, 'quarters_id');
+    }
+    public function seminarRanks()
+    {
+        return $this->hasMany(ScientificSeminar::class, 'quarters_id');
+    }
 }
