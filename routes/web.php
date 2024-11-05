@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
 use App\Http\Controllers\ConventionController;
 use App\Http\Controllers\HigherOrganController;
+use App\Http\Controllers\MethodController;
 use App\Http\Controllers\OAVPublishController;
 use App\Http\Controllers\PublishController;
 use App\Http\Controllers\ScientificCouncilController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\TrainingCourseController;
 use App\Http\Controllers\YoungEconomistController;
 use App\Models\Convention;
 use App\Models\HigherOrgan;
+use App\Models\Method;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +70,7 @@ Route::middleware(['auth', 'role:moderator'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:author'])->group(function () {
-    Route::get('/page4', function () {
-        return 'Page4';
-    });
+    Route::resource('methods', MethodController::class);
 });
 
 Route::middleware(['auth', 'role:subscriber'])->group(function () {

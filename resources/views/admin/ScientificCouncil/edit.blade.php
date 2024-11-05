@@ -50,7 +50,7 @@
 
                             <div class="form-group col-lg-6">
                                 <label for="author"><b>Ф.И.Ш</b></label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ $scientifics->name }}" required>
+                                <input type="text" name="name" id="name" class="form-control" value="{{ $scientifics->name }}">
                             </div>
 
                             <div class="form-group col-lg-6">
@@ -70,7 +70,7 @@
 
                             <div class="form-group col-lg-2">
                                 <label for="date"><b>Ҳимоя санаси</b></label>
-                                <input type="date" name="date" id="date" class="form-control" value="{{ $scientifics->date }}" required>
+                                <input type="date" name="date" id="date" class="form-control" value="{{ $scientifics->date }}">
                             </div>
 
                             <div class="form-group col-lg-2">

@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     @if( Auth::user()->name == 'Abdixojayev')
-      <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') || Request::is('methods*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('index') }}">
           <i class="menu-icon mdi mdi-home"></i>
           <span class="menu-title">Aсосий саҳифа</span>
@@ -71,6 +71,15 @@
         <a class="nav-link" href="{{ url('oavpublish') }}" aria-expanded="false" aria-controls="ui-basic">
           <i class="menu-icon mdi mdi-shield-account"></i>
           <span class="menu-title">ОАВ нашриёт ишлари</span>
+        </a>
+      </li>
+    @endif
+    @if( Auth::user()->name == 'Axmedova')
+    <li class="nav-item nav-category">Barcha malumotlar</li>
+      <li class="nav-item {{ Request::is('methods*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('methods') }}" aria-expanded="false" aria-controls="ui-basic">
+          <i class="menu-icon mdi mdi-lightbulb-on"></i>
+          <span class="menu-title">Илмий методологик семинар</span>
         </a>
       </li>
     @endif

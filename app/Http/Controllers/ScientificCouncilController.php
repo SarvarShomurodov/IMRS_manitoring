@@ -11,17 +11,38 @@ class ScientificCouncilController extends Controller
 {
     public function index(Request $request)
     {
-         // Start a query for ScientificCouncil
-        $query = ScientificCouncil::query();
+        //  // Start a query for ScientificCouncil
+        // $query = ScientificCouncil::query();
 
+        // // Apply quarters_id filter if provided
+        // if ($request->filled('quarters_id')) {
+        //     $query->where('quarters_id', $request->input('quarters_id'));
+        // }
+
+        // // Get the filtered results
+        // $scientifics = $query->get();
+
+        // // Pass the quarters list (assuming it's already retrieved in your controller or use Quarters::all() if needed)
+        // $quarters = Quarter::all();
+        // Start a query for ScientificCouncil
+        $query = ScientificCouncil::query();
+            
+        // Get the 'degree_id' parameter from the URL
+        $degreeId = $request->query('degree_id');
+            
         // Apply quarters_id filter if provided
         if ($request->filled('quarters_id')) {
             $query->where('quarters_id', $request->input('quarters_id'));
         }
-
+        
+        // Apply the degree_id filter if it is in the allowed values; otherwise, retrieve all records
+        if (in_array($degreeId, [1, 2])) {
+            $query->where('degree_id', $degreeId);
+        }
+        
         // Get the filtered results
         $scientifics = $query->get();
-
+        
         // Pass the quarters list (assuming it's already retrieved in your controller or use Quarters::all() if needed)
         $quarters = Quarter::all();
         return view('admin.ScientificCouncil.index',compact(['scientifics','quarters']))->with('i');
@@ -36,11 +57,11 @@ class ScientificCouncilController extends Controller
     {
         $validatedData = $request->validate([
             'degree_id' => 'required|exists:scientific_degrees,id',
-            'name' => 'required|string',
+            'name' => 'nullable|string',
             'type' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
-            'date' => 'required|date',
+            'date' => 'nullable|date',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
 
@@ -59,11 +80,11 @@ class ScientificCouncilController extends Controller
     {
         $validatedData = $request->validate([
             'degree_id' => 'required|exists:scientific_degrees,id',
-            'name' => 'required|string',
+            'name' => 'nullable|string',
             'type' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
-            'date' => 'required|date',
+            'date' => 'nullable|date',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
 

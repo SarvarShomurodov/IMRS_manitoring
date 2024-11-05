@@ -40,4 +40,8 @@ class Quarter extends Model
     {
         return $this->hasMany(ScientificSeminar::class, 'quarters_id');
     }
+    public function methods()
+    {
+        return $this->hasMany(Method::class, 'quarters_id');
+    }
 }

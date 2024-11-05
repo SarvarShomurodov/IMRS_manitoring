@@ -159,10 +159,10 @@ class Controller extends BaseController
         ");
         $scientifics = DB::select("
             SELECT 
-                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
-                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
-                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
-                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+                SUM(CASE WHEN q.id = 1 AND o.date IS NOT NULL THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 AND o.date IS NOT NULL THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 AND o.date IS NOT NULL THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 AND o.date IS NOT NULL THEN 1 ELSE 0 END) AS fourth_quarter
             FROM 
                 scientific_councils AS o
             INNER JOIN 
@@ -179,7 +179,49 @@ class Controller extends BaseController
             INNER JOIN 
                 quarters AS q ON o.quarters_id = q.id
         ");
+        $methods = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                methods AS o
+            INNER JOIN 
+                quarters AS q ON o.quarters_id = q.id
+        ");
+        $nullScientifics = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 AND o.name IS NOT NULL AND o.name <> '' THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 AND o.name IS NOT NULL AND o.name <> '' THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 AND o.name IS NOT NULL AND o.name <> '' THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 AND o.name IS NOT NULL AND o.name <> '' THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                scientific_councils AS o
+            INNER JOIN 
+                quarters AS q ON o.quarters_id = q.id
+        ");
+        $nullScientificCounts = DB::select("
+            SELECT 
+                sc.name AS issuer_name,
+                sc.id AS id,
+                sc.year_num AS year_number,
+                SUM(CASE WHEN q.id = 1 AND ho.name IS NOT NULL AND ho.name <> '' THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 AND ho.name IS NOT NULL AND ho.name <> '' THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 AND ho.name IS NOT NULL AND ho.name <> '' THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 AND ho.name IS NOT NULL AND ho.name <> '' THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                scientific_councils AS ho
+            INNER JOIN 
+                scientific_degrees AS sc ON ho.degree_id = sc.id
+            INNER JOIN 
+                quarters AS q ON ho.quarters_id = q.id
+            GROUP BY 
+                sc.name, sc.id, sc.year_num
+            ORDER BY 
+                sc.id;
+        ");
         // dd($higherOrganIdCounts);
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars']));
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars','methods','nullScientifics','nullScientificCounts']));
     }
 }

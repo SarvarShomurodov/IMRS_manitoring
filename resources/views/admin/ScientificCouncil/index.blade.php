@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Display filter form only if the user is 'Abdixojayev' -->
-    @if (Auth::user()->name == 'Abdixojayev')
+    @if (Auth::user()->name == 'Abdixojayev' && request()->is('scientific'))
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">

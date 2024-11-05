@@ -212,6 +212,14 @@
           <div>{{$seminars[0]->fourth_quarter}}</div>
           <div>111</div>
 
+          <div class="id">13</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('methods') }}"><b>Институт Илмий-амалий семинар йиғилишлари</b></a></div>
+          <div>{{$methods[0]->first_quarter}}</div>
+          <div>{{$methods[0]->second_quarter}}</div>
+          <div>{{$methods[0]->third_quarter}}</div>
+          <div>{{$methods[0]->fourth_quarter}}</div>
+          <div>211</div>
+
           <div class="id">14</div>
           <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('young_economists') }}"><b>Институт Ёш иқтисодчилар мажлислари сони</b></a></div>
           <div>{{$youngEconomistCounts[0]->first_quater}}</div>
@@ -219,6 +227,26 @@
           <div>{{$youngEconomistCounts[0]->third_quater}}</div>
           <div>{{$youngEconomistCounts[0]->fourth_quater}}</div>
           <div>173</div>
+
+          <div class="id">16</div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('scientific') }}"><b>Илмий даражага эга бўлиш учун ҳимояга чиққан илмий изланувчилар сони</b></a></div>
+          <div>{{$nullScientifics[0]->first_quarter}}</div>
+          <div>{{$nullScientifics[0]->second_quarter}}</div>
+          <div>{{$nullScientifics[0]->third_quarter}}</div>
+          <div>{{$nullScientifics[0]->fourth_quarter}}</div>
+          <div>281</div>
+    
+          @foreach($nullScientificCounts as $publishCount)
+            <div></div>
+            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('scientific.index',['degree_id' => $publishCount->id, 'quarters_id' => request('quarters_id')]) }}">
+              {{$publishCount->issuer_name}}
+            </a></div>
+            <div>{{$publishCount->first_quarter}}</div>
+            <div>{{$publishCount->second_quarter}}</div>
+            <div>{{$publishCount->third_quarter}}</div>
+            <div>{{$publishCount->fourth_quarter}}</div>
+            <div>{{$publishCount->year_number}}</div>
+          @endforeach
           
       </div>
       </div>
