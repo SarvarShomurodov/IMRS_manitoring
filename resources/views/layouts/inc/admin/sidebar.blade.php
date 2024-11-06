@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     @if( Auth::user()->name == 'Abdixojayev')
-      <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') || Request::is('methods*') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') || Request::is('methods*') || Request::is('event*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('index') }}">
           <i class="menu-icon mdi mdi-home"></i>
           <span class="menu-title">Aсосий саҳифа</span>
@@ -43,7 +43,13 @@
       <li class="nav-item {{ Request::is('seminar*') ? 'active' : '' }}">
         <a class="nav-link"  href="{{ url('seminar') }}" aria-expanded="false" aria-controls="form-elements">
           <i class="menu-icon mdi mdi-domain"></i>
-          <span class="menu-title">Иштирок этган анжуманлар</span>
+          <span class="menu-title">ИИК ҳузуридаги семинарлар</span>
+        </a>
+      </li>
+      <li class="nav-item {{ Request::is('event*') ? 'active' : '' }}">
+        <a class="nav-link"  href="{{ url('event') }}" aria-expanded="false" aria-controls="form-elements">
+          <i class="menu-icon mdi mdi-bullhorn"></i>
+          <span class="menu-title">Институт тадбирлари</span>
         </a>
       </li>
     @endif
@@ -80,6 +86,15 @@
         <a class="nav-link" href="{{ url('methods') }}" aria-expanded="false" aria-controls="ui-basic">
           <i class="menu-icon mdi mdi-lightbulb-on"></i>
           <span class="menu-title">Илмий методологик семинар</span>
+        </a>
+      </li>
+    @endif
+    @if( Auth::user()->name == 'Xalbayev')
+    <li class="nav-item nav-category">Barcha malumotlar</li>
+      <li class="nav-item {{ Request::is('meeting*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('meeting') }}" aria-expanded="false" aria-controls="ui-basic">
+          <i class="menu-icon mdi mdi-handshake"></i>
+          <span class="menu-title">Учрашувлар</span>
         </a>
       </li>
     @endif

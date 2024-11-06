@@ -86,14 +86,20 @@
           </select>
         </div>
 
-        <div class="form-group col-lg-4">
+        {{-- <div class="form-group col-lg-4">
           <label for="country"><b>Давлат ёки ҳудуд</b></label>
           <input type="text" name="country" id="country" class="form-control" value="{{ $higherOrgans->country }}" required>
-        </div>
-
+        </div> --}}
         <div class="form-group col-lg-4">
-          <label for="ball"><b>Иштирок этган ходимлар ва уларнинг қўшган ҳиссаси (балл)</b></label>
-          <input type="number" name="ball" id="ball" class="form-control" value="{{ $higherOrgans->ball }}" min="0" required>
+          <label for="regions_id" class="form-label"><b>Давлат ёки ҳудуд</b></label>
+          <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+              <option value="">-- Xудуд --</option>
+              @foreach($regions as $region)
+                  <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
+                      {{ $region->name }}
+                  </option>
+              @endforeach
+          </select>
         </div>
 
         <div class="form-group col-lg-2">

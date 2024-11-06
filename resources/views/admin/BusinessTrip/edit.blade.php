@@ -63,9 +63,21 @@
                   <textarea name="list_person" id="summernote2" class="form-control" required>{{ $businessTrips->list_person }}</textarea>
                 </div>
 
-                <div class="form-group col-lg-4">
+                {{-- <div class="form-group col-lg-4">
                   <label for="adress"><b>Манзил(давлат ёки ҳудуд)</b></label>
                   <input type="text" name="adress" id="adress" class="form-control" value="{{ $businessTrips->adress }}" required>
+                </div> --}}
+                <div class="form-group col-lg-2">
+                  <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
+                  <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+                      <option value="">-- Xудуд --</option>
+                      @foreach($regions as $region)
+                        <option value="{{ $region->id }}" 
+                          {{ (old('regions_id', $businessTrips->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
+                          {{ $region->name }}
+                        </option>
+                      @endforeach
+                  </select>
                 </div>
 
                 <div class="form-group col-lg-6">

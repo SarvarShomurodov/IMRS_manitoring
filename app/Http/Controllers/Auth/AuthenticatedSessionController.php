@@ -48,6 +48,9 @@ class AuthenticatedSessionController extends Controller
         elseif($user->email == 'axmedova@example.com'){
             return redirect('/methods');
         }
+        elseif($user->email == 'xalbayev@example.com'){
+            return redirect('/meeting');
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 

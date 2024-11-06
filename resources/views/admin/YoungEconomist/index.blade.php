@@ -24,51 +24,45 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="card">
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead class="text-center">
-                    <tr>
-                        <th>№</th>
-                        <th>Маърузачининг ф.и.ш.</th>
-                        <th>Маърузачи лавозими (докторант, таянч докторант, мустақил изланувчи, илмий ходим)</th>
-                        <th>Мажлис санаси</th>
-                        <th>Иштирокчилар руйҳати (маҳаллий)</th>
-                        <th>Иштирокчилар рўйхати (чет эл вакиллари)</th>
-                        <th>Чораклар</th>
-                        @if(Auth::user()->name == 'Abdixojayev')
-                        @else
-                            <th>Action</th>  
-                        @endif
-                    </tr>
-              </thead>
-              <tbody>
-                @foreach ($youngEconomists as $trip)
-                    <tr>
-                        <td>{{ ++$i }}</td>
-                        <td>{{ $trip->name }}</td>
-                        <td>{{ $trip->position }}</td>
-                        <td>{{ $trip->date }}</td>
-                        <td>{!! $trip->list_person_local !!}</td>
-                        <td>{!! $trip->list_person_no_local !!}</td>
-                        <td>{{ $trip->quarter->name }}</td>
-                        @if (Auth::user()->name == 'Abdixojayev')
-                        @else
-                        <td>
-                            <form action="{{ route('young_economists.destroy',$trip->id) }}" method="POST">        
-                                <a class="btn btn-info" href="{{ route('young_economists.edit',$trip->id) }}">Ўзгартириш</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Ўчириш</button>
-                            </form>
-                        </td>
-                        @endif 
-                    </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+        <table>
+          <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Маърузачининг ф.и.ш.</th>
+                    <th>Маърузачи лавозими (докторант, таянч докторант, мустақил изланувчи, илмий ходим)</th>
+                    <th>Мажлис санаси</th>
+                    <th>Иштирокчилар руйҳати (маҳаллий)</th>
+                    <th>Иштирокчилар рўйхати (чет эл вакиллари)</th>
+                    <th>Чораклар</th>
+                    @if(Auth::user()->name == 'Abdixojayev')
+                    @else
+                        <th>Action</th>  
+                    @endif
+                </tr>
+          </thead>
+          <tbody>
+            @foreach ($youngEconomists as $trip)
+                <tr>
+                    <td>{{ ++$i }}</td>
+                    <td>{{ $trip->name }}</td>
+                    <td>{{ $trip->position }}</td>
+                    <td>{{ $trip->date }}</td>
+                    <td>{!! $trip->list_person_local !!}</td>
+                    <td>{!! $trip->list_person_no_local !!}</td>
+                    <td>{{ $trip->quarter->name }}</td>
+                    @if (Auth::user()->name == 'Abdixojayev')
+                    @else
+                    <td>
+                        <form action="{{ route('young_economists.destroy',$trip->id) }}" method="POST">        
+                            <a class="btn btn-info mb-1" href="{{ route('young_economists.edit',$trip->id) }}">Ўзгартириш</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Ўчириш</button>
+                        </form>
+                    </td>
+                    @endif 
+                </tr>
+            @endforeach
+          </tbody>
+        </table>
 @endsection

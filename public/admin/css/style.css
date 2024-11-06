@@ -117,6 +117,110 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
+    /* Basic table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      margin-top: 20px;
+  }
+  
+  thead th {
+      background-color: #51B1E1; /* Header background color */
+      color: white; /* Header text color */
+      font-weight: bold;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+  }
+  
+  tbody tr:nth-child(even) {
+      background-color: #f2f2f2; /* Alternating row colors */
+  }
+  
+  /* tbody tr:hover {
+      background-color: #818181; 
+      color: white;
+  } */
+  
+  tbody td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+  }
+  
+  /* Number column styling */
+  tbody td:first-child {
+      text-align: center;
+      width: 50px;
+  }
+  
+  /* Button styling */
+  .btn {
+      padding: 6px 12px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 13px;
+      cursor: pointer;
+  }
+  
+  .btn-info {
+      background-color: #2196F3; /* Edit button color */
+  }
+  
+  .btn-info:hover {
+      background-color: #0b7dda;
+  }
+  
+  .btn-danger {
+      background-color: #f44336; /* Delete button color */
+  }
+  
+  .btn-danger:hover {
+      background-color: #da190b;
+  }
+  
+  form {
+      display: inline;
+  }
+  
+  /* Responsive styling */
+  @media screen and (max-width: 768px) {
+      table, tbody, thead, tr, th, td {
+          display: block;
+          width: 100%;
+      }
+  
+      thead tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+      }
+  
+      tr {
+          border: 1px solid #ddd;
+          margin-bottom: 10px;
+      }
+  
+      td {
+          border: none;
+          padding-left: 50%;
+          position: relative;
+          text-align: right;
+      }
+  
+      td:before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          padding-left: 10px;
+          font-weight: bold;
+          text-align: left;
+      }
+  }
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @-moz-keyframes flash {
   0% {

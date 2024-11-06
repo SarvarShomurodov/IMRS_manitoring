@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Институт Илмий-амалий семинар йиғилишлари</h2>
+                    <h2>Институт томонидан ташкиллаштирилган музокаралар ва учрашувлар</h2>
                 </div>
             </div>
         </div>       
@@ -16,10 +16,10 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Илмий методологик семинар</h2>
+                    <h2>Учрашувлар</h2>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-primary mb-2" href="{{ route('methods.create') }}">Илмий методологик семинар қўшиш</a>
+                    <a class="btn btn-primary mb-2" href="{{ route('meeting.create') }}">Учрашувлар қўшиш</a>
                 </div>
             </div>
         </div>
@@ -33,13 +33,13 @@
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>Семинарда кўрилган масала тури(етакчи ташкилот семинари ёки Институт ходимлари тақдимоти)</th>
-                    <th>Маърузачининг ф.и.ш.</th>
-                    <th>Маърузачи лавозими (докторант, таянч докторант, мустақил изланувчи, илмий ходим)</th>
-                    <th>Маърузачи ишлаётган муассаса ёки ташкилот номи</th>
-                    <th>Семинар санаси</th>
-                    <th>Иштирок этган семинар аъзолари сони</th>
-                    <th>Семинар хулосаси</th>
+                    <th>Учрашув номи ва мақсади</th>
+                    <th>Ташкилот</th>
+                    <th>Асос</th>
+                    <th>Формат</th>
+                    <th>Сана</th>
+                    <th>Манзил(давлат ёки ҳудуд)</th>
+                    <th>Иштирок этган Институт вакиллари рўйхати</th>
                     <th>Чораклар</th>
                     @if(Auth::user()->name != 'Abdixojayev')
                         <th>Action</th>  
@@ -47,21 +47,21 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($methods as $trip)
+                @foreach ($meetings as $trip)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $trip->type }}</td>
-                        <td>{{ $trip->name }}</td>
-                        <td>{{ $trip->position }}</td>
-                        <td>{{ $trip->reportName }}</td>
+                        <td>{!! $trip->nameGoal !!}</td>
+                        <td>{{ $trip->organization }}</td>
+                        <td>{{ $trip->basis }}</td>
+                        <td>{{ $trip->format }}</td>
                         <td>{{ $trip->date }}</td>
-                        <td>{{ $trip->number }}</td>
-                        <td>{!! $trip->conclusion !!}</td>
+                        <td>{!! $trip->address !!}</td>
+                        <td>{!! $trip->list !!}</td>
                         <td>{{ $trip->quarter->name }}</td>
                         @if (Auth::user()->name != 'Abdixojayev')
                             <td>
-                                <form action="{{ route('methods.destroy',$trip->id) }}" method="POST">        
-                                    <a class="btn btn-info mb-1" href="{{ route('methods.edit',$trip->id) }}">Ўзгартириш</a>
+                                <form action="{{ route('meeting.destroy',$trip->id) }}" method="POST">        
+                                    <a class="btn btn-info mb-1" href="{{ route('meeting.edit',$trip->id) }}">Ўзгартириш</a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Ўчириш</button>

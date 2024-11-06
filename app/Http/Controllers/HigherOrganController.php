@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use App\Models\Quarter;
-use App\Models\HigherOrgan;
 use App\Models\WhoGiven;
+use App\Models\HigherOrgan;
 use Illuminate\Http\Request;
 
 class HigherOrganController extends Controller
@@ -17,7 +18,7 @@ class HigherOrganController extends Controller
        // Get the 'who_given_id' parameter from the URL
         $whoGivenId = $request->query('who_given_id');
         // Apply the filter only if 'who_given_id' is 6 or 8; otherwise, retrieve all records
-        $higherOrgans = HigherOrgan::when(in_array($whoGivenId, [1,2,3,4,5,6,8,10]), function ($query) use ($whoGivenId) {
+        $higherOrgans = HigherOrgan::when(in_array($whoGivenId, [1,2,3,4,5,6,7,8]), function ($query) use ($whoGivenId) {
             return $query->where('who_given_id', $whoGivenId);
         })->get();
 
@@ -31,7 +32,8 @@ class HigherOrganController extends Controller
     {
         $quarters = Quarter::all();
         $whogivens = WhoGiven::all();
-        return view('admin.HigherOrgan.create',compact(['quarters','whogivens']));
+        $regions = Region::all();
+        return view('admin.HigherOrgan.create',compact(['quarters','whogivens','regions']));
     }
 
     /**
@@ -49,8 +51,7 @@ class HigherOrganController extends Controller
             'letter_number' => 'required|integer',
             'direction' => 'required|string',
             'sorov' => 'required|string',
-            'country' => 'required|string',
-            'ball' => 'required|integer',
+            'regions_id' => 'required|exists:regions,id',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
 
@@ -74,8 +75,9 @@ class HigherOrganController extends Controller
     {
         $quarters = Quarter::all();
         $whogivens = WhoGiven::all();
+        $regions = Region::all();
         $higherOrgans = HigherOrgan::findOrFail($id);
-        return view('admin.HigherOrgan.edit',compact(['quarters','whogivens','higherOrgans']));
+        return view('admin.HigherOrgan.edit',compact(['quarters','whogivens','higherOrgans','regions']));
     }
 
     /**
@@ -93,8 +95,7 @@ class HigherOrganController extends Controller
             'letter_number' => 'required|integer',
             'direction' => 'required|string',
             'sorov' => 'required|string',
-            'country' => 'required|string',
-            'ball' => 'required|integer',
+            'regions_id' => 'required|exists:regions,id',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
         $higherOrgans = HigherOrgan::findOrFail($id);

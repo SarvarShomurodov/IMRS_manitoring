@@ -1,3 +1,7 @@
+<style>
+
+
+</style>
 @extends('layouts.app-admin')
 
 @section('title', 'Higher Organ')
@@ -24,11 +28,11 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead class="text-center">
+          <div class="table-responsive"> --}}
+            <table>
+              <thead>
                     <tr>
                         <th>№</th>
                         <th>Таҳлилий материал номи</th>
@@ -41,7 +45,6 @@
                         <th>Йўналиш</th>
                         <th>Сўровнома мавжудлиги (ҳа, йўқ)</th>
                         <th>Давлат ёки ҳудуд</th>
-                        <th>Иштирок этган ходимлар ва уларнинг қўшган ҳиссаси (балл)</th>
                         <th>Чораклар</th>
                         @if(Auth::user()->name == 'Abdixojayev')
                         @else
@@ -62,14 +65,13 @@
                         <td>{{ $trip->letter_number }}</td>
                         <td>{{ $trip->direction }}</td>
                         <td>{{ $trip->sorov }}</td>
-                        <td>{{ $trip->country }}</td>
-                        <td>{{ $trip->ball }}</td>
+                        <td>{{ $trip->regionsVal->name }}</td>
                         <td>{{ $trip->quarter->name }}</td>
                         @if (Auth::user()->name == 'Abdixojayev')
                         @else
                         <td>
                             <form action="{{ route('higher_organs.destroy',$trip->id) }}" method="POST">        
-                                <a class="btn btn-info" href="{{ route('higher_organs.edit',$trip->id) }}">Ўзгартириш</a>
+                                <a class="btn btn-info mb-1" href="{{ route('higher_organs.edit',$trip->id) }}">Ўзгартириш</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Ўчириш</button>
@@ -80,7 +82,7 @@
                 @endforeach
               </tbody>
             </table>
-          </div>
+          {{-- </div>
         </div>
-      </div>
+      </div> --}}
 @endsection

@@ -221,7 +221,29 @@ class Controller extends BaseController
             ORDER BY 
                 sc.id;
         ");
+        $events = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                events AS o
+            INNER JOIN 
+                quarters AS q ON o.quarters_id = q.id
+        ");
+        $meetings = DB::select("
+            SELECT 
+                SUM(CASE WHEN q.id = 1 THEN 1 ELSE 0 END) AS first_quarter,
+                SUM(CASE WHEN q.id = 2 THEN 1 ELSE 0 END) AS second_quarter,
+                SUM(CASE WHEN q.id = 3 THEN 1 ELSE 0 END) AS third_quarter,
+                SUM(CASE WHEN q.id = 4 THEN 1 ELSE 0 END) AS fourth_quarter
+            FROM 
+                meetings AS o
+            INNER JOIN 
+                quarters AS q ON o.quarters_id = q.id
+        ");
         // dd($higherOrganIdCounts);
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars','methods','nullScientifics','nullScientificCounts']));
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars','methods','nullScientifics','nullScientificCounts','events','meetings']));
     }
 }

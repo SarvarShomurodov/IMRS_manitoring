@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessTripController;
 use App\Http\Controllers\ConventionController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HigherOrganController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MethodController;
 use App\Http\Controllers\OAVPublishController;
 use App\Http\Controllers\PublishController;
@@ -54,19 +56,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('conventions',ConventionController::class);
     Route::resource('scientific',ScientificCouncilController::class);
     Route::resource('seminar',ScientificSeminarController::class);
+    Route::resource('event',EventController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {
-    // Route::get('/index', function () {
-    //     return 'Page2';
-    // });
     Route::resource('business_trips', BusinessTripController::class);
 });
 
 Route::middleware(['auth', 'role:moderator'])->group(function () {
-    Route::get('/page3', function () {
-        return 'Page3';
-    });
+    Route::resource('meeting', MeetingController::class);
 });
 
 Route::middleware(['auth', 'role:author'])->group(function () {

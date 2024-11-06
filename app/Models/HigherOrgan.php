@@ -18,8 +18,7 @@ class HigherOrgan extends Model
         'letter_number',
         'direction',
         'sorov',
-        'country',
-        'ball',
+        'regions_id',
         'quarters_id'
     ];
 
@@ -30,5 +29,9 @@ class HigherOrgan extends Model
     public function whoGiven()
     {
         return $this->belongsTo(WhoGiven::class, 'who_given_id');
+    }
+    public function regionsVal()
+    {
+        return $this->belongsTo(Region::class, 'regions_id');
     }
 }

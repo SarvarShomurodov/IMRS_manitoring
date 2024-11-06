@@ -29,56 +29,49 @@
             {{ session('success') }}
         </div>
     @endif
-
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="text-center">
-                        <tr>
-                            <th>№</th>
-                            <th>Диссертантнинг ф.и.ш.</th>
-                            <th>Диссертант ишлаётган  муассаса ёки ташкилот номи ва лавозими</th>
-                            <th>Диссертация мавзуси</th>
-                            <th>Илмий раҳбарининг ф.и.ш.</th>
-                            <th>Қайси илмий даражага даъвогар (PhD/DSc)</th>
-                            <th>ўтказилган ИС санаси</th>
-                            <th>Иштирок этган ИС аъзолари сони</th>
-                            <th>ИС хулосаси</th>
-                            <th>Чораклар</th>
-                            @if(Auth::user()->name != 'Abdixojayev')
-                                <th>Action</th>  
-                            @endif
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($scientifics as $trip)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $trip->name }}</td>
-                                <td>{{ $trip->organizationName }}</td>
-                                <td>{!! $trip->topic !!}</td>
-                                <td>{{ $trip->leaderName }}</td>
-                                <td>{{ $trip->scientific->name }}</td>
-                                <td>{{ $trip->date }}</td>
-                                <td>{{ $trip->number }}</td>
-                                <td>{!! $trip->conclusion !!}</td>
-                                <td>{{ $trip->quarter->name }}</td>
-                                @if (Auth::user()->name != 'Abdixojayev')
-                                    <td>
-                                        <form action="{{ route('seminar.destroy',$trip->id) }}" method="POST">        
-                                            <a class="btn btn-info" href="{{ route('seminar.edit',$trip->id) }}">Ўзгартириш</a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Ўчириш</button>
-                                        </form>
-                                    </td> 
-                                @endif
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Диссертантнинг ф.и.ш.</th>
+                    <th>Диссертант ишлаётган  муассаса ёки ташкилот номи ва лавозими</th>
+                    <th>Диссертация мавзуси</th>
+                    <th>Илмий раҳбарининг ф.и.ш.</th>
+                    <th>Қайси илмий даражага даъвогар (PhD/DSc)</th>
+                    <th>ўтказилган ИС санаси</th>
+                    <th>Иштирок этган ИС аъзолари сони</th>
+                    <th>ИС хулосаси</th>
+                    <th>Чораклар</th>
+                    @if(Auth::user()->name != 'Abdixojayev')
+                        <th>Action</th>  
+                    @endif
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($scientifics as $trip)
+                    <tr>
+                        <td>{{ ++$i }}</td>
+                        <td>{{ $trip->name }}</td>
+                        <td>{{ $trip->organizationName }}</td>
+                        <td>{!! $trip->topic !!}</td>
+                        <td>{{ $trip->leaderName }}</td>
+                        <td>{{ $trip->scientific->name }}</td>
+                        <td>{{ $trip->date }}</td>
+                        <td>{{ $trip->number }}</td>
+                        <td>{!! $trip->conclusion !!}</td>
+                        <td>{{ $trip->quarter->name }}</td>
+                        @if (Auth::user()->name != 'Abdixojayev')
+                            <td>
+                                <form action="{{ route('seminar.destroy',$trip->id) }}" method="POST">        
+                                    <a class="btn btn-info mb-1" href="{{ route('seminar.edit',$trip->id) }}">Ўзгартириш</a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Ўчириш</button>
+                                </form>
+                            </td> 
+                        @endif
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 @endsection

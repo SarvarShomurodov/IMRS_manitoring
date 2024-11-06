@@ -48,52 +48,45 @@
             {{ session('success') }}
         </div>
     @endif
-
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="text-center">
-                        <tr>
-                            <th>№</th>
-                            <th>Илмий даража</th>
-                            <th>Ф.И.Ш</th>
-                            <th>Изланувчилик тури</th>
-                            <th>ўқишга кирган сана</th>
-                            <th>ўқишни битирган сана</th>
-                            <th>Ҳимоя санаси</th>
-                            <th>Чораклар</th>
-                            @if(Auth::user()->name != 'Abdixojayev')
-                                <th>Action</th>  
-                            @endif
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($scientifics as $trip)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $trip->scientific->name }}</td>
-                                <td>{{ $trip->name }}</td>
-                                <td>{{ $trip->type }}</td>
-                                <td>{{ $trip->start_date }}</td>
-                                <td>{{ $trip->end_date }}</td>
-                                <td>{{ $trip->date }}</td>
-                                <td>{{ $trip->quarter->name }}</td>
-                                @if (Auth::user()->name != 'Abdixojayev')
-                                    <td>
-                                        <form action="{{ route('scientific.destroy',$trip->id) }}" method="POST">        
-                                            <a class="btn btn-info" href="{{ route('scientific.edit',$trip->id) }}">Ўзгартириш</a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Ўчириш</button>
-                                        </form>
-                                    </td> 
-                                @endif
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Илмий даража</th>
+                    <th>Ф.И.Ш</th>
+                    <th>Изланувчилик тури</th>
+                    <th>ўқишга кирган сана</th>
+                    <th>ўқишни битирган сана</th>
+                    <th>Ҳимоя санаси</th>
+                    <th>Чораклар</th>
+                    @if(Auth::user()->name != 'Abdixojayev')
+                        <th>Action</th>  
+                    @endif
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($scientifics as $trip)
+                    <tr>
+                        <td>{{ ++$i }}</td>
+                        <td>{{ $trip->scientific->name }}</td>
+                        <td>{{ $trip->name }}</td>
+                        <td>{{ $trip->type }}</td>
+                        <td>{{ $trip->start_date }}</td>
+                        <td>{{ $trip->end_date }}</td>
+                        <td>{{ $trip->date }}</td>
+                        <td>{{ $trip->quarter->name }}</td>
+                        @if (Auth::user()->name != 'Abdixojayev')
+                            <td>
+                                <form action="{{ route('scientific.destroy',$trip->id) }}" method="POST">        
+                                    <a class="btn btn-info mb-1" href="{{ route('scientific.edit',$trip->id) }}">Ўзгартириш</a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Ўчириш</button>
+                                </form>
+                            </td> 
+                        @endif
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 @endsection
