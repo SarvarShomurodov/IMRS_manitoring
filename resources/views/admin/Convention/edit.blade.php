@@ -63,9 +63,17 @@
         <label for="date"><b>Саналар</b></label>
         <input type="date" name="date" id="date" class="form-control" value="{{  $conventions->date }}" required>
       </div>
-      <div class="form-group col-lg-4">
-        <label for="who_send"><b>Манзил(давлат ёки ҳудуд)</b></label>
-        <input type="text" name="address" id="address" class="form-control" value="{{  $conventions->address }}" required>
+      <div class="form-group col-lg-3">
+        <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
+        <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+            <option value="">-- Xудуд --</option>
+            @foreach($regions as $region)
+              <option value="{{ $region->id }}" 
+                {{ (old('regions_id', $conventions->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
+                {{ $region->name }}
+              </option>
+            @endforeach
+        </select>
       </div>
       <div class="form-group col-lg-2">
         <label for="letter_number"><b>Иштирок этган ходимлар сони</b></label>

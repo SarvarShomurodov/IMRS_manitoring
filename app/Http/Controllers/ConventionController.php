@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use App\Models\Quarter;
 use App\Models\WhoGiven;
 use App\Models\Convention;
-use App\Models\ConventionType;
 use Illuminate\Http\Request;
+use App\Models\ConventionType;
 
 class ConventionController extends Controller
 {
@@ -19,8 +20,9 @@ class ConventionController extends Controller
     {
         $quarters = Quarter::all();
         $whogivens = WhoGiven::all();
+        $regions = Region::all();
         $conventionstypes = ConventionType::all();
-        return view('admin.Convention.create',compact(['quarters','whogivens','conventionstypes']));
+        return view('admin.Convention.create',compact(['quarters','whogivens','conventionstypes','regions']));
     }
     public function store(Request $request)
     {
@@ -30,7 +32,7 @@ class ConventionController extends Controller
             'type_id'=>'required|exists:publish_types,id',
             'organizer' => 'required|string',
             'date' => 'required|date',
-            'address' => 'required|string',
+            'regions_id' => 'required|exists:regions,id',
             'employees_count' => 'required|integer',
             'list' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
@@ -45,10 +47,11 @@ class ConventionController extends Controller
         $quarters = Quarter::all();
         $whogivens = WhoGiven::all();
         // $item = ConventionType::findOrFail($id);
+        $regions = Region::all();
         $publishTypes = ConventionType::all();
         $conventions = Convention::findOrFail($id);
         // var_dump($item->name);
-        return view('admin.Convention.edit',compact(['quarters','whogivens','publishTypes','conventions']));
+        return view('admin.Convention.edit',compact(['quarters','whogivens','publishTypes','conventions','regions']));
     }
     public function update(Request $request, string $id)
     {
@@ -58,7 +61,7 @@ class ConventionController extends Controller
             'type_id'=>'required|exists:publish_types,id',
             'organizer' => 'required|string',
             'date' => 'required|date',
-            'address' => 'required|string',
+            'regions_id' => 'required|exists:regions,id',
             'employees_count' => 'required|integer',
             'list' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
@@ -68,5 +71,11 @@ class ConventionController extends Controller
         $conventions->update($validatedData);
 
         return redirect()->route('conventions.index')->with('success', 'Convention Update successfully!');
+    }
+    public function destroy(string $id)
+    {
+        $conventions = Convention::findOrFail($id);
+        $conventions->delete();
+        return redirect()->route('conventions.index')->with('success', 'Convention deleted successfully.');
     }
 }

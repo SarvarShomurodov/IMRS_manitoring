@@ -15,7 +15,7 @@ class Event extends Model
         'organizer',
         'goal',
         'date',
-        'place',
+        'regions_id',
         'foreignNum',
         'localNum',
         'result',
@@ -24,5 +24,9 @@ class Event extends Model
     public function quarter()
     {
         return $this->belongsTo(Quarter::class, 'quarters_id');
+    }
+    public function regionsVal()
+    {
+        return $this->belongsTo(Region::class, 'regions_id');
     }
 }

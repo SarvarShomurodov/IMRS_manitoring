@@ -59,7 +59,7 @@
                         <td>{{ $trip->organizer }}</td>
                         <td>{!! $trip->goal !!}</td>
                         <td>{{ $trip->date }}</td>
-                        <td>{{ $trip->place }}</td>
+                        <td>{{ $trip->regionsVal->name }}</td>
                         <td>{{ $trip->foreignNum }}</td>
                         <td>{{ $trip->localNum }}</td>
                         <td>{!! $trip->result !!}</td>

@@ -60,10 +60,17 @@
                                 <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}" required>
                             </div>
 
-                            <div class="form-group col-lg-6">
-                                <label for="place"><b>Тадбир ўтказилган жой</b></label>
-                                <input type="text" name="place" id="place" class="form-control" value="{{ old('place') }}" required>
-                            </div>
+                            <div class="form-group col-lg-2">
+                                <label for="regions_id" class="form-label"><b>Тадбир ўтказилган жой</b></label>
+                                <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+                                    <option value="">-- Xудуд --</option>
+                                    @foreach($regions as $region)
+                                        <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
+                                            {{ $region->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                              </div>
               
                             <div class="form-group col-lg-2">
                               <label for="foreignNum"><b>Иштирокчилар сони (маҳаллий)</b></label>

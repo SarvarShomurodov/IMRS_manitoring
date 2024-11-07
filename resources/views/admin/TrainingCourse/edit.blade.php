@@ -49,10 +49,17 @@
         <label for="start_date">Саналар</label>
         <input type="date" name="date" id="date" class="form-control" value="{{ $trainingCourses->date }}" required>
       </div>
-      <div class="form-group col-lg-6">
-        <label for="adress">Манзил
-          (давлат ёки ҳудуд)</label>
-        <input type="text" name="adress" id="adress" class="form-control" value="{{ $trainingCourses->adress }}" required>
+      <div class="form-group col-lg-2">
+        <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
+        <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+            <option value="">-- Xудуд --</option>
+            @foreach($regions as $region)
+              <option value="{{ $region->id }}" 
+                {{ (old('regions_id', $businessTrips->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
+                {{ $region->name }}
+              </option>
+            @endforeach
+        </select>
       </div>
       <div class="form-group col-lg-2">
         <label for="invite_count">Иштирок этган ходимлар сони</label>

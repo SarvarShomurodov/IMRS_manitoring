@@ -1,15 +1,22 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     @if( Auth::user()->name == 'Abdixojayev')
+    <li class="nav-item nav-category">Барча малумотлар</li>
       <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') || Request::is('methods*') || Request::is('event*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('index') }}">
           <i class="menu-icon mdi mdi-home"></i>
           <span class="menu-title">Aсосий саҳифа</span>
         </a>
       </li>
+      <li class="nav-item {{ Request::is('regionAdmin*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('regionAdmin') }}">
+          <i class="menu-icon mdi mdi-map-marker"></i>
+          <span class="menu-title">Ҳудудлар бўйича</span>
+        </a>
+      </li>
     @endif
     @if( Auth::user()->name == 'Qutliyev')
-    <li class="nav-item nav-category">Barcha malumotlar</li>
+    <li class="nav-item nav-category">Барча малумотлар</li>
       <li class="nav-item {{ Request::is('training_courses*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('training_courses') }}" aria-expanded="false" aria-controls="ui-basic">
           <i class="menu-icon mdi mdi-school"></i>
@@ -50,6 +57,13 @@
         <a class="nav-link"  href="{{ url('event') }}" aria-expanded="false" aria-controls="form-elements">
           <i class="menu-icon mdi mdi-bullhorn"></i>
           <span class="menu-title">Институт тадбирлари</span>
+        </a>
+      </li>
+      <li class="nav-item nav-category">Қўшимча малумотлар</li>
+      <li class="nav-item {{ Request::is('region*') ? 'active' : '' }}">
+        <a class="nav-link"  href="{{ url('region') }}" aria-expanded="false" aria-controls="form-elements">
+          <i class="menu-icon mdi mdi-map"></i>
+          <span class="menu-title">Давлат ёки ҳудуд</span>
         </a>
       </li>
     @endif

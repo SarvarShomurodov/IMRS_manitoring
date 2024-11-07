@@ -43,7 +43,7 @@ class BusinessTripController extends Controller
             'regions_id' => 'required|exists:regions,id',
             'list_person' => 'required|string',
             'data_name' => 'required|string',
-            'invite_count' => 'required|integer',
+            'invite_count' => 'nullable|integer',
             'ball' => 'required|integer',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
@@ -86,7 +86,7 @@ class BusinessTripController extends Controller
             'regions_id' => 'required|exists:regions,id',
             'list_person' => 'required|string',
             'data_name' => 'required|string',
-            'invite_count' => 'required|integer',
+            'invite_count' => 'nullable|integer',
             'ball' => 'required|integer',
             'quarters_id' => 'required|exists:quarters,id',
         ]);

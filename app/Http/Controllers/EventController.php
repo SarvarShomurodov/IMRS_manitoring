@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Region;
 use App\Models\Quarter;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class EventController extends Controller
     public function create()
     {
         $quarters = Quarter::all();
-        return view('admin.Event.create',compact('quarters'));
+        $regions = Region::all();
+        return view('admin.Event.create',compact(['quarters','regions']));
     }
     public function store(Request $request)
     {
@@ -27,7 +29,7 @@ class EventController extends Controller
             'organizer' => 'required|string',
             'goal' => 'required|string',
             'date' => 'required|date',
-            'place' => 'required|string',
+            'regions_id' => 'required|exists:regions,id',
             'foreignNum' => 'required|integer',
             'localNum' => 'required|integer',
             'result' => 'required|string',
@@ -41,8 +43,9 @@ class EventController extends Controller
     public function edit(string $id)
     {
         $quarters = Quarter::all();
+        $regions = Region::all();
         $events = Event::findOrFail($id);
-        return view('admin.Event.edit',compact(['quarters','events']));
+        return view('admin.Event.edit',compact(['quarters','events','regions']));
     }
     public function update(Request $request, string $id)
     {
@@ -53,7 +56,7 @@ class EventController extends Controller
             'organizer' => 'required|string',
             'goal' => 'required|string',
             'date' => 'required|date',
-            'place' => 'required|string',
+            'regions_id' => 'required|exists:regions,id',
             'foreignNum' => 'required|integer',
             'localNum' => 'required|integer',
             'result' => 'required|string',

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreign('type_id')->references('id')->on('convention_types')->onDelete('cascade');
             $table->string('organizer');
             $table->date('date');
-            $table->string('address');
+            $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
+            $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
             $table->integer('employees_count');
             $table->text('list');
             $table->unsignedBigInteger('quarters_id');  // Foreign key to quarters table

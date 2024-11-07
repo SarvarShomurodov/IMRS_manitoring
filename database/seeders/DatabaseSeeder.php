@@ -21,6 +21,18 @@ class DatabaseSeeder extends Seeder
             WhoPublishSeeder::class,
             PublishSeeder::class,
             ConventionTypeSeeder::class,
+            BusinessTripsTableSeeder::class,
+            HigherOrgansTableSeeder::class,
+            TrainingCoursesSeeder::class,
+            YoungEconomistsTableSeeder::class,
+            PublishesTableSeeder::class,
+            OpublishesTableSeeder::class,
+            ConventionsTableSeeder::class,
+            ScientificCouncilsSeeder::class,
+            ScientificSeminarsSeeder::class,
+            MethodsSeeder::class,
+            EventsTableSeeder::class,
+            MeetingsTableSeeder::class
         ]);
     }
 }

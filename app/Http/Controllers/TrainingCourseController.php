@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use App\Models\Quarter;
 use Illuminate\Http\Request;
 use App\Models\TrainingCourse;
@@ -23,7 +24,8 @@ class TrainingCourseController extends Controller
     public function create()
     {
         $quarters = Quarter::all();
-        return view('admin.TrainingCourse.create',compact('quarters'));
+        $regions = Region::all();
+        return view('admin.TrainingCourse.create',compact(['quarters','regions']));
     }
 
     /**
@@ -36,7 +38,7 @@ class TrainingCourseController extends Controller
             'type' => 'required|string',
             'organizer' => 'required|string',
             'date' => 'required|date',
-            'adress' => 'required|string',
+            'regions_id' => 'required|exists:regions,id',
             'invite_count' => 'required|integer',
             'list_person' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
@@ -61,8 +63,9 @@ class TrainingCourseController extends Controller
     public function edit(string $id)
     {
         $quarters = Quarter::all();
+        $regions = Region::all();
         $trainingCourses = TrainingCourse::findOrFail($id);
-        return view('admin.TrainingCourse.edit',compact(['quarters','trainingCourses']));
+        return view('admin.TrainingCourse.edit',compact(['quarters','trainingCourses','regions']));
     }
 
     /**
@@ -75,7 +78,7 @@ class TrainingCourseController extends Controller
             'type' => 'required|string',
             'organizer' => 'required|string',
             'date' => 'required|date',
-            'adress' => 'required|string',
+            'regions_id' => 'required|exists:regions,id',
             'invite_count' => 'required|integer',
             'list_person' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',

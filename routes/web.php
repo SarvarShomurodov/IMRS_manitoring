@@ -11,6 +11,7 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MethodController;
 use App\Http\Controllers\OAVPublishController;
 use App\Http\Controllers\PublishController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ScientificCouncilController;
 use App\Http\Controllers\ScientificSeminarController;
 use App\Http\Controllers\TrainingCourseController;
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/index', [Controller::class, 'getBusinessTripCounts'])->name('index.getBusinessTripCounts');
+    Route::get('/regionAdmin',[Controller::class,'getRegionsCounts'])->name('regionAdmin.getRegionsCounts');
     Route::get('/business_trips', [BusinessTripController::class,'index'])->name('business_trips.index');
 });
 
@@ -57,6 +59,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('scientific',ScientificCouncilController::class);
     Route::resource('seminar',ScientificSeminarController::class);
     Route::resource('event',EventController::class);
+    Route::resource('region',RegionController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {

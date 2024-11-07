@@ -86,7 +86,7 @@
 
                 <div class="form-group col-lg-4">
                   <label for="invite_count"><b>Сафар доирасида/натижасида тайёрланган таклифлар сони</b></label>
-                  <input type="number" name="invite_count" id="invite_count" class="form-control" value="{{ old('invite_count') }}" min="0" required>
+                  <input type="number" name="invite_count" id="invite_count" class="form-control" value="{{ old('invite_count') }}" min="0">
                 </div>
 
                 <div class="form-group col-lg-4">

@@ -90,14 +90,15 @@
           <label for="country"><b>Давлат ёки ҳудуд</b></label>
           <input type="text" name="country" id="country" class="form-control" value="{{ $higherOrgans->country }}" required>
         </div> --}}
-        <div class="form-group col-lg-4">
-          <label for="regions_id" class="form-label"><b>Давлат ёки ҳудуд</b></label>
+        <div class="form-group col-lg-2">
+          <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
           <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
               <option value="">-- Xудуд --</option>
               @foreach($regions as $region)
-                  <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
-                      {{ $region->name }}
-                  </option>
+                <option value="{{ $region->id }}" 
+                  {{ (old('regions_id', $higherOrgans->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
+                  {{ $region->name }}
+                </option>
               @endforeach
           </select>
         </div>

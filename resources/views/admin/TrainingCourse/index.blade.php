@@ -52,7 +52,7 @@
                     <td>{{ $trip->type }}</td>
                     <td>{!! $trip->organizer !!}</td>
                     <td>{{ $trip->date }}</td>
-                    <td>{{ $trip->adress }}</td>
+                    <td>{{ $trip->regionsVal->name }}</td>
                     <td>{{ $trip->invite_count }}</td>
                     <td>{!! $trip->list_person !!}</td>
                     <td>{{ $trip->quarter->name }}</td>

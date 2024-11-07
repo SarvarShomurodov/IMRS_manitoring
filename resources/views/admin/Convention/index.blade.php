@@ -52,7 +52,7 @@
                     <td>{{ $trip->conventionType->name  }}</td>
                     <td>{{ $trip->organizer }}</td>
                     <td>{{ $trip->date }}</td>
-                    <td>{{ $trip->address }}</td>
+                    <td>{{ $trip->regionsVal->name }}</td>
                     <td>{{ $trip->employees_count }}</td>
                     <td>{!! $trip->list !!}</td>
                     <td>{{ $trip->quarter->name }}</td>

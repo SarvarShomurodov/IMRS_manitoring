@@ -19,5 +19,16 @@ class Region extends Model
     {
         return $this->hasMany(HigherOrgan::class, 'regions_id');
     }
-
+    public function meetingRegions()
+    {
+        return $this->hasMany(Event::class, 'regions_id');
+    }
+    public function conventionRegions()
+    {
+        return $this->hasMany(Convention::class, 'regions_id');
+    }
+    public function trainingCourseRegions()
+    {
+        return $this->hasMany(TrainingCourse::class, 'regions_id');
+    }
 }

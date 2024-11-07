@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
     public function getBusinessTripCounts()
     {
         $businessTripCounts = DB::select("
@@ -245,5 +246,46 @@ class Controller extends BaseController
         ");
         // dd($higherOrganIdCounts);
         return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars','methods','nullScientifics','nullScientificCounts','events','meetings']));
+    }
+    public function getRegionsCounts()
+    {
+        $higherOrganCounts = DB::select("
+            SELECT 
+                r.id AS regions_id, 
+                r.name, 
+                COALESCE(higher_organs_table.occurrences, 0) AS higher_organs_count,
+                COALESCE(another_table_table.occurrences, 0) AS another_table_count,
+                COALESCE(another_table_sorov_table.occurrences, 0) AS another_table_sorov_count,
+                COALESCE(third_table_table.occurrences, 0) AS third_table_count,
+                COALESCE(conventions_table.occurrences, 0) AS conventions_count
+            FROM regions AS r
+            LEFT JOIN (
+                SELECT regions_id, COUNT(*) AS occurrences 
+                FROM higher_organs 
+                GROUP BY regions_id
+            ) AS higher_organs_table ON r.id = higher_organs_table.regions_id
+            LEFT JOIN (
+                SELECT regions_id, COUNT(*) AS occurrences 
+                FROM busines_trips 
+                GROUP BY regions_id
+            ) AS another_table_table ON r.id = another_table_table.regions_id
+            LEFT JOIN (
+                SELECT regions_id, COUNT(*) AS occurrences 
+                FROM busines_trips 
+                WHERE invite_count IS NOT NULL AND invite_count <> ''
+                GROUP BY regions_id
+            ) AS another_table_sorov_table ON r.id = another_table_sorov_table.regions_id
+            LEFT JOIN (
+                SELECT regions_id, COUNT(*) AS occurrences 
+                FROM events 
+                GROUP BY regions_id
+            ) AS third_table_table ON r.id = third_table_table.regions_id
+            LEFT JOIN (
+                SELECT regions_id, COUNT(*) AS occurrences 
+                FROM conventions 
+                GROUP BY regions_id
+            ) AS conventions_table ON r.id = conventions_table.regions_id;
+        ");
+        return view('client.region',compact('higherOrganCounts'));
     }
 }

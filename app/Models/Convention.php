@@ -14,7 +14,7 @@ class Convention extends Model
         'type_id',
         'organizer',
         'date',
-        'address',
+        'regions_id',
         'employees_count',
         'list',
         'quarters_id'
@@ -30,5 +30,9 @@ class Convention extends Model
     public function conventionType()
     {
         return $this->belongsTo(ConventionType::class, 'type_id');
+    }
+    public function regionsVal()
+    {
+        return $this->belongsTo(Region::class, 'regions_id');
     }
 }
