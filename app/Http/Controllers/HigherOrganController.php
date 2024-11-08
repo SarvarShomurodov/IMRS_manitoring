@@ -10,6 +10,28 @@ use Illuminate\Http\Request;
 
 class HigherOrganController extends Controller
 {
+    public function indexAdmin(Request $request)
+    {
+        $query = HigherOrgan::query();
+
+        // Apply regions_id filter if provided
+        if ($request->filled('regions_id')) {
+            $query->where('regions_id', $request->input('regions_id'));
+        }
+
+        // Apply quarters_id filter if provided
+        if ($request->filled('quarters_id')) {
+            $query->where('quarters_id', $request->input('quarters_id'));
+        }
+
+        // Get the filtered results
+        $higherOrgans = $query->get();
+
+        // Retrieve regions list and quarters list (assuming Quarters is a model)
+        $regions = Region::all();
+        $quarters = Quarter::all();
+        return view('admin.HigherOrgan.indexAdmin',compact(['higherOrgans','regions','quarters']))->with('i');
+    }
      /**
      * Display a listing of the resource.
      */

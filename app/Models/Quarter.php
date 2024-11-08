@@ -52,4 +52,8 @@ class Quarter extends Model
     {
         return $this->hasMany(Meeting::class, 'quarters_id');
     }
+    public function survays()
+    {
+        return $this->hasMany(Survey::class, 'quarters_id');
+    }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\PublishController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ScientificCouncilController;
 use App\Http\Controllers\ScientificSeminarController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TrainingCourseController;
 use App\Http\Controllers\YoungEconomistController;
 use App\Models\Convention;
@@ -49,6 +50,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/index', [Controller::class, 'getBusinessTripCounts'])->name('index.getBusinessTripCounts');
     Route::get('/regionAdmin',[Controller::class,'getRegionsCounts'])->name('regionAdmin.getRegionsCounts');
     Route::get('/business_trips', [BusinessTripController::class,'index'])->name('business_trips.index');
+    Route::get('/higher_admin', [HigherOrganController::class,'indexAdmin'])->name('higher_admin.indexAdmin');
+    Route::get('/business_admin', [BusinessTripController::class,'indexAdmin'])->name('business_admin.indexAdmin');
+    Route::get('/ev_admin', [EventController::class,'indexAdmin'])->name('ev_admin.indexAdmin');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -60,6 +64,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('seminar',ScientificSeminarController::class);
     Route::resource('event',EventController::class);
     Route::resource('region',RegionController::class);
+    Route::resource('survay',SurveyController::class);
 });
 
 Route::middleware(['auth', 'role:editor'])->group(function () {

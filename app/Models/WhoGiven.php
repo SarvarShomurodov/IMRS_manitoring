@@ -21,5 +21,8 @@ class WhoGiven extends Model
     {
         return $this->hasMany(Convention::class, 'who_given_id');
     }
-    
+    public function survey()
+    {
+        return $this->hasMany(Survey::class, 'who_given_id');
+    }
 }

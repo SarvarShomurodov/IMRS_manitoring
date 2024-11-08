@@ -8,7 +8,7 @@
           <span class="menu-title">Aсосий саҳифа</span>
         </a>
       </li>
-      <li class="nav-item {{ Request::is('regionAdmin*') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('regionAdmin*') || Request::is('higher_admin*') || Request::is('business_admin*') || Request::is('ev_admin*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('regionAdmin') }}">
           <i class="menu-icon mdi mdi-map-marker"></i>
           <span class="menu-title">Ҳудудлар бўйича</span>
@@ -64,6 +64,12 @@
         <a class="nav-link"  href="{{ url('region') }}" aria-expanded="false" aria-controls="form-elements">
           <i class="menu-icon mdi mdi-map"></i>
           <span class="menu-title">Давлат ёки ҳудуд</span>
+        </a>
+      </li>
+      <li class="nav-item {{ Request::is('survay*') ? 'active' : '' }}">
+        <a class="nav-link"  href="{{ url('survay') }}" aria-expanded="false" aria-controls="form-elements">
+          <i class="menu-icon mdi mdi-form-select"></i>
+          <span class="menu-title">Cўровномалар</span>
         </a>
       </li>
     @endif

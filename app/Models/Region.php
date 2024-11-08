@@ -31,4 +31,8 @@ class Region extends Model
     {
         return $this->hasMany(TrainingCourse::class, 'regions_id');
     }
+    public function surveyRegions()
+    {
+        return $this->hasMany(Survey::class, 'regions_id');
+    }
 }

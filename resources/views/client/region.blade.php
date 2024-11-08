@@ -11,11 +11,12 @@
             <tr>
                 <th>№</th>
                 <th>Ҳудуд номи</th>
-                <th>Таҳлилий материаллар сони</th>
-                <th>Сафарлар сони</th>
-                <th>Институт томонидан ташкил этилган тадбирлар сони</th>
+                <th><a style="color: white" href="{{ route('higher_admin.indexAdmin') }}">Таҳлилий материаллар сони</a></th>
+                <th><a style="color: white" href="{{ route('business_admin.indexAdmin') }}">Сафарлар сони</a></th>
+                <th><a style="color: white" href="{{ route('ev_admin.indexAdmin') }}">Институт томонидан ташкил этилган тадбирлар сони</a></th>
                 <th>Институт ходимлари иштирок этган тадбирлар сони</th>
                 <th>Таклифлар сони</th>
+                <th>Cўровномалар сони</th>
             </tr>
         </thead>
         <tbody>
@@ -23,11 +24,12 @@
                 <tr>
                     <td>{{ $count->regions_id }}</td>
                     <td>{{ $count->name }}</td>
-                    <td>{{ $count->higher_organs_count }}</td>
-                    <td>{{ $count->another_table_count }}</td>
-                    <td>{{ $count->third_table_count }}</td>
-                    <td>{{ $count->conventions_count }}</td>
-                    <td>{{ $count->another_table_sorov_count }}</td>
+                    <td style="text-align: center">{{ $count->higher_organs_count }}</td>
+                    <td style="text-align: center">{{ $count->another_table_count }}</td>
+                    <td style="text-align: center">{{ $count->third_table_count }}</td>
+                    <td style="text-align: center">{{ $count->conventions_count }}</td>
+                    <td style="text-align: center">{{ $count->another_table_sorov_count }}</td>
+                    <td style="text-align: center">{{ $count->surveys_count }}</td>    
                 </tr>
             @endforeach
         </tbody>

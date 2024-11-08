@@ -257,7 +257,8 @@ class Controller extends BaseController
                 COALESCE(another_table_table.occurrences, 0) AS another_table_count,
                 COALESCE(another_table_sorov_table.occurrences, 0) AS another_table_sorov_count,
                 COALESCE(third_table_table.occurrences, 0) AS third_table_count,
-                COALESCE(conventions_table.occurrences, 0) AS conventions_count
+                COALESCE(conventions_table.occurrences, 0) AS conventions_count,
+                COALESCE(surveys_table.occurrences, 0) AS surveys_count
             FROM regions AS r
             LEFT JOIN (
                 SELECT regions_id, COUNT(*) AS occurrences 
@@ -284,7 +285,12 @@ class Controller extends BaseController
                 SELECT regions_id, COUNT(*) AS occurrences 
                 FROM conventions 
                 GROUP BY regions_id
-            ) AS conventions_table ON r.id = conventions_table.regions_id;
+            ) AS conventions_table ON r.id = conventions_table.regions_id
+            LEFT JOIN (
+                SELECT regions_id, COUNT(*) AS occurrences 
+                FROM surveys 
+                GROUP BY regions_id
+            ) AS surveys_table ON r.id = surveys_table.regions_id;
         ");
         return view('client.region',compact('higherOrganCounts'));
     }
