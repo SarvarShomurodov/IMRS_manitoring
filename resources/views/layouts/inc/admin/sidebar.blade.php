@@ -2,13 +2,13 @@
   <ul class="nav">
     @if( Auth::user()->name == 'Abdixojayev')
     <li class="nav-item nav-category">Барча малумотлар</li>
-      <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') || Request::is('methods*') || Request::is('event*') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('index*') || Request::is('higher_organs*') || Request::is('business_trips*') || Request::is('training_courses*') || Request::is('publishes*') || Request::is('oavpublish*') ||Request::is('conventions*') || Request::is('scientific*') || Request::is('seminar*') || Request::is('young_economists*') || Request::is('methods*') || Request::is('event*') || Request::is('meeting*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('index') }}">
           <i class="menu-icon mdi mdi-home"></i>
           <span class="menu-title">Aсосий саҳифа</span>
         </a>
       </li>
-      <li class="nav-item {{ Request::is('regionAdmin*') || Request::is('higher_admin*') || Request::is('business_admin*') || Request::is('ev_admin*') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('regionAdmin*') || Request::is('higher_admin*') || Request::is('business_admin*') || Request::is('ev_admin*') || Request::is('convent_admin*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('regionAdmin') }}">
           <i class="menu-icon mdi mdi-map-marker"></i>
           <span class="menu-title">Ҳудудлар бўйича</span>

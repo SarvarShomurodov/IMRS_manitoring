@@ -14,8 +14,8 @@
                 <th><a style="color: white" href="{{ route('higher_admin.indexAdmin') }}">Таҳлилий материаллар сони</a></th>
                 <th><a style="color: white" href="{{ route('business_admin.indexAdmin') }}">Сафарлар сони</a></th>
                 <th><a style="color: white" href="{{ route('ev_admin.indexAdmin') }}">Институт томонидан ташкил этилган тадбирлар сони</a></th>
-                <th>Институт ходимлари иштирок этган тадбирлар сони</th>
-                <th>Таклифлар сони</th>
+                <th><a style="color: white" href="{{ route('convent_admin.indexAdmin') }}">Институт ходимлари иштирок этган тадбирлар сони</a></th>
+                <th><a style="color: white" href="{{ route('business_admin.indexAdmin') }}">Таклифлар сони</a></th>
                 <th>Cўровномалар сони</th>
             </tr>
         </thead>

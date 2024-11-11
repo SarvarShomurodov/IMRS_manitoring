@@ -53,6 +53,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/higher_admin', [HigherOrganController::class,'indexAdmin'])->name('higher_admin.indexAdmin');
     Route::get('/business_admin', [BusinessTripController::class,'indexAdmin'])->name('business_admin.indexAdmin');
     Route::get('/ev_admin', [EventController::class,'indexAdmin'])->name('ev_admin.indexAdmin');
+    Route::get('/convent_admin', [ConventionController::class,'indexAdmin'])->name('convent_admin.indexAdmin');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

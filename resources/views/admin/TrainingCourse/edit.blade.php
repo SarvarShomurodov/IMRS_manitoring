@@ -54,10 +54,10 @@
         <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
             <option value="">-- Xудуд --</option>
             @foreach($regions as $region)
-              <option value="{{ $region->id }}" 
-                {{ (old('regions_id', $businessTrips->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
-                {{ $region->name }}
-              </option>
+            <option value="{{ $region->id }}" 
+              {{ (old('regions_id', $trainingCourses->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
+              {{ $region->name }}
+            </option>
             @endforeach
         </select>
       </div>

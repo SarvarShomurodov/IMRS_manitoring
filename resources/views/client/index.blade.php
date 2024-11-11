@@ -238,7 +238,7 @@
           {{-- <div>274</div> --}}
 
           <div class="id">18</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('event') }}"><b>Институт томонидан ташкиллаштирилган музокаралар ва учрашувлар</b></a></div>
+          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('meeting') }}"><b>Институт томонидан ташкиллаштирилган музокаралар ва учрашувлар</b></a></div>
           <div>{{$meetings[0]->first_quarter}}</div>
           <div>{{$meetings[0]->second_quarter}}</div>
           <div>{{$meetings[0]->third_quarter}}</div>

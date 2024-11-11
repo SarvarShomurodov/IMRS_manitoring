@@ -11,6 +11,28 @@ use App\Models\ConventionType;
 
 class ConventionController extends Controller
 {
+    public function indexAdmin(Request $request)
+    {
+        $query = Convention::query();
+
+        // Apply regions_id filter if provided
+        if ($request->filled('regions_id')) {
+            $query->where('regions_id', $request->input('regions_id'));
+        }
+
+        // Apply quarters_id filter if provided
+        if ($request->filled('quarters_id')) {
+            $query->where('quarters_id', $request->input('quarters_id'));
+        }
+
+        // Get the filtered results
+        $conventions = $query->get();
+
+        // Retrieve regions list and quarters list (assuming Quarters is a model)
+        $regions = Region::all();
+        $quarters = Quarter::all();
+        return view('admin.Convention.indexAdmin',compact(['conventions','regions','quarters']))->with('i');
+    }
     public function index()
     {
         $conventions = Convention::all();
