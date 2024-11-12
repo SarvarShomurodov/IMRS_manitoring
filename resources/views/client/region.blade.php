@@ -16,7 +16,7 @@
                 <th><a style="color: white" href="{{ route('ev_admin.indexAdmin') }}">Институт томонидан ташкил этилган тадбирлар сони</a></th>
                 <th><a style="color: white" href="{{ route('convent_admin.indexAdmin') }}">Институт ходимлари иштирок этган тадбирлар сони</a></th>
                 <th><a style="color: white" href="{{ route('business_admin.indexAdmin') }}">Таклифлар сони</a></th>
-                <th>Cўровномалар сони</th>
+                <th><a style="color: white" href="{{ route('sorov_admin.indexAdmin') }}">Cўровномалар сони</a></th>
             </tr>
         </thead>
         <tbody>

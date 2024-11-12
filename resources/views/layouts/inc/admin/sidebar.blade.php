@@ -8,7 +8,7 @@
           <span class="menu-title">Aсосий саҳифа</span>
         </a>
       </li>
-      <li class="nav-item {{ Request::is('regionAdmin*') || Request::is('higher_admin*') || Request::is('business_admin*') || Request::is('ev_admin*') || Request::is('convent_admin*') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('regionAdmin*') || Request::is('higher_admin*') || Request::is('business_admin*') || Request::is('ev_admin*') || Request::is('convent_admin*') || Request::is('sorov_admin*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('regionAdmin') }}">
           <i class="menu-icon mdi mdi-map-marker"></i>
           <span class="menu-title">Ҳудудлар бўйича</span>

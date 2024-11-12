@@ -31,26 +31,26 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         // Redirect one specific user to the index route, others to the home route
-        if ($user->email == 'abdixojayev@example.com') {  // Replace with specific user condition
-            return redirect('/index');
-        }elseif($user->email == 'qarabayeva@example.com'){
-            return redirect('/business_trips');
-        }
-        elseif($user->email == 'qutliyev@example.com'){
-            return redirect('/training_courses');
-        }
-        elseif($user->email == 'maxmudov@example.com'){
-            return redirect('/young_economists');
-        }
-        elseif($user->email == 'turdiyev@example.com'){
-            return redirect('/oavpublish');
-        }
-        elseif($user->email == 'axmedova@example.com'){
-            return redirect('/methods');
-        }
-        elseif($user->email == 'xalbayev@example.com'){
-            return redirect('/meeting');
-        }
+        // if ($user->email == 'abdixojayev@example.com') {  // Replace with specific user condition
+        //     return redirect('/index');
+        // }elseif($user->email == 'qarabayeva@example.com'){
+        //     return redirect('/business_trips');
+        // }
+        // elseif($user->email == 'qutliyev@example.com'){
+        //     return redirect('/training_courses');
+        // }
+        // elseif($user->email == 'maxmudov@example.com'){
+        //     return redirect('/young_economists');
+        // }
+        // elseif($user->email == 'turdiyev@example.com'){
+        //     return redirect('/oavpublish');
+        // }
+        // elseif($user->email == 'axmedova@example.com'){
+        //     return redirect('/methods');
+        // }
+        // elseif($user->email == 'xalbayev@example.com'){
+        //     return redirect('/meeting');
+        // }
         return redirect(RouteServiceProvider::HOME);
     }
 

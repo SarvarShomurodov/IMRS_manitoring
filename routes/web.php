@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\BusinessTripController;
-use App\Http\Controllers\ConventionController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\HigherOrganController;
-use App\Http\Controllers\MeetingController;
-use App\Http\Controllers\MethodController;
-use App\Http\Controllers\OAVPublishController;
-use App\Http\Controllers\PublishController;
-use App\Http\Controllers\RegionController;
-use App\Http\Controllers\ScientificCouncilController;
-use App\Http\Controllers\ScientificSeminarController;
-use App\Http\Controllers\SurveyController;
-use App\Http\Controllers\TrainingCourseController;
-use App\Http\Controllers\YoungEconomistController;
+use App\Models\Method;
 use App\Models\Convention;
 use App\Models\HigherOrgan;
-use App\Models\Method;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\MethodController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublishController;
+use App\Http\Controllers\ConventionController;
+use App\Http\Controllers\OAVPublishController;
+use App\Http\Controllers\HigherOrganController;
+use App\Http\Controllers\BusinessTripController;
+use App\Http\Controllers\TrainingCourseController;
+use App\Http\Controllers\YoungEconomistController;
+use App\Http\Controllers\ScientificCouncilController;
+use App\Http\Controllers\ScientificSeminarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/business_admin', [BusinessTripController::class,'indexAdmin'])->name('business_admin.indexAdmin');
     Route::get('/ev_admin', [EventController::class,'indexAdmin'])->name('ev_admin.indexAdmin');
     Route::get('/convent_admin', [ConventionController::class,'indexAdmin'])->name('convent_admin.indexAdmin');
+    Route::get('/sorov_admin', [SurveyController::class,'indexAdmin'])->name('sorov_admin.indexAdmin');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -93,3 +95,7 @@ Route::middleware(['auth', 'role:noner'])->group(function () {
 
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
