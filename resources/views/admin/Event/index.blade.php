@@ -59,7 +59,11 @@
                         <td>{{ $trip->organizer }}</td>
                         <td>{!! $trip->goal !!}</td>
                         <td>{{ $trip->date }}</td>
-                        <td>{{ $trip->regionsVal->name }}</td>
+                        <td>
+                            @foreach($trip->regions as $region)
+                            {{ $region->name }}@if (!$loop->last), @endif
+                            @endforeach
+                        </td>
                         <td>{{ $trip->foreignNum }}</td>
                         <td>{{ $trip->localNum }}</td>
                         <td>{!! $trip->result !!}</td>

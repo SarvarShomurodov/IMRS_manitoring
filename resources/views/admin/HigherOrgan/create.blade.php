@@ -28,7 +28,7 @@
           <label for="name"><b>Таҳлилий материал номи</b></label>
           <textarea name="name" id="summernote" class="form-control" required>{{ old('name') }}</textarea>
       </div>
-      <div class="form-group col-lg-4">
+      <div class="form-group col-lg-2">
         <label for="who_given_id" class="form-label"><b>Асос</b></label>
         <select name="who_given_id" class="form-control" id="who_given_id" class="form-control" required>
             <option value="">-- Ким томонидан берилди --</option>
@@ -76,17 +76,17 @@
         <label for="country"><b>Давлат ёки ҳудуд</b></label>
         <input type="text" name="country" id="country" class="form-control" value="{{ old('country') }}" required>
       </div> --}}
-      <div class="form-group col-lg-4">
-        <label for="regions_id" class="form-label"><b>Давлат ёки ҳудуд</b></label>
-        <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
-            <option value="">-- Xудуд --</option>
+      <div class="form-group col-lg-2">
+        <label for="regions_id" class="form-label"><b>Манзил (давлат ёки ҳудуд)</b></label>
+        <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
             @foreach($regions as $region)
-                <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
+                <option value="{{ $region->id }}" 
+                    {{ (collect(old('regions_id'))->contains($region->id)) ? 'selected' : '' }}>
                     {{ $region->name }}
                 </option>
             @endforeach
         </select>
-      </div>
+      </div> 
 
       <div class="form-group col-lg-2">
         <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>

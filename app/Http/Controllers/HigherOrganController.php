@@ -13,25 +13,29 @@ class HigherOrganController extends Controller
     public function indexAdmin(Request $request)
     {
         $query = HigherOrgan::query();
-
+    
         // Apply regions_id filter if provided
         if ($request->filled('regions_id')) {
-            $query->where('regions_id', $request->input('regions_id'));
+            $query->whereHas('regions', function ($q) use ($request) {
+                $q->where('region_id', $request->input('regions_id'));
+            });
         }
-
+    
         // Apply quarters_id filter if provided
         if ($request->filled('quarters_id')) {
             $query->where('quarters_id', $request->input('quarters_id'));
         }
-
+    
         // Get the filtered results
         $higherOrgans = $query->get();
-
-        // Retrieve regions list and quarters list (assuming Quarters is a model)
+    
+        // Retrieve regions list and quarters list
         $regions = Region::all();
         $quarters = Quarter::all();
-        return view('admin.HigherOrgan.indexAdmin',compact(['higherOrgans','regions','quarters']))->with('i');
+    
+        return view('admin.HigherOrgan.indexAdmin', compact(['higherOrgans', 'regions', 'quarters']))->with('i');
     }
+
      /**
      * Display a listing of the resource.
      */
@@ -40,7 +44,7 @@ class HigherOrganController extends Controller
        // Get the 'who_given_id' parameter from the URL
         $whoGivenId = $request->query('who_given_id');
         // Apply the filter only if 'who_given_id' is 6 or 8; otherwise, retrieve all records
-        $higherOrgans = HigherOrgan::when(in_array($whoGivenId, [1,2,3,4,5,6,7,8]), function ($query) use ($whoGivenId) {
+        $higherOrgans = HigherOrgan::when(in_array($whoGivenId, [1,2,3,4,5,6,7,8,9,10,11,12,13,14]), function ($query) use ($whoGivenId) {
             return $query->where('who_given_id', $whoGivenId);
         })->get();
 
@@ -63,6 +67,7 @@ class HigherOrganController extends Controller
      */
     public function store(Request $request)
     {
+        // Validatsiya: 'regions_id' massivi bo'lib, har bir element `regions` jadvalidagi idga mos kelishi kerak
         $validatedData = $request->validate([
             'name' => 'required|string',
             'who_given_id' => 'required|exists:who_givens,id',
@@ -73,14 +78,33 @@ class HigherOrganController extends Controller
             'letter_number' => 'required|integer',
             'direction' => 'required|string',
             'sorov' => 'required|string',
-            'regions_id' => 'required|exists:regions,id',
+            'regions_id' => 'required|array',  // `regions_id` massivini qabul qilish
+            'regions_id.*' => 'exists:regions,id',  // Har bir element `regions` jadvalidagi idga mos kelishi kerak
             'quarters_id' => 'required|exists:quarters,id',
         ]);
 
-        HigherOrgan::create($validatedData);
+        // Higher Organ yaratish
+        $higherOrgan = HigherOrgan::create([
+            'name' => $validatedData['name'],
+            'who_given_id' => $validatedData['who_given_id'],
+            'date' => $validatedData['date'],
+            'ass_number' => $validatedData['ass_number'],
+            'who_send' => $validatedData['who_send'],
+            'letter_date' => $validatedData['letter_date'],
+            'letter_number' => $validatedData['letter_number'],
+            'direction' => $validatedData['direction'],
+            'sorov' => $validatedData['sorov'],
+            'quarters_id' => $validatedData['quarters_id'],
+        ]);
 
+        // Yaratilgan Higher Organni `regions` bilan bog'lash
+        $higherOrgan->regions()->sync($validatedData['regions_id']);
+
+        // Muvaffaqiyatli xabar bilan qaytish
         return redirect()->route('higher_organs.index')->with('success', 'Higher Organ created successfully!');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -105,8 +129,9 @@ class HigherOrganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        // Validatsiya: `regions_id` massivi va uning har bir elementi `regions` jadvalidagi idga mos kelishi kerak
         $validatedData = $request->validate([
             'name' => 'required|string',
             'who_given_id' => 'required|exists:who_givens,id',
@@ -117,15 +142,24 @@ class HigherOrganController extends Controller
             'letter_number' => 'required|integer',
             'direction' => 'required|string',
             'sorov' => 'required|string',
-            'regions_id' => 'required|exists:regions,id',
+            'regions_id' => 'required|array',  // `regions_id` massivi
+            'regions_id.*' => 'exists:regions,id',  // Har bir element `regions` jadvalidagi idga mos kelishi kerak
             'quarters_id' => 'required|exists:quarters,id',
         ]);
-        $higherOrgans = HigherOrgan::findOrFail($id);
-
-        $higherOrgans->update($validatedData);
-
-        return redirect()->route('higher_organs.index')->with('success', 'Higher Organ Update successfully!');
+    
+        // Higher Organni topish
+        $higherOrgan = HigherOrgan::findOrFail($id);
+    
+        // Yangi malumotlarni yangilash
+        $higherOrgan->update($validatedData);
+    
+        // `regions_id` larni yangilash, eski bog'lanishni yangilash
+        $higherOrgan->regions()->sync($request->regions_id);
+    
+        // Muvaffaqiyatli xabar bilan qaytish
+        return redirect()->route('higher_organs.index')->with('success', 'Higher Organ updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.

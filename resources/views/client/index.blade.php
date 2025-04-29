@@ -4,34 +4,17 @@
 
 @section('content')
 <style>
-   .grid-container {
-            display: grid;
-            grid-template-columns: 0.5fr 3fr 1fr 1fr 1fr 1fr; /* Adjusted width for the first column */
-            gap: 10px;
-            padding: 10px;
-            /* border: 1px solid #ddd; */
-        }
-        .grid-container div {
-            padding: 10px;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center; /* Vertically centers the content */
-            justify-content: center;
-            text-align: center;
-        }
-        .grid-container .left-align {
-            justify-content: flex-start; /* Align to the beginning of the screen (left) */
-            text-align: left; /* Align text to the left */
-        }
-        .grid-container .left-align a{
-            text-decoration: none;
-        }
-        .header {
-            font-weight: bold;
-        }
-        .id{
-          font-weight: bold;
-        }
+  .left-align{
+    text-align: left;
+    width: 66%;
+  }
+  table tr td{
+      text-align: center;
+      font-size: 17px;
+  }
+  .left-align a{
+    text-decoration: none;
+  }
 </style>
 <div class="row">
   <div class="col-lg-12 margin-tb">
@@ -39,214 +22,356 @@
         МАЪЛУМОТ</h4>
   </div>
 </div>
-<div class="card">
-    <div class="card-body">
-      <div class="table-responsive">
-        <div class="grid-container">
-          <div class="header">№</div>
-          <div class="header text-start">КО`РСАТКИЧ НОМИ</div>
-          <div class="header">1-ЧОРАК</div>
-          <div class="header">2-ЧОРАК</div>
-          <div class="header">3-ЧОРАК</div>
-          <div class="header">4-ЧОРАК</div>
-          {{-- <div class="header">Йил бўйича Режа</div> --}}
-          
-          @foreach($higherOrganCounts as $higherOrganCount)
-            @if ($higherOrganCount->id == 7)
-              <div class="id">1</div>
-              <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 7]) }}"><b>{{$higherOrganCount->issuer_name}}</b></a></div>
-              <div>{{$higherOrganCount->first_quarter}}</div>
-              <div>{{$higherOrganCount->second_quarter}}</div>
-              <div>{{$higherOrganCount->third_quarter}}</div>
-              <div>{{$higherOrganCount->fourth_quarter}}</div>
-              {{-- <div>{{$higherOrganCount->year_number}}</div> --}}
-             @endif              
-          @endforeach
-
-          @foreach($higherOrganCounts as $higherOrganCount)
-            @if ($higherOrganCount->id == 8)
-              <div class="id">2</div>
-              <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 8]) }}"><b>{{$higherOrganCount->issuer_name}}</b></a></div>
-              <div>{{$higherOrganCount->first_quarter}}</div>
-              <div>{{$higherOrganCount->second_quarter}}</div>
-              <div>{{$higherOrganCount->third_quarter}}</div>
-              <div>{{$higherOrganCount->fourth_quarter}}</div>
-              {{-- <div>{{$higherOrganCount->year_number}}</div> --}}
-             @endif              
-          @endforeach
-
-          <div class="id">3</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}"><b>Юқори ташкилотларнинг топшириқларга  мувофиқ бажарилган ишлар сони, шундан</b></a></div>
-          <div>{{$higherOrgans[0]->first_quater}}</div>
-          <div>{{$higherOrgans[0]->second_quater}}</div>
-          <div>{{$higherOrgans[0]->third_quater}}</div>
-          <div>{{$higherOrgans[0]->fourth_quater}}</div>
-          {{-- <div>160</div> --}}
-
-          @foreach($higherOrganCounts as $higherOrganCount)
-            @if($higherOrganCount->id != 7 && $higherOrganCount->id != 8 && $higherOrganCount->id != 6)
-            <div>3. {{$higherOrganCount->id}}</div>
-            <div class="left-align">
-                <a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => $higherOrganCount->id]) }}">
-                    {{$higherOrganCount->issuer_name}}
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>КО`РСАТКИЧ НОМИ</th>
+      <th>1-ЧОРАК</th>
+      <th>2-ЧОРАК</th>
+      <th>3-ЧОРАК</th>
+      <th>4-ЧОРАК</th>
+      {{-- <th>Yillik</th> --}}
+    </tr>
+  </thead>
+  <tbody>
+      <tr style="background-color: #ffffff">
+        @foreach($higherOrganCounts as $higherOrganCount)
+          @if ($higherOrganCount->id == 13)
+            <td>1</td>
+            <td class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 13]) }}"><b>{{$higherOrganCount->issuer_name}}</b></a></td>
+            <td>{{$higherOrganCount->first_quarter}} </td>
+            <td>{{$higherOrganCount->second_quarter}}</td> 
+            <td>{{$higherOrganCount->third_quarter}} </td>
+            <td>{{$higherOrganCount->fourth_quarter}}</td>
+            {{-- <td>{{ $higherOrganCount->first_quarter + $higherOrganCount->second_quarter +$higherOrganCount->third_quarter + $higherOrganCount->fourth_quarter}}</td> --}}
+          @endif
+        @endforeach
+      </tr>
+      <tr style="background-color: #ffffff">
+        @foreach($higherOrganCounts as $higherOrganCount)
+            @if ($higherOrganCount->id == 14)
+              <td>2</td>
+              <td class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 14]) }}"><b>{{$higherOrganCount->issuer_name}}</b></a></td>
+              <td>{{$higherOrganCount->first_quarter}} </td>
+              <td>{{$higherOrganCount->second_quarter}}</td> 
+              <td>{{$higherOrganCount->third_quarter}} </td>
+              <td>{{$higherOrganCount->fourth_quarter}}</td>
+              {{-- <td>{{ $higherOrganCount->first_quarter + $higherOrganCount->second_quarter + $higherOrganCount->third_quarter + $higherOrganCount->fourth_quarter}}</td> --}}
+            @endif              
+        @endforeach 
+      </tr>
+      <tr style="background-color: #ffffff">
+          <td>3</td>
+          <td class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('higher_organs') }}"><b>Юқори ташкилотларнинг топшириқларга  мувофиқ бажарилган ишлар сони, шундан</b></a></td>
+          <td>{{$higherOrgans[0]->first_quater}} </td>
+          <td>{{$higherOrgans[0]->second_quater}}</td> 
+          <td>{{$higherOrgans[0]->third_quater}} </td>
+          <td>{{$higherOrgans[0]->fourth_quater}}</td> 
+          {{-- <td>{{ $higherOrgans[0]->first_quater + $higherOrgans[0]->second_quater +$higherOrgans[0]->third_quater + $higherOrgans[0]->fourth_quater}}</td>  --}}
+      </tr>
+      @foreach($higherOrganCounts as $higherOrganCount)
+        <tr style="background-color: #ffffff">
+          @if($higherOrganCount->id != 13 && $higherOrganCount->id != 14 && $higherOrganCount->id != 12)
+            <td>3.{{ $higherOrganCount->id }}</td>
+            <td class="left-align">
+              <a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => $higherOrganCount->id]) }}">
+                {{$higherOrganCount->issuer_name}}
+              </a>
+            </td>
+            <td>{{$higherOrganCount->first_quarter}} </td>
+            <td>{{$higherOrganCount->second_quarter}}</td> 
+            <td>{{$higherOrganCount->third_quarter}} </td>
+            <td>{{$higherOrganCount->fourth_quarter}}</td>  
+          @endif
+        </tr>
+      @endforeach
+      <tr style="background-color: #ffffff">
+        <td class="id">5</td>
+        <td class="left-align">
+            <a style="color: rgb(48, 48, 48)" href="{{ url('business_trips') }}">
+                <b>Хизмат сафарлар</b>
+            </a>
+        </td>
+        <td>{{$businessTripCounts[0]->first_quater}}</td>
+        <td>{{$businessTripCounts[0]->second_quater}}</td>
+        <td>{{$businessTripCounts[0]->third_quater}}</td>
+        <td>{{$businessTripCounts[0]->fourth_quater}}</td>
+      </tr>
+      @foreach($higherOrganCounts as $higherOrganCount)
+        @if ($higherOrganCount->id == 12)
+          <tr style="background-color: #ffffff">
+              <td class="id">6</td>
+              <td class="left-align">
+                  <a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 12]) }}">
+                      <b>{{$higherOrganCount->issuer_name}}</b>
+                  </a>
+              </td>
+              <td>{{$higherOrganCount->first_quarter}}</td>
+              <td>{{$higherOrganCount->second_quarter}}</td>
+              <td>{{$higherOrganCount->third_quarter}}</td>
+              <td>{{$higherOrganCount->fourth_quarter}}</td>
+              {{-- <td>{{$higherOrganCount->year_number}}</td> --}}
+          </tr>
+        @endif
+      @endforeach
+      <tr style="background-color: #ffffff">
+        <td class="id">7</td>
+        <td class="left-align">
+            <a style="color: rgb(48, 48, 48)" href="{{ url('training_courses') }}">
+                <b>Тренинглар, ўқув курслари (сертификат билан)</b>
+            </a>
+        </td>
+        <td>{{$trainingCourseCounts[0]->first_quater}}</td>
+        <td>{{$trainingCourseCounts[0]->second_quater}}</td>
+        <td>{{$trainingCourseCounts[0]->third_quater}}</td>
+        <td>{{$trainingCourseCounts[0]->fourth_quater}}</td>
+      </tr>
+      <tr style="background-color: #ffffff">
+        <td class="id">8</td>
+        <td class="left-align">
+            <a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}">
+                <b>Илмий нашриёт ишлари сони</b>
+            </a>
+        </td>
+        <td>{{$publish[0]->first_quater}}</td>
+        <td>{{$publish[0]->second_quater}}</td>
+        <td>{{$publish[0]->third_quater}}</td>
+        <td>{{$publish[0]->fourth_quater}}</td>
+      </tr>
+      @foreach($publishCounts as $publishCount)
+        <tr style="background-color: #ffffff">
+          <td>8.{{$publishCount->id}}</td>
+          <td class="left-align">
+              <a style="color: rgb(48, 48, 48)" href="{{ route('publishes.index', ['type_id' => $publishCount->id]) }}">
+                  {{$publishCount->issuer_name}}
+              </a>
+          </td>
+          <td>{{$publishCount->first_quarter}}</td>
+          <td>{{$publishCount->second_quarter}}</td>
+          <td>{{$publishCount->third_quarter}}</td>
+          <td>{{$publishCount->fourth_quarter}}</td>
+          {{-- <td>{{$publishCount->year_number}}</td> --}}
+        </tr>
+      @endforeach
+      <tr style="background-color: #ffffff">
+        <td class="id">9</td>
+        <td class="left-align">
+            <a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}">
+                <b>ОАВ нашриёт ишлари сони</b>
+            </a>
+        </td>
+        <td>{{$opublishes[0]->first_quarter}}</td>
+        <td>{{$opublishes[0]->second_quarter}}</td>
+        <td>{{$opublishes[0]->third_quarter}}</td>
+        <td>{{$opublishes[0]->fourth_quarter}}</td>
+      </tr>
+      @foreach($opublishCounts as $publishCount)
+          <tr style="background-color: #ffffff">
+              <td>9.{{$publishCount->id}}</td>
+              <td class="left-align">
+                  <a style="color: rgb(48, 48, 48)" href="{{ route('oavpublish.index', ['oav_id' => $publishCount->id]) }}">
+                      {{$publishCount->issuer_name}}
+                  </a>
+              </td>
+              <td>{{$publishCount->first_quarter}}</td>
+              <td>{{$publishCount->second_quarter}}</td>
+              <td>{{$publishCount->third_quarter}}</td>
+              <td>{{$publishCount->fourth_quarter}}</td>
+              {{-- <td>{{$publishCount->year_number}}</td> --}}
+          </tr>
+      @endforeach
+        @foreach($conventions as $convention)
+        <tr style="background-color: #ffffff">
+            <td>10</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('conventions') }}">
+                    <b>Юқори ташкилотларнинг топшириқларга  мувофиқ семинарлар, вебинарлар, давра сухбатлар, конференциялар, форумлар ва бошқа тадбирларда иштирок этиш (публикациясиз)</b>
                 </a>
-            </div>
-            <div>{{$higherOrganCount->first_quarter}}</div>
-            <div>{{$higherOrganCount->second_quarter}}</div>
-            <div>{{$higherOrganCount->third_quarter}}</div>
-            <div>{{$higherOrganCount->fourth_quarter}}</div>
-            {{-- <div>{{$higherOrganCount->year_number}}</div> --}}
-            @endif
-          @endforeach
-
-          <div class="id">5</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('business_trips') }}"><b>Хизмат сафарлар</b></a></div>
-          <div>{{$businessTripCounts[0]->first_quater}}</div>
-          <div>{{$businessTripCounts[0]->second_quater}}</div>
-          <div>{{$businessTripCounts[0]->third_quater}}</div>
-          <div>{{$businessTripCounts[0]->fourth_quater}}</div>
-          {{-- <div>154</div> --}}
-
-          @foreach($higherOrganCounts as $higherOrganCount)
-            @if ($higherOrganCount->id == 6)
-              <div class="id">6</div>
-              <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('higher_organs.index', ['who_given_id' => 6]) }}">
-                <b>{{$higherOrganCount->issuer_name}}</b>
-              </a></div>
-              <div>{{$higherOrganCount->first_quarter}}</div>
-              <div>{{$higherOrganCount->second_quarter}}</div>
-              <div>{{$higherOrganCount->third_quarter}}</div>
-              <div>{{$higherOrganCount->fourth_quarter}}</div>
-              {{-- <div>{{$higherOrganCount->year_number}}</div> --}}
-             @endif              
-          @endforeach
-
-          <div class="id">7</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('training_courses') }}"><b>Тренинглар, ўқув курслари (сертификат билан)</b></a></div>
-          <div>{{$trainingCourseCounts[0]->first_quater}}</div>
-          <div>{{$trainingCourseCounts[0]->second_quater}}</div>
-          <div>{{$trainingCourseCounts[0]->third_quater}}</div>
-          <div>{{$trainingCourseCounts[0]->fourth_quater}}</div>
-          {{-- <div>154</div> --}}
-
-          <div class="id">8</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('publishes') }}"><b>Илмий нашриёт ишлари сони</b></a></div>
-          <div>{{$publish[0]->first_quater}}</div>
-          <div>{{$publish[0]->second_quater}}</div>
-          <div>{{$publish[0]->third_quater}}</div>
-          <div>{{$publish[0]->fourth_quater}}</div>
-          {{-- <div>198</div> --}}
-
-          @foreach($publishCounts as $publishCount)
-            <div>8.{{$publishCount->id}}</div>
-            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('publishes.index',['type_id' => $publishCount->id]) }}">
-              {{$publishCount->issuer_name}}
-            </a></div>
-            <div>{{$publishCount->first_quarter}}</div>
-            <div>{{$publishCount->second_quarter}}</div>
-            <div>{{$publishCount->third_quarter}}</div>
-            <div>{{$publishCount->fourth_quarter}}</div>
-            {{-- <div>{{$publishCount->year_number}}</div> --}}
-          @endforeach
-
-          <div class="id">9</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('oavpublish') }}"><b>ОАВ нашриёт ишлари сони</b></a></div>
-          <div>{{$opublishes[0]->first_quarter}}</div>
-          <div>{{$opublishes[0]->second_quarter}}</div>
-          <div>{{$opublishes[0]->third_quarter}}</div>
-          <div>{{$opublishes[0]->fourth_quarter}}</div>
-          {{-- <div>198</div> --}}
-
-          @foreach($opublishCounts as $publishCount)
-            <div>9.{{$publishCount->id}}</div>
-            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('oavpublish.index',['oav_id' => $publishCount->id]) }}">
-              {{$publishCount->issuer_name}}
-            </a></div>
-            <div>{{$publishCount->first_quarter}}</div>
-            <div>{{$publishCount->second_quarter}}</div>
-            <div>{{$publishCount->third_quarter}}</div>
-            <div>{{$publishCount->fourth_quarter}}</div>
-            {{-- <div>{{$publishCount->year_number}}</div> --}}
-          @endforeach
-          
-          <div class="id">10</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('conventions') }}"><b>Юқори ташкилотларнинг топшириқларга  мувофиқ семинарлар, вебинарлар, давра сухбатлар, конференциялар, форумлар ва бошқа тадбирларда иштирок этиш (публикациясиз)</b></a></div>
-          <div>{{$conventions[0]->first_quarter}}</div>
-          <div>{{$conventions[0]->second_quarter}}</div>
-          <div>{{$conventions[0]->third_quarter}}</div>
-          <div>{{$conventions[0]->fourth_quarter}}</div>
-          {{-- <div>148</div> --}}
-
-          <div class="id">11</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('scientific') }}"><b>Илмий даражаларни ва унвонларни берувчи Илмий Кенгаш мажлислари</b></a></div>
-          <div>{{$scientifics[0]->first_quarter}}</div>
-          <div>{{$scientifics[0]->second_quarter}}</div>
-          <div>{{$scientifics[0]->third_quarter}}</div>
-          <div>{{$scientifics[0]->fourth_quarter}}</div>
-          {{-- <div>113</div> --}}
-
-          <div class="id">12</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('seminar') }}"><b>Илмий даражаларни ва унвонларни берувчи Илмий Кенгаш хузуридаги Илмий семинар йиғилишлари</b></a></div>
-          <div>{{$seminars[0]->first_quarter}}</div>
-          <div>{{$seminars[0]->second_quarter}}</div>
-          <div>{{$seminars[0]->third_quarter}}</div>
-          <div>{{$seminars[0]->fourth_quarter}}</div>
-          {{-- <div>111</div> --}}
-
-          <div class="id">13</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('methods') }}"><b>Институт Илмий-амалий семинар йиғилишлари</b></a></div>
-          <div>{{$methods[0]->first_quarter}}</div>
-          <div>{{$methods[0]->second_quarter}}</div>
-          <div>{{$methods[0]->third_quarter}}</div>
-          <div>{{$methods[0]->fourth_quarter}}</div>
-          {{-- <div>211</div> --}}
-
-          <div class="id">14</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('young_economists') }}"><b>Институт Ёш иқтисодчилар мажлислари сони</b></a></div>
-          <div>{{$youngEconomistCounts[0]->first_quater}}</div>
-          <div>{{$youngEconomistCounts[0]->second_quater}}</div>
-          <div>{{$youngEconomistCounts[0]->third_quater}}</div>
-          <div>{{$youngEconomistCounts[0]->fourth_quater}}</div>
-          {{-- <div>173</div> --}}
-
-          <div class="id">16</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('scientific') }}"><b>Илмий даражага эга бўлиш учун ҳимояга чиққан илмий изланувчилар сони</b></a></div>
-          <div>{{$nullScientifics[0]->first_quarter}}</div>
-          <div>{{$nullScientifics[0]->second_quarter}}</div>
-          <div>{{$nullScientifics[0]->third_quarter}}</div>
-          <div>{{$nullScientifics[0]->fourth_quarter}}</div>
-          {{-- <div>281</div> --}}
+            </td>
+            <td>{{$convention->first_quarter}}</td>
+            <td>{{$convention->second_quarter}}</td>
+            <td>{{$convention->third_quarter}}</td>
+            <td>{{$convention->fourth_quarter}}</td>
+        </tr>
+        @endforeach
     
-          @foreach($nullScientificCounts as $publishCount)
-            <div></div>
-            <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ route('scientific.index',['degree_id' => $publishCount->id, 'quarters_id' => request('quarters_id')]) }}">
-              {{$publishCount->issuer_name}}
-            </a></div>
-            <div>{{$publishCount->first_quarter}}</div>
-            <div>{{$publishCount->second_quarter}}</div>
-            <div>{{$publishCount->third_quarter}}</div>
-            <div>{{$publishCount->fourth_quarter}}</div>
-            {{-- <div>{{$publishCount->year_number}}</div> --}}
-          @endforeach
-          
-          <div class="id">17</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('event') }}"><b>Институт томонидан ташкиллаштирилган семинарлар, давра суҳбатлар, конференциялар, форумлар</b></a></div>
-          <div>{{$events[0]->first_quarter}}</div>
-          <div>{{$events[0]->second_quarter}}</div>
-          <div>{{$events[0]->third_quarter}}</div>
-          <div>{{$events[0]->fourth_quarter}}</div>
-          {{-- <div>274</div> --}}
+        @foreach($scientifics as $scientific)
+        <tr style="background-color: #ffffff">
+            <td>11</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('scientific') }}">
+                    <b>Илмий даражаларни ва унвонларни берувчи Илмий Кенгаш мажлислари</b>
+                </a>
+            </td>
+            <td>{{$scientific->first_quarter}}</td>
+            <td>{{$scientific->second_quarter}}</td>
+            <td>{{$scientific->third_quarter}}</td>
+            <td>{{$scientific->fourth_quarter}}</td>
+        </tr>
+        @endforeach
+    
+        @foreach($seminars as $seminar)
+          <tr style="background-color: #ffffff">
+            <td>12</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('seminar') }}">
+                    <b>Илмий даражаларни ва унвонларни берувчи Илмий Кенгаш хузуридаги Илмий семинар йиғилишлари</b>
+                </a>
+            </td>
+            <td>{{$seminar->first_quarter}}</td>
+            <td>{{$seminar->second_quarter}}</td>
+            <td>{{$seminar->third_quarter}}</td>
+            <td>{{$seminar->fourth_quarter}}</td>
+          </tr>
+        @endforeach
+    
+        @foreach($methods as $method)
+        <tr style="background-color: #ffffff">
+            <td>13</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('methods') }}">
+                    <b>Институт Илмий-амалий семинар йиғилишлари</b>
+                </a>
+            </td>
+            <td>{{$method->first_quarter}}</td>
+            <td>{{$method->second_quarter}}</td>
+            <td>{{$method->third_quarter}}</td>
+            <td>{{$method->fourth_quarter}}</td>
+        </tr>
+        @endforeach
+    
+        @foreach($youngEconomistCounts as $youngEconomist)
+          <tr style="background-color: #ffffff">
+            <td>14</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('young_economists') }}">
+                    <b>Институт Ёш иқтисодчилар мажлислари сони</b>
+                </a>
+            </td>
+            <td>{{$youngEconomist->first_quater}}</td>
+            <td>{{$youngEconomist->second_quater}}</td>
+            <td>{{$youngEconomist->third_quater}}</td>
+            <td>{{$youngEconomist->fourth_quater}}</td>
+          </tr>
+        @endforeach
+    
+        @foreach($studentCounts as $studentCount)
+          <tr style="background-color: #ffffff">
+            <td>15</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('doctorate') }}">
+                   <b>Ўқув йилида докторантурага қабул қилинганларнинг сони:</b>
+                </a>
+            </td>
+            <td>{{$studentCount->quarter_1}}</td>
+            <td>{{$studentCount->quarter_2}}</td>
+            <td>{{$studentCount->quarter_3}}</td>
+            <td>{{$studentCount->quarter_4}}</td>
+          </tr>
+        @endforeach
 
-          <div class="id">18</div>
-          <div class="left-align"><a style="color: rgb(48, 48, 48)" href="{{ url('meeting') }}"><b>Институт томонидан ташкиллаштирилган музокаралар ва учрашувлар</b></a></div>
-          <div>{{$meetings[0]->first_quarter}}</div>
-          <div>{{$meetings[0]->second_quarter}}</div>
-          <div>{{$meetings[0]->third_quarter}}</div>
-          <div>{{$meetings[0]->fourth_quarter}}</div>
-          {{-- <div>274</div> --}}
-
-      </div>
-      </div>
-    </div>
-  </div>
+        @foreach($students as $student)
+          <tr style="background-color: #ffffff">
+            <td>
+              @if($student->dokt_id == 4 || $student->dokt_id == 5)
+                  
+              @else
+                  15.{{ $student->dokt_id }}
+              @endif
+            </td>
+            <td class="left-align">
+              @if($student->dokt_id == 3)
+                  <span style="color: rgb(48, 48, 48)">{{$student->dokt_name}}</span>
+              @else
+                  <a style="color: rgb(48, 48, 48)" 
+                     href="{{ route('doctorate.index', ['dokt_id' => $student->dokt_id]) }}">
+                      {{$student->dokt_name}}
+                  </a>
+              @endif
+          </td>
+            {{-- <td>{{ $student->dokt_id }}</td> --}}
+            <td>{{ $student->quarter_1 }}</td>
+            <td>{{ $student->quarter_2 }}</td>
+            <td>{{ $student->quarter_3 }}</td>
+            <td>{{ $student->quarter_4 }}</td>
+          </tr>
+        @endforeach
+    
+        {{-- @foreach($studentCounts as $publishCount)
+          <tr>
+            <td></td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ route('doctorate.index',['dokt_id' => $publishCount->id]) }}">
+                    {{$publishCount->issuer_name}}
+                </a>
+            </td>
+            <td>{{$publishCount->first_quarter}}</td>
+            <td>{{$publishCount->second_quarter}}</td>
+            <td>{{$publishCount->third_quarter}}</td>
+            <td>{{$publishCount->fourth_quarter}}</td>
+          </tr>
+        @endforeach --}}
+    
+        @foreach($nullScientifics as $nullScientific)
+        <tr style="background-color: #ffffff">
+            <td>16</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('scientific') }}">
+                    <b>Илмий даражага эга бўлиш учун ҳимояга чиққан илмий изланувчилар сони</b>
+                </a>
+            </td>
+            <td>{{$nullScientific->first_quarter}}</td>
+            <td>{{$nullScientific->second_quarter}}</td>
+            <td>{{$nullScientific->third_quarter}}</td>
+            <td>{{$nullScientific->fourth_quarter}}</td>
+        </tr>
+        @endforeach
+    
+        @foreach($nullScientificCounts as $publishCount)
+          <tr style="background-color: #ffffff">
+            <td></td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ route('scientific.index',['degree_id' => $publishCount->id, 'quarters_id' => request('quarters_id')]) }}">
+                    {{$publishCount->issuer_name}}
+                </a>
+            </td>
+            <td>{{$publishCount->first_quarter}}</td>
+            <td>{{$publishCount->second_quarter}}</td>
+            <td>{{$publishCount->third_quarter}}</td>
+            <td>{{$publishCount->fourth_quarter}}</td>
+          </tr>
+        @endforeach
+    
+        @foreach($events as $event)
+          <tr style="background-color: #ffffff">
+            <td>17</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('event') }}">
+                    <b>Институт томонидан ташкиллаштирилган семинарлар, давра суҳбатлар, конференциялар, форумлар</b>
+                </a>
+            </td>
+            <td>{{$event->first_quarter}}</td>
+            <td>{{$event->second_quarter}}</td>
+            <td>{{$event->third_quarter}}</td>
+            <td>{{$event->fourth_quarter}}</td>
+          </tr>
+        @endforeach
+    
+        @foreach($meetings as $meeting)
+          <tr>
+            <td>18</td>
+            <td class="left-align">
+                <a style="color: rgb(48, 48, 48)" href="{{ url('meeting') }}">
+                    <b>Институт томонидан ташкиллаштирилган музокаралар ва учрашувлар</b>
+                </a>
+            </td>
+            <td>{{$meeting->first_quarter}}</td>
+            <td>{{$meeting->second_quarter}}</td>
+            <td>{{$meeting->third_quarter}}</td>
+            <td>{{$meeting->fourth_quarter}}</td>
+          </tr>
+        @endforeach 
+  </tbody>
+</table>
 @endsection

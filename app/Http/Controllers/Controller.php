@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -60,7 +61,7 @@ class Controller extends BaseController
             INNER JOIN 
                 who_givens wg ON ho.who_given_id = wg.id 
             WHERE 
-                wg.id IN (1, 2, 3, 4, 5);
+                wg.id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         ");
         $higherOrganCounts = DB::select("
             SELECT 
@@ -242,54 +243,99 @@ class Controller extends BaseController
             INNER JOIN 
                 quarters AS q ON o.quarters_id = q.id
         ");
-        // dd($higherOrganIdCounts);
-        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars','methods','nullScientifics','nullScientificCounts','events','meetings']));
-    }
-    public function getRegionsCounts()
-    {
-        $higherOrganCounts = DB::select("
+        $students = DB::select("
             SELECT 
-                r.id AS regions_id, 
-                r.name, 
-                COALESCE(higher_organs_table.occurrences, 0) AS higher_organs_count,
-                COALESCE(another_table_table.occurrences, 0) AS another_table_count,
-                COALESCE(another_table_sorov_table.occurrences, 0) AS another_table_sorov_count,
-                COALESCE(third_table_table.occurrences, 0) AS third_table_count,
-                COALESCE(conventions_table.occurrences, 0) AS conventions_count,
-                COALESCE(surveys_table.occurrences, 0) AS surveys_count
-            FROM regions AS r
-            LEFT JOIN (
-                SELECT regions_id, COUNT(*) AS occurrences 
-                FROM higher_organs 
-                GROUP BY regions_id
-            ) AS higher_organs_table ON r.id = higher_organs_table.regions_id
-            LEFT JOIN (
-                SELECT regions_id, COUNT(*) AS occurrences 
-                FROM busines_trips 
-                GROUP BY regions_id
-            ) AS another_table_table ON r.id = another_table_table.regions_id
-            LEFT JOIN (
-                SELECT regions_id, COUNT(*) AS occurrences 
-                FROM busines_trips 
-                WHERE invite_count IS NOT NULL AND invite_count <> ''
-                GROUP BY regions_id
-            ) AS another_table_sorov_table ON r.id = another_table_sorov_table.regions_id
-            LEFT JOIN (
-                SELECT regions_id, COUNT(*) AS occurrences 
-                FROM events 
-                GROUP BY regions_id
-            ) AS third_table_table ON r.id = third_table_table.regions_id
-            LEFT JOIN (
-                SELECT regions_id, COUNT(*) AS occurrences 
-                FROM conventions 
-                GROUP BY regions_id
-            ) AS conventions_table ON r.id = conventions_table.regions_id
-            LEFT JOIN (
-                SELECT regions_id, COUNT(*) AS occurrences 
-                FROM surveys 
-                GROUP BY regions_id
-            ) AS surveys_table ON r.id = surveys_table.regions_id;
+                d.dokt_id,
+                dn.name AS dokt_name,
+                SUM(CASE WHEN d.quarters_id = 1 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_1,
+                SUM(CASE WHEN d.quarters_id = 2 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_2,
+                SUM(CASE WHEN d.quarters_id = 3 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_3,
+                SUM(CASE WHEN d.quarters_id = 4 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_4
+            FROM doktarants d
+            JOIN doktarantids dn ON d.dokt_id = dn.id
+            GROUP BY d.dokt_id, dn.name
+
+            UNION ALL
+
+            SELECT 
+                3 AS dokt_id, 
+                'мустақил изланувчилар' AS dokt_name, 
+                SUM(CASE WHEN d.quarters_id = 1 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_1,
+                SUM(CASE WHEN d.quarters_id = 2 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_2,
+                SUM(CASE WHEN d.quarters_id = 3 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_3,
+                SUM(CASE WHEN d.quarters_id = 4 THEN IFNULL(d.soni, 0) ELSE 0 END) AS quarter_4
+            FROM doktarants d
+            WHERE d.dokt_id IN (4, 5)  -- IDlarni aniq tekshiring!
+
+            ORDER BY dokt_id;
         ");
-        return view('client.region',compact('higherOrganCounts'));
+    
+        $studentCounts = DB::select("
+            SELECT 
+                'Natija' AS dokt_name,
+                SUM(CASE WHEN d.quarters_id = 1 THEN d.soni ELSE 0 END) AS quarter_1,
+                SUM(CASE WHEN d.quarters_id = 2 THEN d.soni ELSE 0 END) AS quarter_2,
+                SUM(CASE WHEN d.quarters_id = 3 THEN d.soni ELSE 0 END) AS quarter_3,
+                SUM(CASE WHEN d.quarters_id = 4 THEN d.soni ELSE 0 END) AS quarter_4
+            FROM doktarants d
+        ");
+        return view('client.index',compact(['businessTripCounts','youngEconomistCounts','trainingCourseCounts','higherOrgans','higherOrganCounts','publish','publishCounts','opublishes','opublishCounts','conventions','scientifics','seminars','methods','nullScientifics','nullScientificCounts','events','meetings','students','studentCounts']));
+    }
+
+
+    public function getRegionsCounts()
+{
+    $higherOrganCounts = DB::select("
+        SELECT 
+            r.id AS region_id, 
+            r.name, 
+            COALESCE(higher_organs_table.occurrences, 0) AS higher_organs_count,
+            COALESCE(business_trips_table.occurrences, 0) AS business_trips_count,
+            COALESCE(business_trips_sorov_table.occurrences, 0) AS business_trips_sorov_count,
+            COALESCE(events_table.occurrences, 0) AS events_count,
+            COALESCE(conventions_table.occurrences, 0) AS conventions_count,
+            COALESCE(surveys_table.occurrences, 0) AS surveys_count
+        FROM regions AS r
+        LEFT JOIN (
+            SELECT region_id, COUNT(*) AS occurrences 
+            FROM region_higher_organ 
+            GROUP BY region_id
+        ) AS higher_organs_table ON r.id = higher_organs_table.region_id
+        LEFT JOIN (
+            SELECT region_id, COUNT(*) AS occurrences 
+            FROM region_business_trip 
+            GROUP BY region_id
+        ) AS business_trips_table ON r.id = business_trips_table.region_id
+        LEFT JOIN (
+            SELECT region_id, COUNT(*) AS occurrences 
+            FROM region_business_trip 
+            JOIN busines_trips ON busines_trips.id = region_business_trip.business_trip_id
+            WHERE busines_trips.invite_count IS NOT NULL AND busines_trips.invite_count <> ''
+            GROUP BY region_id
+        ) AS business_trips_sorov_table ON r.id = business_trips_sorov_table.region_id
+        LEFT JOIN (
+            SELECT region_id, COUNT(*) AS occurrences 
+            FROM region_event 
+            GROUP BY region_id
+        ) AS events_table ON r.id = events_table.region_id
+        LEFT JOIN (
+            SELECT region_id, COUNT(*) AS occurrences 
+            FROM region_convention 
+            GROUP BY region_id
+        ) AS conventions_table ON r.id = conventions_table.region_id
+        LEFT JOIN (
+            SELECT region_id, COUNT(*) AS occurrences 
+            FROM region_survey 
+            GROUP BY region_id
+        ) AS surveys_table ON r.id = surveys_table.region_id;
+    ");
+    
+    return view('client.region', compact('higherOrganCounts'));
+}
+
+    
+    public function user(){
+        $users = User::all(); // Fetch all users
+        return view('client.users', compact('users')); // Pass users to the view
     }
 }

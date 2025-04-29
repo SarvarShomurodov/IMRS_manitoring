@@ -68,7 +68,11 @@
                         <td>{{ $trip->letterDate }}</td>
                         <td>{{ $trip->letterNumber }}</td>
                         <td>{{ $trip->direction }}</td>
-                        <td>{{ $trip->regionsVal->name }}</td>
+                        <td>
+                            @foreach($trip->regions as $region)
+                            {{ $region->name }}@if (!$loop->last), @endif
+                            @endforeach
+                        </td>
                         <td>{!! $trip->shortResult !!}</td>
                         {{-- <td>{{ $trip->readyArticle }}</td>
                         <td>{{ $trip->telegram }}</td>

@@ -69,17 +69,16 @@
                 </div> --}}
                 <div class="form-group col-lg-2">
                   <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-                  <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+                  <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
                       <option value="">-- Xудуд --</option>
                       @foreach($regions as $region)
-                        <option value="{{ $region->id }}" 
-                          {{ (old('regions_id', $businessTrips->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
-                          {{ $region->name }}
-                        </option>
+                          <option value="{{ $region->id }}" 
+                              {{ in_array($region->id, old('regions_id', $businessTrips->regions->pluck('id')->toArray())) ? 'selected' : '' }}>
+                              {{ $region->name }}
+                          </option>
                       @endforeach
                   </select>
                 </div>
-
                 <div class="form-group col-lg-6">
                   <label for="data_name"><b>Сафар доирасида/натижасида тайёрланган маълумотнома номи</b></label>
                   <input type="text" name="data_name" id="data_name" class="form-control" value="{{ $businessTrips->data_name }}" required>
@@ -90,10 +89,10 @@
                   <input type="number" name="invite_count" id="invite_count" class="form-control" value="{{ $businessTrips->invite_count }}" min="0">
                 </div>
 
-                <div class="form-group col-lg-4">
+                {{-- <div class="form-group col-lg-4">
                   <label for="ball"><b>Маълумотнома/ таклифлар тайёрлашда иштирок этган ходимлар рўйхати ва қўшган ҳиссаси (балл)</b></label>
                   <input type="number" name="ball" id="ball" class="form-control" value="{{ $businessTrips->ball }}" min="0" required>
-                </div>
+                </div> --}}
 
                 <div class="form-group col-lg-2">
                   <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>

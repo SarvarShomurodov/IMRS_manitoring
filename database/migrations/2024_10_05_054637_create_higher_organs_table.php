@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('letter_number');
             $table->string('direction');
             $table->string('sorov');
-            $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
-            $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
+            // $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
+            // $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
             $table->unsignedBigInteger('quarters_id');  // Foreign key to `quarters` table
             $table->foreign('quarters_id')->references('id')->on('quarters')->onDelete('cascade');
             $table->timestamps();

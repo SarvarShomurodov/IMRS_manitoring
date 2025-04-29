@@ -55,18 +55,23 @@
               <tbody>
                 @foreach ($higherOrgans as $trip)
                     <tr>
-                        <td>{{ ++$i }}</td>
-                        <td>{!! $trip->name !!}</td>
-                        <td>{{ $trip->whogiven->name }}</td>
-                        <td>{{ $trip->date }}</td>
-                        <td>{{ $trip->ass_number }}</td>
-                        <td>{{ $trip->who_send }}</td>
-                        <td>{{ $trip->letter_date }}</td>
-                        <td>{{ $trip->letter_number }}</td>
-                        <td>{{ $trip->direction }}</td>
-                        <td>{{ $trip->sorov }}</td>
-                        <td>{{ $trip->regionsVal->name }}</td>
-                        <td>{{ $trip->quarter->name }}</td>
+                        {{-- @if ($trip->who_given_id != 13 && $trip->who_given_id != 12 && $trip->who_given_id != 14) --}}
+                            <td>{{ ++$i }}</td>
+                            <td>{!! $trip->name !!}</td>
+                            <td>{{ $trip->whogiven->name }}</td>
+                            <td>{{ $trip->date }}</td>
+                            <td>{{ $trip->ass_number }}</td>
+                            <td>{{ $trip->who_send }}</td>
+                            <td>{{ $trip->letter_date }}</td>
+                            <td>{{ $trip->letter_number }}</td>
+                            <td>{{ $trip->direction }}</td>
+                            <td>{{ $trip->sorov }}</td>
+                            <td>
+                                @foreach($trip->regions as $region)
+                                {{ $region->name }}@if (!$loop->last), @endif
+                                @endforeach
+                            </td>
+                            <td>{{ $trip->quarter->name }}</td>
                         @if (Auth::user()->name == 'Abdixojayev')
                         @else
                         <td>
@@ -77,7 +82,8 @@
                                 <button type="submit" class="btn btn-danger">Ўчириш</button>
                             </form>
                         </td> 
-                        @endif
+                        @endif                          
+                        {{-- @endif --}}
                     </tr>
                 @endforeach
               </tbody>

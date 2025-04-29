@@ -63,15 +63,15 @@
         <label for="date"><b>Саналар</b></label>
         <input type="date" name="date" id="date" class="form-control" value="{{  $conventions->date }}" required>
       </div>
-      <div class="form-group col-lg-3">
+      <div class="form-group col-lg-2">
         <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-        <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+        <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
             <option value="">-- Xудуд --</option>
             @foreach($regions as $region)
-              <option value="{{ $region->id }}" 
-                {{ (old('regions_id', $conventions->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
-                {{ $region->name }}
-              </option>
+                <option value="{{ $region->id }}" 
+                    {{ in_array($region->id, old('regions_id', $conventions->regions->pluck('id')->toArray())) ? 'selected' : '' }}>
+                    {{ $region->name }}
+                </option>
             @endforeach
         </select>
       </div>

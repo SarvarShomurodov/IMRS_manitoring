@@ -15,7 +15,9 @@ class EventController extends Controller
 
         // Apply regions_id filter if provided
         if ($request->filled('regions_id')) {
-            $query->where('regions_id', $request->input('regions_id'));
+            $query->whereHas('regions', function ($q) use ($request) {
+                $q->where('region_id', $request->input('regions_id'));
+            });
         }
 
         // Apply quarters_id filter if provided
@@ -26,11 +28,13 @@ class EventController extends Controller
         // Get the filtered results
         $events = $query->get();
 
-        // Retrieve regions list and quarters list (assuming Quarters is a model)
+        // Retrieve regions list and quarters list
         $regions = Region::all();
         $quarters = Quarter::all();
-        return view('admin.Event.indexAdmin',compact(['events','regions','quarters']))->with('i');
+
+        return view('admin.Event.indexAdmin', compact(['events', 'regions', 'quarters']))->with('i');
     }
+
     public function index()
     {
         $events = Event::all();
@@ -51,17 +55,34 @@ class EventController extends Controller
             'organizer' => 'required|string',
             'goal' => 'required|string',
             'date' => 'required|date',
-            'regions_id' => 'required|exists:regions,id',
+            'regions_id' => 'required|array',  // `regions_id` massivini qabul qilish
+            'regions_id.*' => 'exists:regions,id',  // Har bir element `regions` jadvalidagi idga mos kelishi kerak
             'foreignNum' => 'required|integer',
             'localNum' => 'required|integer',
             'result' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
 
-        Event::create($validatedData);
+        // Event yaratish
+        $event = Event::create([
+            'name' => $validatedData['name'],
+            'type' => $validatedData['type'],
+            'basis' => $validatedData['basis'],
+            'organizer' => $validatedData['organizer'],
+            'goal' => $validatedData['goal'],
+            'date' => $validatedData['date'],
+            'foreignNum' => $validatedData['foreignNum'],
+            'localNum' => $validatedData['localNum'],
+            'result' => $validatedData['result'],
+            'quarters_id' => $validatedData['quarters_id'],
+        ]);
+
+        // Yaratilgan Eventni `regions` bilan bog'lash
+        $event->regions()->sync($validatedData['regions_id']);
 
         return redirect()->route('event.index')->with('success', 'Event created successfully!');
     }
+
     public function edit(string $id)
     {
         $quarters = Quarter::all();
@@ -69,8 +90,9 @@ class EventController extends Controller
         $events = Event::findOrFail($id);
         return view('admin.Event.edit',compact(['quarters','events','regions']));
     }
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        // Validatsiya: `regions_id` massivini qabul qilish va har bir element `regions` jadvalidagi idga mos kelishini tekshirish
         $validatedData = $request->validate([
             'name' => 'required|string',
             'type' => 'required|string',
@@ -78,18 +100,38 @@ class EventController extends Controller
             'organizer' => 'required|string',
             'goal' => 'required|string',
             'date' => 'required|date',
-            'regions_id' => 'required|exists:regions,id',
+            'regions_id' => 'required|array',  // `regions_id` massivini qabul qilish
+            'regions_id.*' => 'exists:regions,id',  // Har bir element `regions` jadvalidagi idga mos kelishi kerak
             'foreignNum' => 'required|integer',
             'localNum' => 'required|integer',
             'result' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
-        $events = Event::findOrFail($id);
-
-        $events->update($validatedData);
-
-        return redirect()->route('event.index')->with('success', 'Event Update successfully!');
+    
+        // Eventni topish
+        $event = Event::findOrFail($id);
+    
+        // Yaratilgan Eventni yangilash
+        $event->update([
+            'name' => $validatedData['name'],
+            'type' => $validatedData['type'],
+            'basis' => $validatedData['basis'],
+            'organizer' => $validatedData['organizer'],
+            'goal' => $validatedData['goal'],
+            'date' => $validatedData['date'],
+            'foreignNum' => $validatedData['foreignNum'],
+            'localNum' => $validatedData['localNum'],
+            'result' => $validatedData['result'],
+            'quarters_id' => $validatedData['quarters_id'],
+        ]);
+    
+        // Yangi `regions_id` qiymatlarini `sync` yordamida yangilash
+        $event->regions()->sync($validatedData['regions_id']);
+    
+        // Muvaffaqiyatli xabar bilan qaytish
+        return redirect()->route('event.index')->with('success', 'Event updated successfully!');
     }
+
     public function destroy(string $id)
     {
         $events = Event::findOrFail($id);

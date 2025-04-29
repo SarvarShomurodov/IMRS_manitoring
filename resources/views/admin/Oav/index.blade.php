@@ -3,7 +3,7 @@
 @section('title', 'Higher Organ')
 
 @section('content')
-    @if (Auth::user()->name == 'Abdixojayev')
+    @if (Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
         <div class="col-lg-12 mb-4">
             <h2>ОАВ нашриёт ишлари сони</h2>
         </div>
@@ -35,7 +35,7 @@
                     <th>Нашр этилган санаси</th>
                     <th>Ҳавола</th>
                     <th>Чораклар</th>
-                    @if(Auth::user()->name == 'Abdixojayev')
+                    @if(Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
                     @else
                         <th>Action</th>  
                     @endif
@@ -52,7 +52,7 @@
                     <td>{{ $trip->date }}</td>
                     <td>{!! $trip->link !!}</td>
                     <td>{{ $trip->quarter->name }}</td>
-                    @if (Auth::user()->name == 'Abdixojayev')
+                    @if (Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
                     @else
                     <td>
                         <form action="{{ route('oavpublish.destroy',$trip->id) }}" method="POST">        

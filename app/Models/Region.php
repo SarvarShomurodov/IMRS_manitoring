@@ -11,28 +11,33 @@ class Region extends Model
     protected $fillable = [
         'name'
     ];
-    public function regions()
+    public function businesTrips()
+{
+    return $this->belongsToMany(BusinesTrip::class, 'region_business_trip', 'region_id', 'business_trip_id');
+}
+    
+    public function higherOrgans()
     {
-        return $this->hasMany(BusinesTrip::class, 'regions_id');
+        return $this->belongsToMany(HigherOrgan::class, 'region_higher_organ','region_id','higher_organ_id');
     }
-    public function higherOrganRegions()
+    
+    public function events()
     {
-        return $this->hasMany(HigherOrgan::class, 'regions_id');
+        return $this->belongsToMany(Event::class, 'region_event');
     }
-    public function meetingRegions()
+    
+    public function conventions()
     {
-        return $this->hasMany(Event::class, 'regions_id');
+        return $this->belongsToMany(Convention::class, 'region_convention');
     }
-    public function conventionRegions()
+    
+    public function trainingCourses()
     {
-        return $this->hasMany(Convention::class, 'regions_id');
+        return $this->belongsToMany(TrainingCourse::class, 'region_training_course');
     }
-    public function trainingCourseRegions()
+    
+    public function surveys()
     {
-        return $this->hasMany(TrainingCourse::class, 'regions_id');
-    }
-    public function surveyRegions()
-    {
-        return $this->hasMany(Survey::class, 'regions_id');
+        return $this->belongsToMany(Survey::class, 'region_survey');
     }
 }

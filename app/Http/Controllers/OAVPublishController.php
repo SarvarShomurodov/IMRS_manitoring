@@ -15,7 +15,7 @@ class OAVPublishController extends Controller
         // Get the 'who_given_id' parameter from the URL
         $oavId = $request->query('oav_id');
         // Apply the filter only if 'who_given_id' is 6 or 8; otherwise, retrieve all records
-        $oavpublishes = Opublish::when(in_array($oavId, [1,2,3,4,5,6,7,8,9]), function ($query) use ($oavId) {
+        $oavpublishes = Opublish::when(in_array($oavId, [1,2,3,4,5,6]), function ($query) use ($oavId) {
             return $query->where('oav_id', $oavId);
         })->get();
         return view('admin.Oav.index',compact('oavpublishes'))->with('i');

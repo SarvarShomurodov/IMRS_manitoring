@@ -56,4 +56,8 @@ class Quarter extends Model
     {
         return $this->hasMany(Survey::class, 'quarters_id');
     }
+    public function doktarants()
+    {
+        return $this->hasMany(Doktarant::class, 'quarters_id');
+    }
 }

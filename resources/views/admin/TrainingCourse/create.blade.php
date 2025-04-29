@@ -38,6 +38,10 @@
                 <option value="offline">Oффлайн</option>
               </select>
           </div>
+          <div class="form-group col-lg-2">
+            <label for="sertificateNum"><b>Cертификат рақами</b></label>
+            <input type="text" name="sertificateNum" id="sertificateNum" class="form-control" value="{{ old('sertificateNum') }}" required>
+          </div>
           <div class="form-group col-lg-6">
             <label for="organizer">Ташкилотчи</label>
             <textarea name="organizer" id="summernote2" class="form-control" required>{{ old('organizer') }}</textarea>
@@ -47,16 +51,16 @@
             <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}" required>
           </div>
           <div class="form-group col-lg-2">
-            <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-            <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
-                <option value="">-- Xудуд --</option>
+            <label for="regions_id" class="form-label"><b>Манзил (давлат ёки ҳудуд)</b></label>
+            <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
                 @foreach($regions as $region)
-                    <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
+                    <option value="{{ $region->id }}" 
+                        {{ (collect(old('regions_id'))->contains($region->id)) ? 'selected' : '' }}>
                         {{ $region->name }}
                     </option>
                 @endforeach
             </select>
-          </div>
+          </div>               
           <div class="form-group col-lg-2">
             <label for="invite_count">Иштирок этган ходимлар сони</label>
             <input type="number" name="invite_count" id="invite_count" class="form-control" value="{{ old('invite_count') }}" min="0" required>

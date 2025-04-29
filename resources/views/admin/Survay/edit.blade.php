@@ -75,15 +75,16 @@
 
         <div class="form-group col-lg-2">
             <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-            <select name="regions_id" class="form-control" id="regions_id" required>
+            <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
                 <option value="">-- Xудуд --</option>
                 @foreach($regions as $region)
-                    <option value="{{ $region->id }}" {{ old('regions_id', $survays->regions_id) == $region->id ? 'selected' : '' }}>
+                    <option value="{{ $region->id }}" 
+                        {{ in_array($region->id, old('regions_id', $survays->regions->pluck('id')->toArray())) ? 'selected' : '' }}>
                         {{ $region->name }}
                     </option>
                 @endforeach
             </select>
-        </div>
+          </div>
 
         <div class="form-group col-lg-6">
             <label for="listPerson"><b>Иштирок этган ходимлар</b></label>

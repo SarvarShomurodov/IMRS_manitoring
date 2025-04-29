@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,24 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/home';
+    // public function login(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+    
+    //     $credentials = $request->only('email', 'password');
+    //     $remember = $request->has('remember'); // Check if "Remember Me" was selected
+    
+    //     if (Auth::attempt($credentials, $remember)) {
+    //         // Authentication successful
+    //         return redirect()->intended('dashboard'); // Redirect to the intended page
+    //     }
+    
+    //     // Authentication failed
+    //     return back()->withErrors(['email' => 'Логин ёки Парол хато']);
+    // }
     protected function redirectTo()
     {
         $user = Auth::user();
@@ -58,6 +77,9 @@ class LoginController extends Controller
 
         if ($user->role == 'noner') {
             return '/oavpublish';
+        }
+        if ($user->role == 'loyigaRaxbar') {
+            return '/training_courses';
         }
 
         // Default fallback redirect

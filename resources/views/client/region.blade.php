@@ -22,13 +22,13 @@
         <tbody>
             @foreach($higherOrganCounts as $count)
                 <tr>
-                    <td>{{ $count->regions_id }}</td>
+                    <td>{{ $count->region_id }}</td>
                     <td>{{ $count->name }}</td>
                     <td style="text-align: center">{{ $count->higher_organs_count }}</td>
-                    <td style="text-align: center">{{ $count->another_table_count }}</td>
-                    <td style="text-align: center">{{ $count->third_table_count }}</td>
+                    <td style="text-align: center">{{ $count->business_trips_count }}</td>
+                    <td style="text-align: center">{{ $count->events_count }}</td>
                     <td style="text-align: center">{{ $count->conventions_count }}</td>
-                    <td style="text-align: center">{{ $count->another_table_sorov_count }}</td>
+                    <td style="text-align: center">{{ $count->business_trips_sorov_count }}</td>
                     <td style="text-align: center">{{ $count->surveys_count }}</td>    
                 </tr>
             @endforeach

@@ -17,7 +17,6 @@ class Survey extends Model
         'letterDate',
         'letterNumber',
         'direction',
-        'regions_id',
         'shortResult',
         'readyArticle',
         'telegram',
@@ -36,9 +35,13 @@ class Survey extends Model
     {
         return $this->belongsTo(WhoGiven::class, 'who_given_id');
     }
-    public function regionsVal()
+    // public function regionsVal()
+    // {
+    //     return $this->belongsTo(Region::class, 'regions_id');
+    // }
+    public function regions()
     {
-        return $this->belongsTo(Region::class, 'regions_id');
+        return $this->belongsToMany(Region::class, 'region_survey', 'survey_id', 'region_id');
     }
 
 }

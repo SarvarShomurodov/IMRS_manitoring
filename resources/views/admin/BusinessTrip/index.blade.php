@@ -37,9 +37,9 @@
                 <th>Сафарга юборилганлар рўйхати</th>
                 <th>Сафар доирасида/натижасида тайёрланган маълумотнома номи</th>
                 <th>Сафар доирасида/натижасида тайёрланган таклифлар сони</th>
-                <th>Маълумотнома/ таклифлар тайёрлашда иштирок этган ходимлар рўйхати ва қўшган ҳиссаси (балл)</th>
+                {{-- <th>Маълумотнома/ таклифлар тайёрлашда иштирок этган ходимлар рўйхати ва қўшган ҳиссаси (балл)</th> --}}
                 <th>Чораклар</th>
-                @if(Auth::user()->name == 'Abdixojayev')
+                @if(Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
                 @else
                     <th>Action</th>  
                 @endif
@@ -54,13 +54,17 @@
                 <td>{!! $trip->goal !!}</td>
                 <td>{{ $trip->start_date }}</td>
                 <td>{{ $trip->end_date }}</td>
-                <td>{{ $trip->regionsVal->name }}</td>
+                <td>
+                    @foreach($trip->regions as $region)
+                      {{ $region->name }}@if (!$loop->last), @endif
+                      @endforeach
+                </td>
                 <td>{!! $trip->list_person !!}</td>
                 <td>{{ $trip->data_name }}</td>
                 <td>{{ $trip->invite_count }}</td>
-                <td>{{ $trip->ball }}</td>
+                {{-- <td>{{ $trip->ball }}</td> --}}
                 <td>{{ $trip->quarter->name }}</td>
-                @if (Auth::user()->name == 'Abdixojayev')
+                @if (Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
                 @else
                 <td>
                     <form action="{{ route('business_trips.destroy',$trip->id) }}" method="POST">        

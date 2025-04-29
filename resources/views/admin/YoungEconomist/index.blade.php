@@ -3,7 +3,7 @@
 @section('title', 'Business Trips')
 
 @section('content')
-@if (Auth::user()->name == 'Abdixojayev')
+@if (Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
     <div class="col-lg-12 mb-4">
         <h2>Институт Ёш иқтисодчилар мажлислари сони</h2>
     </div>
@@ -34,7 +34,7 @@
                     <th>Иштирокчилар руйҳати (маҳаллий)</th>
                     <th>Иштирокчилар рўйхати (чет эл вакиллари)</th>
                     <th>Чораклар</th>
-                    @if(Auth::user()->name == 'Abdixojayev')
+                    @if(Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
                     @else
                         <th>Action</th>  
                     @endif
@@ -50,7 +50,7 @@
                     <td>{!! $trip->list_person_local !!}</td>
                     <td>{!! $trip->list_person_no_local !!}</td>
                     <td>{{ $trip->quarter->name }}</td>
-                    @if (Auth::user()->name == 'Abdixojayev')
+                    @if (Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
                     @else
                     <td>
                         <form action="{{ route('young_economists.destroy',$trip->id) }}" method="POST">        

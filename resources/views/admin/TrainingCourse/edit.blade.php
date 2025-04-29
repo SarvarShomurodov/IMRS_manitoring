@@ -41,6 +41,10 @@
             <option value="Oффлайн" {{ $trainingCourses->type == 'Oффлайн' ? 'selected' : '' }}>Oффлайн</option>
           </select>
       </div>
+      <div class="form-group col-lg-2">
+        <label for="sertificateNum"><b>Cертификат рақами</b></label>
+        <input type="text" name="sertificateNum" id="sertificateNum" class="form-control" value="{{ old('sertificateNum', $trainingCourses->sertificateNum) }}" required>
+      </div>
       <div class="form-group col-lg-6">
         <label for="organizer">Ташкилотчи</label>
         <textarea name="organizer" id="summernote2" class="form-control" required>{{ $trainingCourses->organizer }}</textarea>
@@ -51,16 +55,16 @@
       </div>
       <div class="form-group col-lg-2">
         <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-        <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
+        <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
             <option value="">-- Xудуд --</option>
             @foreach($regions as $region)
-            <option value="{{ $region->id }}" 
-              {{ (old('regions_id', $trainingCourses->regions_id ?? '') == $region->id) ? 'selected' : '' }}>
-              {{ $region->name }}
-            </option>
+                <option value="{{ $region->id }}" 
+                    {{ in_array($region->id, old('regions_id', $trainingCourses->regions->pluck('id')->toArray())) ? 'selected' : '' }}>
+                    {{ $region->name }}
+                </option>
             @endforeach
         </select>
-      </div>
+      </div>    
       <div class="form-group col-lg-2">
         <label for="invite_count">Иштирок этган ходимлар сони</label>
         <input type="number" name="invite_count" id="invite_count" class="form-control" value="{{ $trainingCourses->invite_count }}" min="0" required>

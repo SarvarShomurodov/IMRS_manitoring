@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('letterDate');
             $table->integer('letterNumber');
             $table->string('direction');
-            $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
-            $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade');
+            // $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
+            // $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade');
             $table->text('shortResult')->nullable();
             $table->string('readyArticle')->nullable();
             $table->string('telegram')->nullable();

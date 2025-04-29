@@ -87,7 +87,9 @@
                         <td>{{ $trip->letter_number }}</td>
                         <td>{{ $trip->direction }}</td>
                         <td>{{ $trip->sorov }}</td>
-                        <td>{{ $trip->regionsVal->name }}</td>
+                        <td>@foreach($trip->regions as $region)
+                            {{ $region->name }}@if (!$loop->last), @endif
+                            @endforeach</td>
                         <td>{{ $trip->quarter->name }}</td>
                     </tr>
                 @endforeach

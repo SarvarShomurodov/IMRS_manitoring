@@ -68,16 +68,16 @@
                   <input type="text" name="adress" id="adress" class="form-control" value="{{ old('adress') }}" required>
                 </div> --}}
                 <div class="form-group col-lg-2">
-                  <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-                  <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
-                      <option value="">-- Xудуд --</option>
+                  <label for="regions_id" class="form-label"><b>Манзил (давлат ёки ҳудуд)</b></label>
+                  <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
                       @foreach($regions as $region)
-                          <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
+                          <option value="{{ $region->id }}" 
+                              {{ (collect(old('regions_id'))->contains($region->id)) ? 'selected' : '' }}>
                               {{ $region->name }}
                           </option>
                       @endforeach
                   </select>
-                </div>
+                </div> 
 
                 <div class="form-group col-lg-6">
                   <label for="data_name"><b>Сафар доирасида/натижасида тайёрланган маълумотнома номи</b></label>
@@ -89,10 +89,10 @@
                   <input type="number" name="invite_count" id="invite_count" class="form-control" value="{{ old('invite_count') }}" min="0">
                 </div>
 
-                <div class="form-group col-lg-4">
+                {{-- <div class="form-group col-lg-4">
                   <label for="ball"><b>Маълумотнома/ таклифлар тайёрлашда иштирок этган ходимлар рўйхати ва қўшган ҳиссаси (балл)</b></label>
                   <input type="number" name="ball" id="ball" class="form-control" value="{{ old('ball') }}" min="0" required>
-                </div>
+                </div> --}}
                 
                 <div class="form-group col-lg-2">
                   <label for="quarters_id" class="form-label"><b>Қайси чоракда</b></label>

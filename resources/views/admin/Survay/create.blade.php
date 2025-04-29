@@ -72,11 +72,11 @@
     </div>
 
     <div class="form-group col-lg-2">
-        <label for="regions_id" class="form-label"><b>Манзил(давлат ёки ҳудуд)</b></label>
-        <select name="regions_id" class="form-control" id="regions_id" class="form-control" required>
-            <option value="">-- Xудуд --</option>
+        <label for="regions_id" class="form-label"><b>Манзил (давлат ёки ҳудуд)</b></label>
+        <select name="regions_id[]" class="form-control" id="regions_id" multiple required>
             @foreach($regions as $region)
-                <option value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>
+                <option value="{{ $region->id }}" 
+                    {{ (collect(old('regions_id'))->contains($region->id)) ? 'selected' : '' }}>
                     {{ $region->name }}
                 </option>
             @endforeach

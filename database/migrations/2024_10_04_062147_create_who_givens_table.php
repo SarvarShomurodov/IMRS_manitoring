@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('who_givens', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('year_num');
+            $table->string('name')->nullable();
+            $table->integer('year_num')->nullable();
             $table->timestamps();
         });
     }

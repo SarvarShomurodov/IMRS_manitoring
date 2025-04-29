@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Display filter form only if the user is 'Abdixojayev' -->
-    @if (Auth::user()->name == 'Abdixojayev')
+    @if (Auth::user()->name == 'Abdixojayev' || Auth::user()->name == 'Qutliyev')
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
@@ -41,7 +41,7 @@
                     <th>Иштирок этган семинар аъзолари сони</th>
                     <th>Семинар хулосаси</th>
                     <th>Чораклар</th>
-                    @if(Auth::user()->name != 'Abdixojayev')
+                    @if(Auth::user()->name != 'Abdixojayev' && Auth::user()->name != 'Qutliyev')
                         <th>Action</th>  
                     @endif
                 </tr>
@@ -58,7 +58,7 @@
                         <td>{{ $trip->number }}</td>
                         <td>{!! $trip->conclusion !!}</td>
                         <td>{{ $trip->quarter->name }}</td>
-                        @if (Auth::user()->name != 'Abdixojayev')
+                        @if (Auth::user()->name != 'Abdixojayev' && Auth::user()->name != 'Qutliyev')
                             <td>
                                 <form action="{{ route('methods.destroy',$trip->id) }}" method="POST">        
                                     <a class="btn btn-info mb-1" href="{{ route('methods.edit',$trip->id) }}">Ўзгартириш</a>

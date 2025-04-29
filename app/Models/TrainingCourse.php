@@ -11,9 +11,9 @@ class TrainingCourse extends Model
     protected $fillable = [
         'name',
         'type',
+        'sertificateNum',
         'organizer',
         'date',
-        'regions_id',
         'invite_count',
         'list_person',
         'quarters_id'
@@ -22,8 +22,8 @@ class TrainingCourse extends Model
     {
         return $this->belongsTo(Quarter::class, 'quarters_id');
     }
-    public function regionsVal()
+    public function regions()
     {
-        return $this->belongsTo(Region::class, 'regions_id');
+        return $this->belongsToMany(Region::class, 'region_training_course');
     }
 }

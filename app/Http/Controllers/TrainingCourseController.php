@@ -36,19 +36,33 @@ class TrainingCourseController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'type' => 'required|string',
+            'sertificateNum'=>'required|string',
             'organizer' => 'required|string',
             'date' => 'required|date',
-            'regions_id' => 'required|exists:regions,id',
+            'regions_id' => 'required|array',           // Massiv sifatida tekshiradi
+            'regions_id.*' => 'exists:regions,id',      // Har bir qiymat `regions` jadvalida mavjudligini tekshiradi
             'invite_count' => 'required|integer',
             'list_person' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
 
-        TrainingCourse::create($validatedData);
+        // Asosiy ma'lumotlarni yaratish
+        $trainingCourse = TrainingCourse::create([
+            'name' => $validatedData['name'],
+            'type' => $validatedData['type'],
+            'sertificateNum' => $validatedData['sertificateNum'],
+            'organizer' => $validatedData['organizer'],
+            'date' => $validatedData['date'],
+            'invite_count' => $validatedData['invite_count'],
+            'list_person' => $validatedData['list_person'],
+            'quarters_id' => $validatedData['quarters_id'],
+        ]);
 
-        return redirect()->route('training_courses.index')->with('success', 'Business trip created successfully!');
+        // Oraliq jadvalga yozish
+        $trainingCourse->regions()->sync($validatedData['regions_id']);
+
+        return redirect()->route('training_courses.index')->with('success', 'Training course created successfully!');
     }
-
     /**
      * Display the specified resource.
      */
@@ -71,23 +85,43 @@ class TrainingCourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        // Yuborilgan ma'lumotlarni tekshirish
         $validatedData = $request->validate([
             'name' => 'required|string',
             'type' => 'required|string',
+            'sertificateNum'=>'required|string',
             'organizer' => 'required|string',
             'date' => 'required|date',
-            'regions_id' => 'required|exists:regions,id',
+            'regions_id' => 'required|array',           // Massiv sifatida tekshiradi
+            'regions_id.*' => 'exists:regions,id',      // Har bir qiymat `regions` jadvalida mavjudligini tekshiradi
             'invite_count' => 'required|integer',
             'list_person' => 'required|string',
             'quarters_id' => 'required|exists:quarters,id',
         ]);
-        $trainingCourses = TrainingCourse::findOrFail($id);
-        $trainingCourses->update($validatedData);
-
-        return redirect()->route('training_courses.index')->with('success', 'Training Course update successfully!');
+    
+        // Mavjud training course ni olish
+        $trainingCourse = TrainingCourse::findOrFail($id);
+    
+        // Asosiy ma'lumotlarni yangilash
+        $trainingCourse->update([
+            'name' => $validatedData['name'],
+            'type' => $validatedData['type'],
+            'sertificateNum' => $validatedData['sertificateNum'],
+            'organizer' => $validatedData['organizer'],
+            'date' => $validatedData['date'],
+            'invite_count' => $validatedData['invite_count'],
+            'list_person' => $validatedData['list_person'],
+            'quarters_id' => $validatedData['quarters_id'],
+        ]);
+    
+        // Oraliq jadvalga yangi regionlarni bog'lash (avvalgi bog'lanishni yangilash)
+        $trainingCourse->regions()->sync($validatedData['regions_id']);
+    
+        return redirect()->route('training_courses.index')->with('success', 'Training course updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.

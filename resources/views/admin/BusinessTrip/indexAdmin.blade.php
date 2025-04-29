@@ -84,7 +84,9 @@
                           <td>{!! $trip->goal !!}</td>
                           <td>{{ $trip->start_date }}</td>
                           <td>{{ $trip->end_date }}</td>
-                          <td>{{ $trip->regionsVal->name }}</td>
+                          <td>@foreach($trip->regions as $region)
+                            {{ $region->name }}@if (!$loop->last), @endif
+                            @endforeach</td>
                           <td>{!! $trip->list_person !!}</td>
                           <td>{{ $trip->data_name }}</td>
                           <td>{{ $trip->invite_count }}</td>

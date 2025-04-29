@@ -14,11 +14,9 @@ class BusinesTrip extends Model
         'goal',
         'start_date',
         'end_date',
-        'regions_id',
         'list_person',
         'data_name',
         'invite_count',
-        'ball',
         'quarters_id'
     ];
 
@@ -26,8 +24,12 @@ class BusinesTrip extends Model
     {
         return $this->belongsTo(Quarter::class, 'quarters_id');
     }
-    public function regionsVal()
+    // public function regionsVal()
+    // {
+    //     return $this->belongsTo(Region::class, 'regions_id');
+    // }
+    public function regions()
     {
-        return $this->belongsTo(Region::class, 'regions_id');
+        return $this->belongsToMany(Region::class, 'region_business_trip', 'business_trip_id', 'region_id');
     }
 }

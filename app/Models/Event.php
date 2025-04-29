@@ -15,7 +15,6 @@ class Event extends Model
         'organizer',
         'goal',
         'date',
-        'regions_id',
         'foreignNum',
         'localNum',
         'result',
@@ -25,8 +24,12 @@ class Event extends Model
     {
         return $this->belongsTo(Quarter::class, 'quarters_id');
     }
-    public function regionsVal()
+    // public function regionsVal()
+    // {
+    //     return $this->belongsTo(Region::class, 'regions_id');
+    // }
+    public function regions()
     {
-        return $this->belongsTo(Region::class, 'regions_id');
+        return $this->belongsToMany(Region::class, 'region_event', 'event_id', 'region_id');
     }
 }

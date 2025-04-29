@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
+use App\Models\Event;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +23,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'AI Research Institute',
                 'goal' => 'To discuss advancements in Artificial Intelligence.',
                 'date' => Carbon::parse('2024-11-15'),
-                'regions_id' => 1,  // Assuming a valid region ID exists
                 'foreignNum' => 50,
                 'localNum' => 150,
                 'result' => 'The event was successful with notable discussions on AI ethics.',
@@ -37,7 +37,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'World Environment Organization',
                 'goal' => 'To raise awareness on climate change.',
                 'date' => Carbon::parse('2024-12-01'),
-                'regions_id' => 2,  // Assuming a valid region ID exists
                 'foreignNum' => 100,
                 'localNum' => 200,
                 'result' => 'Several key initiatives were proposed for climate action.',
@@ -52,7 +51,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'Tech World Expo',
                 'goal' => 'To showcase the latest technology innovations.',
                 'date' => Carbon::parse('2024-11-20'),
-                'regions_id' => 3,  // Assuming a valid region ID exists
                 'foreignNum' => 80,
                 'localNum' => 120,
                 'result' => 'New startups presented groundbreaking innovations.',
@@ -67,7 +65,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'Global Health Organization',
                 'goal' => 'To discuss the future of healthcare systems.',
                 'date' => Carbon::parse('2024-12-05'),
-                'regions_id' => 4,  // Assuming a valid region ID exists
                 'foreignNum' => 60,
                 'localNum' => 140,
                 'result' => 'Strategies for improving healthcare systems were discussed.',
@@ -82,7 +79,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'United Nations Education Programme',
                 'goal' => 'To address challenges in global education.',
                 'date' => Carbon::parse('2024-11-25'),
-                'regions_id' => 5,  // Assuming a valid region ID exists
                 'foreignNum' => 70,
                 'localNum' => 130,
                 'result' => 'Educational policies for the next decade were outlined.',
@@ -97,7 +93,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'Business Leaders Organization',
                 'goal' => 'To discuss innovative strategies for business growth.',
                 'date' => Carbon::parse('2024-12-10'),
-                'regions_id' => 1,  // Assuming a valid region ID exists
                 'foreignNum' => 40,
                 'localNum' => 160,
                 'result' => 'Several new business strategies were discussed.',
@@ -112,7 +107,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'National Space Agency',
                 'goal' => 'To discuss the future of space exploration.',
                 'date' => Carbon::parse('2024-11-30'),
-                'regions_id' => 6,  // Assuming a valid region ID exists
                 'foreignNum' => 90,
                 'localNum' => 110,
                 'result' => 'New space exploration missions were announced.',
@@ -127,7 +121,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'Global Leadership Institute',
                 'goal' => 'To discuss strategies for leadership development.',
                 'date' => Carbon::parse('2024-12-15'),
-                'regions_id' => 2,  // Assuming a valid region ID exists
                 'foreignNum' => 120,
                 'localNum' => 80,
                 'result' => 'Leadership initiatives were presented.',
@@ -142,7 +135,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'UNESCO',
                 'goal' => 'To discuss preserving cultural heritage.',
                 'date' => Carbon::parse('2024-11-18'),
-                'regions_id' => 3,  // Assuming a valid region ID exists
                 'foreignNum' => 50,
                 'localNum' => 150,
                 'result' => 'Efforts for cultural preservation were outlined.',
@@ -157,7 +149,6 @@ class EventsTableSeeder extends Seeder
                 'organizer' => 'Tech in Education Network',
                 'goal' => 'To explore the use of technology in education.',
                 'date' => Carbon::parse('2024-12-20'),
-                'regions_id' => 4,  // Assuming a valid region ID exists
                 'foreignNum' => 80,
                 'localNum' => 120,
                 'result' => 'New educational technologies were presented.',
@@ -166,5 +157,10 @@ class EventsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+        $conventions = Event::all();
+        foreach ($conventions as $convention) {
+            $regions = [3, 2, 5]; // Example of region IDs to associate with the convention
+            $convention->regions()->sync($regions);
+        }
     }
 }

@@ -19,12 +19,12 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             // $table->string('adress');
-            $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
-            $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
+            // $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
+            // $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
             $table->longText('list_person');
             $table->text('data_name');
             $table->integer('invite_count')->nullable();
-            $table->integer('ball');
+            // $table->integer('ball');
             $table->unsignedBigInteger('quarters_id');  // Foreign key to `quarters` table
             $table->foreign('quarters_id')->references('id')->on('quarters')->onDelete('cascade');  // Set foreign key with cascade
             $table->timestamps();

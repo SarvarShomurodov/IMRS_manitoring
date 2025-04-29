@@ -32,6 +32,7 @@
                   <th>№</th>
                     <th>Тренинг/ўқув курси номи</th>
                     <th>Тури(онлайн ёки оффлайн)</th>
+                    <th>Cертификат рақами</th>
                     <th>Ташкилотчи</th>
                     <th>Саналар</th>
                     <th>Манзил(давлат ёки ҳудуд)</th>
@@ -50,9 +51,14 @@
                   <td>{{ ++$i }}</td>
                     <td>{!! $trip->name !!}</td>
                     <td>{{ $trip->type }}</td>
+                    <td>{{ $trip->sertificateNum }}</td>
                     <td>{!! $trip->organizer !!}</td>
                     <td>{{ $trip->date }}</td>
-                    <td>{{ $trip->regionsVal->name }}</td>
+                    <td>
+                      @foreach($trip->regions as $region)
+                      {{ $region->name }}@if (!$loop->last), @endif
+                      @endforeach
+                    </td>
                     <td>{{ $trip->invite_count }}</td>
                     <td>{!! $trip->list_person !!}</td>
                     <td>{{ $trip->quarter->name }}</td>

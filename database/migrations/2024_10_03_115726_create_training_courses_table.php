@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->string('type');
+            $table->string('sertificateNum')->nullable();
             $table->text('organizer');
             $table->date('date');
-            $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
-            $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
             $table->integer('invite_count');
             $table->longText('list_person');
             $table->unsignedBigInteger('quarters_id');  // Foreign key to `quarters` table

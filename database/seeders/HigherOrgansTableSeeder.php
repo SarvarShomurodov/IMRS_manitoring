@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
+use App\Models\HigherOrgan;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,8 +26,43 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 456,
                 'direction' => 'Financial Analysis',
                 'sorov' => 'Quarterly Report',
-                'regions_id' => 1,
                 'quarters_id' => 1,
+            ],
+            [
+                'name' => 'Economic Policy Review',
+                'who_given_id' => 13,
+                'date' => Carbon::parse('2024-11-10'),
+                'ass_number' => 123,
+                'who_send' => 'Ministry of Finance',
+                'letter_date' => Carbon::parse('2024-11-01'),
+                'letter_number' => 456,
+                'direction' => 'Financial Analysis',
+                'sorov' => 'Quarterly Report',
+                'quarters_id' => 2,
+            ],
+            [
+                'name' => 'Economic Policy Review',
+                'who_given_id' => 14,
+                'date' => Carbon::parse('2024-11-10'),
+                'ass_number' => 123,
+                'who_send' => 'Ministry of Finance',
+                'letter_date' => Carbon::parse('2024-11-01'),
+                'letter_number' => 456,
+                'direction' => 'Financial Analysis',
+                'sorov' => 'Quarterly Report',
+                'quarters_id' => 1,
+            ],
+            [
+                'name' => 'Economic Policy Review',
+                'who_given_id' => 12,
+                'date' => Carbon::parse('2024-11-10'),
+                'ass_number' => 123,
+                'who_send' => 'Ministry of Finance',
+                'letter_date' => Carbon::parse('2024-11-01'),
+                'letter_number' => 456,
+                'direction' => 'Financial Analysis',
+                'sorov' => 'Quarterly Report',
+                'quarters_id' => 4,
             ],
             [
                 'name' => 'Market Stability Report',
@@ -38,7 +74,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 457,
                 'direction' => 'Economic Stability',
                 'sorov' => 'Annual Analysis',
-                'regions_id' => 2,
                 'quarters_id' => 1,
             ],
             [
@@ -51,7 +86,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 458,
                 'direction' => 'Labor Market',
                 'sorov' => 'Monthly Review',
-                'regions_id' => 3,
                 'quarters_id' => 2,
             ],
             [
@@ -64,7 +98,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 459,
                 'direction' => 'Price Stability',
                 'sorov' => 'Monthly Inflation Data',
-                'regions_id' => 4,
                 'quarters_id' => 2,
             ],
             [
@@ -77,7 +110,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 460,
                 'direction' => 'Fiscal Management',
                 'sorov' => 'Yearly Overview',
-                'regions_id' => 11,
                 'quarters_id' => 3,
             ],
             [
@@ -90,7 +122,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 461,
                 'direction' => 'Growth Analysis',
                 'sorov' => 'Quarterly Growth Report',
-                'regions_id' => 10,
                 'quarters_id' => 3,
             ],
             [
@@ -103,7 +134,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 462,
                 'direction' => 'Employment Trends',
                 'sorov' => 'Employment Data Review',
-                'regions_id' => 3,
                 'quarters_id' => 4,
             ],
             [
@@ -116,7 +146,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 463,
                 'direction' => 'Foreign Trade',
                 'sorov' => 'Quarterly Trade Data',
-                'regions_id' => 4,
                 'quarters_id' => 4,
             ],
             [
@@ -129,7 +158,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 464,
                 'direction' => 'Budget Analysis',
                 'sorov' => 'Annual Spending Review',
-                'regions_id' => 1,
                 'quarters_id' => 1,
             ],
             [
@@ -142,7 +170,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 465,
                 'direction' => 'Industrial Growth',
                 'sorov' => 'Monthly Output Data',
-                'regions_id' => 2,
                 'quarters_id' => 1,
             ],
             [
@@ -155,7 +182,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 465,
                 'direction' => 'Industrial Growth',
                 'sorov' => 'Monthly Output Data',
-                'regions_id' => 4,
                 'quarters_id' => 2,
             ],
             [
@@ -168,7 +194,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 465,
                 'direction' => 'Industrial Growth',
                 'sorov' => 'Monthly Output Data',
-                'regions_id' => 10,
                 'quarters_id' => 3,
             ],
             [
@@ -181,7 +206,6 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 465,
                 'direction' => 'Industrial Growth',
                 'sorov' => 'Monthly Output Data',
-                'regions_id' => 5,
                 'quarters_id' => 1,
             ],
             [
@@ -194,9 +218,13 @@ class HigherOrgansTableSeeder extends Seeder
                 'letter_number' => 465,
                 'direction' => 'Industrial Growth',
                 'sorov' => 'Monthly Output Data',
-                'regions_id' => 2,
                 'quarters_id' => 4,
             ],
         ]);
+        $conventions = HigherOrgan::all();
+        foreach ($conventions as $convention) {
+            $regions = [4, 2, 3]; // Example of region IDs to associate with the convention
+            $convention->regions()->sync($regions);
+        }
     }
 }

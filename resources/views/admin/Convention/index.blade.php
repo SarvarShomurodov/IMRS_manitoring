@@ -52,7 +52,11 @@
                     <td>{{ $trip->conventionType->name  }}</td>
                     <td>{{ $trip->organizer }}</td>
                     <td>{{ $trip->date }}</td>
-                    <td>{{ $trip->regionsVal->name }}</td>
+                    <td>
+                        @foreach($trip->regions as $region)
+                        {{ $region->name }}@if (!$loop->last), @endif
+                        @endforeach
+                    </td>
                     <td>{{ $trip->employees_count }}</td>
                     <td>{!! $trip->list !!}</td>
                     <td>{{ $trip->quarter->name }}</td>

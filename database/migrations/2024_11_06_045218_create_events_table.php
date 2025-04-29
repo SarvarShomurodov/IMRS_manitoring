@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('organizer');
             $table->text('goal');
             $table->date('date');
-            $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
-            $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
+            // $table->unsignedBigInteger('regions_id');  // Foreign key to `quarters` table
+            // $table->foreign('regions_id')->references('id')->on('regions')->onDelete('cascade'); 
             $table->integer('foreignNum');
             $table->integer('localNum');
             $table->longText('result');
